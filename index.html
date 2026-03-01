@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5"/>
+<title>Yate Clube de Imperatriz — Sócios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Source Sans 3',sans-serif;background:#f1f5f9;color:#1e293b;}
+h1,h2,h3,h4,h5,h6{font-family:'Raleway',sans-serif;}
+
+/* ── HEADER ── */
+header{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#1d4ed8 100%);position:relative;overflow:hidden;padding:2rem 1.5rem;}
+header svg{position:absolute;top:0;left:0;width:100%;height:100%;opacity:.1;}
+.header-content{position:relative;max-width:1280px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem;}
+.header-icon{width:64px;height:64px;border-radius:50%;background:rgba(245,158,11,.2);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;border:2px solid rgba(245,158,11,.5);}
+.header-icon i{color:white;font-size:32px;}
+header h1{color:white;font-size:2.4rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;}
+header p{color:#bfdbfe;font-size:1.05rem;font-weight:500;letter-spacing:.01em;}
+.stats-container{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-top:1.25rem;}
+.stat-badge{display:flex;align-items:center;gap:.5rem;padding:.45rem 1.1rem;border-radius:9999px;color:white;font-size:.85rem;font-weight:600;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);}
+.stat-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+.dot-green{background:#22c55e;}.dot-gray{background:#9ca3af;}.dot-yellow{background:#ffc107;}.dot-blue{background:#60a5fa;}
+
+/* ── MAIN ── */
+main{max-width:1280px;margin:0 auto;padding:1.5rem 1rem;display:flex;flex-direction:column;gap:1.5rem;}
+
+/* ── PAINEL ENVIO ── */
+.envio-panel{background:white;border-radius:1rem;box-shadow:0 4px 32px rgba(3,105,161,.15);border:1px solid #bae6fd;overflow:hidden;}
+.envio-header{background:linear-gradient(135deg,#0c2340,#0369a1,#0ea5e9);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.envio-header-left{display:flex;align-items:center;gap:.75rem;}
+.envio-header-icon{width:40px;height:40px;border-radius:.5rem;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:white;font-size:1.1rem;}
+.envio-header h2{color:white;font-size:1.1rem;font-weight:700;}
+.envio-header p{color:#bae6fd;font-size:.8rem;}
+.envio-body{padding:1.5rem;}
+
+/* Configurações */
+.config-row{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;align-items:flex-end;}
+.config-item{display:flex;flex-direction:column;gap:.3rem;}
+.config-item label{font-size:.7rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;}
+.config-item select,.config-item input[type=number]{padding:.5rem .75rem;border-radius:.5rem;border:1px solid #e5e7eb;font-size:.875rem;font-family:'Source Sans 3',sans-serif;background:white;}
+.config-item select:focus,.config-item input:focus{outline:none;box-shadow:0 0 0 2px #0369a1;border-color:transparent;}
+
+/* Barra de progresso */
+.progress-section{background:#f0f9ff;border:1px solid #bae6fd;border-radius:.75rem;padding:1.25rem;margin-bottom:1.5rem;}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;}
+.progress-title{font-weight:700;color:#0c4a6e;font-size:.95rem;}
+.progress-pct{font-size:1.5rem;font-weight:800;color:#0369a1;}
+.progress-bar-bg{height:14px;background:#dbeafe;border-radius:9999px;overflow:hidden;margin-bottom:.75rem;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,#0369a1,#38bdf8);border-radius:9999px;transition:width .5s ease;width:0%;}
+.progress-stats{display:flex;flex-wrap:wrap;gap:.75rem;}
+.pstat{display:flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;}
+.pstat-dot{width:10px;height:10px;border-radius:50%;}
+.pstat-enviado .pstat-dot{background:#0ea5e9;}
+.pstat-pulado .pstat-dot{background:#f59e0b;}
+.pstat-semtel .pstat-dot{background:#9ca3af;}
+.pstat-pendente .pstat-dot{background:#dbeafe;border:1px solid #93c5fd;}
+
+/* Card atual */
+.atual-card{background:white;border:2px solid #0369a1;border-radius:.75rem;padding:1.25rem;margin-bottom:1.5rem;display:none;position:relative;overflow:hidden;}
+.atual-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#0369a1;}
+.atual-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0369a1;margin-bottom:.5rem;}
+.atual-nome{font-size:1.1rem;font-weight:700;color:#1f2937;margin-bottom:.25rem;}
+.atual-tel{font-size:.875rem;color:#6b7280;display:flex;align-items:center;gap:.35rem;}
+.atual-timer{position:absolute;top:1rem;right:1rem;text-align:center;}
+.timer-circle{width:56px;height:56px;border-radius:50%;background:#f0f9ff;border:3px solid #0369a1;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.timer-num{font-size:1.1rem;font-weight:800;color:#0369a1;line-height:1;}
+.timer-label{font-size:.55rem;color:#6b7280;text-transform:uppercase;}
+
+/* Controles */
+.controls{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem;}
+button{padding:.55rem 1.1rem;border-radius:.5rem;border:none;font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;font-family:'Source Sans 3',sans-serif;}
+button:hover{opacity:.88;transform:scale(1.02);}
+button:active{transform:scale(.97);}
+button:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+.btn-start{background:linear-gradient(135deg,#0369a1,#0ea5e9);color:white;font-size:.95rem;padding:.7rem 1.5rem;}
+.btn-pause{background:#f59e0b;color:white;}
+.btn-resume{background:#0369a1;color:white;}
+.btn-skip{background:#e5e7eb;color:#374151;}
+.btn-stop{background:#dc3545;color:white;}
+.btn-proximo{background:#0369a1;color:white;font-size:1rem;padding:.75rem 2rem;}
+.btn-wa{background:#25D366;color:white;}
+
+/* Fila */
+.fila-section{max-height:320px;overflow-y:auto;border:1px solid #e5e7eb;border-radius:.75rem;}
+.fila-header-row{display:grid;grid-template-columns:40px 1fr 1fr 80px;gap:.5rem;padding:.6rem 1rem;background:#f3f4f6;border-bottom:1px solid #e5e7eb;font-size:.7rem;font-weight:700;text-transform:uppercase;color:#6b7280;letter-spacing:.05em;position:sticky;top:0;}
+.fila-item{display:grid;grid-template-columns:40px 1fr 1fr 80px;gap:.5rem;padding:.65rem 1rem;border-bottom:1px solid #f3f4f6;align-items:center;font-size:.82rem;transition:background .15s;}
+.fila-item:hover{background:#f9fafb;}
+.fila-item.atual-row{background:#eff6ff;border-left:3px solid #0369a1;}
+.fila-item.enviado-row{background:#f0fdf4;opacity:.7;}
+.fila-item.pulado-row{background:#fffbeb;opacity:.65;}
+.fila-item.semtel-row{background:#f9fafb;opacity:.5;}
+.fila-num{font-size:.75rem;font-weight:700;color:#9ca3af;text-align:center;}
+.fila-nome{font-weight:600;color:#1f2937;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fila-tel{color:#6b7280;font-size:.78rem;}
+.fila-status{display:flex;justify-content:center;}
+.status-badge{display:inline-flex;align-items:center;gap:.25rem;padding:.18rem .5rem;border-radius:9999px;font-size:.65rem;font-weight:700;white-space:nowrap;}
+.status-pendente{background:#dbeafe;color:#1d4ed8;}
+.status-atual{background:#dbeafe;color:#1e40af;animation:pulseBadge 1.2s infinite;}
+.status-enviado{background:#dcfce7;color:#166534;}
+.status-pulado{background:#fef3c7;color:#92400e;}
+.status-semtel{background:#f3f4f6;color:#6b7280;}
+@keyframes pulseBadge{0%,100%{opacity:1;}50%{opacity:.6;}}
+
+/* Alerta popup */
+.popup-alerta{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border-radius:.75rem;padding:2rem;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:5000;border-top:5px solid #059669;display:none;}
+.popup-alerta.active{display:block;}
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:4999;display:none;}
+.popup-overlay.active{display:block;}
+.popup-title{font-size:1.2rem;font-weight:800;color:#065f46;margin-bottom:.5rem;}
+.popup-desc{font-size:.875rem;color:#6b7280;margin-bottom:1.5rem;line-height:1.6;}
+.popup-btns{display:flex;gap:.75rem;}
+
+/* Conclusão */
+.conclusao-card{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #93c5fd;border-radius:.75rem;padding:1.5rem;text-align:center;display:none;}
+.conclusao-icon{font-size:3rem;margin-bottom:.75rem;}
+.conclusao-title{font-size:1.25rem;font-weight:800;color:#1e3a8a;margin-bottom:.5rem;}
+.conclusao-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:1rem;}
+.cstat{background:white;border-radius:.5rem;padding:.75rem 1.25rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.cstat-num{font-size:1.5rem;font-weight:800;color:#0369a1;}
+.cstat-label{font-size:.72rem;color:#6b7280;text-transform:uppercase;}
+
+/* ── TABLE ── */
+.table-section{background:white;border-radius:1rem;box-shadow:0 4px 24px rgba(15,23,42,.08);border:1px solid #e2e8f0;overflow:hidden;}
+.search-bar{padding:1rem;border-bottom:1px solid #f3f4f6;}
+.search-row{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;}
+.search-input-wrapper{position:relative;flex:1;min-width:200px;}
+.search-input-wrapper i{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:#9ca3af;font-size:1rem;}
+.search-input-wrapper input{width:100%;padding:.625rem .75rem .625rem 2.5rem;border-radius:.5rem;border:1px solid #e5e7eb;font-size:.875rem;font-family:'Source Sans 3',sans-serif;}
+.search-input-wrapper input:focus{outline:none;box-shadow:0 0 0 2px #0369a1;border-color:transparent;}
+.search-info{font-size:.75rem;color:#9ca3af;margin-top:.4rem;}
+.btn-select-all{background:#0f172a;color:white;font-size:.78rem;padding:.45rem .9rem;white-space:nowrap;}
+.btn-deselect{background:#e5e7eb;color:#374151;font-size:.78rem;padding:.45rem .9rem;white-space:nowrap;}
+.sel-info{font-size:.8rem;color:#0369a1;font-weight:600;display:flex;align-items:center;gap:.3rem;}
+
+*{-webkit-tap-highlight-color:transparent;}
+input,button,select{-webkit-appearance:none;}
+@supports (-webkit-touch-callout:none){.search-input-wrapper input,.config-item input{font-size:16px;}button{min-height:44px;}}
+
+.table-wrapper{max-height:500px;overflow-y:auto;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;font-size:.875rem;}
+thead{background:#0f172a;color:white;position:sticky;top:0;z-index:2;}
+th{padding:.65rem 1rem;text-align:left;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;min-width:70px;}
+th.th-check{width:40px;text-align:center;}
+td{padding:.65rem 1rem;border-bottom:1px solid #f3f4f6;vertical-align:middle;}
+tbody tr{transition:background .15s;}
+tbody tr:nth-child(even){background:#f8fafc;}
+tbody tr:hover{background:#e0f2fe;}
+tbody tr.row-selected{background:#f0fdf4 !important;border-left:3px solid #059669;}
+tbody tr.row-semtel{opacity:.55;}
+
+.box-badge{display:inline-block;padding:.2rem .55rem;border-radius:.25rem;font-size:.72rem;font-weight:700;}
+.box-numeric{background:#eff6ff;color:#1e40af;}
+.box-alpha{background:#fef3c7;color:#92400e;}
+.box-yci{background:#dbeafe;color:#1d4ed8;}
+.socio-name{display:flex;align-items:center;gap:.4rem;}
+.socio-name.falecido{text-decoration:line-through;color:#9ca3af;font-style:italic;opacity:.65;}
+.phone-number{display:flex;align-items:center;gap:.3rem;color:#4b5563;}
+.phone-number i{color:#9ca3af;font-size:.7rem;}
+.sem-telefone{color:#d1d5db;font-size:.75rem;font-style:italic;}
+.check-col{text-align:center;}
+input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:#059669;}
+
+.table-footer{padding:.75rem 1rem;border-top:1px solid #f3f4f6;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;font-size:.75rem;color:#9ca3af;}
+.footer-stats{display:flex;gap:1rem;flex-wrap:wrap;}
+.footer-stat{display:flex;align-items:center;gap:.25rem;}
+.no-results{text-align:center;padding:3rem 1rem;color:#9ca3af;}
+.no-results i{font-size:2rem;opacity:.3;display:block;margin-bottom:.5rem;}
+
+/* Toast */
+.toast{position:fixed;bottom:1rem;right:1rem;padding:.875rem 1.25rem;background:white;border-radius:.5rem;box-shadow:0 10px 25px rgba(0,0,0,.12);z-index:6000;animation:slideIn .3s ease-out;font-size:.85rem;display:flex;align-items:center;gap:.5rem;max-width:320px;}
+@keyframes slideIn{from{transform:translateX(400px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+.toast.success{border-left:4px solid #22c55e;color:#166534;}
+.toast.warning{border-left:4px solid #fbbf24;color:#92400e;}
+.toast.error{border-left:4px solid #dc3545;color:#991b1b;}
+.toast.info{border-left:4px solid #3b82f6;color:#1e40af;}
+
+footer{text-align:center;padding:1.5rem;font-size:.75rem;color:#9ca3af;}
+
+/* ── TABLET / LARGE PHONE (≤768px) ── */
+@media(max-width:768px){
+body{overflow-x:hidden;}
+
+/* Header */
+header{padding:1.5rem 1rem;}
+header h1{font-size:1.55rem;}
+.header-icon{width:50px;height:50px;}
+.header-icon i{font-size:24px;}
+.stat-badge{padding:.35rem .75rem;font-size:.78rem;}
+.stats-container{gap:.4rem;}
+
+/* Layout principal */
+main{padding:1rem .75rem;gap:1rem;}
+
+/* Painel de envio */
+.envio-body{padding:1rem;}
+.envio-header{flex-direction:column;align-items:flex-start;gap:.4rem;}
+.envio-header h2{font-size:1rem;}
+
+/* Config */
+.config-row{flex-direction:column;gap:.65rem;margin-bottom:1rem;align-items:stretch;}
+.config-item{width:100%;}
+.config-item select,.config-item input[type=number]{width:100%;font-size:1rem;}
+.config-row>div[style]{margin-left:0 !important;width:100%;}
+
+/* Progresso */
+.progress-section{padding:1rem;}
+.progress-stats{gap:.5rem;flex-wrap:wrap;}
+
+/* Card atual — timer saindo do fluxo absoluto */
+.atual-card{padding:1rem 1rem 1rem 1.5rem;}
+.atual-timer{position:static;margin-top:.75rem;display:flex;justify-content:flex-end;}
+
+/* Controles: todos full-width */
+.controls{flex-direction:column;gap:.5rem;}
+.controls button{width:100%;justify-content:center;}
+
+/* Fila */
+.fila-header-row,.fila-item{grid-template-columns:30px 1fr 80px;}
+.fila-header-row .fila-col-tel,.fila-item .fila-tel{display:none;}
+.fila-section{max-height:260px;}
+
+/* Barra de busca */
+.search-bar{padding:.875rem;}
+.search-row{flex-wrap:wrap;gap:.5rem;}
+.search-input-wrapper{min-width:100%;flex:0 0 100%;}
+.btn-select-all,.btn-deselect{flex:1;min-width:0;justify-content:center;}
+
+/* Tabela */
+table{min-width:300px;font-size:.75rem;}
+th,td{padding:.45rem .5rem;}
+.table-wrapper{max-height:400px;}
+
+/* Popup */
+.popup-alerta{padding:1.5rem;width:92%;}
+
+/* Conclusão */
+.conclusao-stats{gap:.6rem;}
+
+/* Footer */
+footer{padding:1rem;}
+}
+
+/* ── SMALL PHONE (≤480px) ── */
+@media(max-width:480px){
+/* Header compacto */
+header{padding:1.25rem .875rem;}
+header h1{font-size:1.2rem;letter-spacing:-.01em;}
+header p{font-size:.82rem;}
+.header-icon{width:42px;height:42px;}
+.header-icon i{font-size:20px;}
+.stat-badge{padding:.25rem .55rem;font-size:.68rem;}
+.stats-container{gap:.3rem;}
+
+/* Envio header */
+.envio-header{padding:.875rem;}
+.envio-header h2{font-size:.925rem;}
+.envio-header-icon{width:34px;height:34px;font-size:.9rem;}
+
+/* Progresso vertical */
+.progress-stats{flex-direction:column;gap:.35rem;}
+.pstat{font-size:.78rem;}
+
+/* Card atual */
+.atual-nome{font-size:.95rem;}
+.atual-tel{font-size:.8rem;}
+
+/* Fila menor */
+.fila-section{max-height:200px;}
+.fila-item{font-size:.78rem;}
+
+/* Tabela — oculta coluna Telefone (redundante no mobile) */
+table th:nth-child(4),table td:nth-child(4){display:none;}
+table{min-width:260px;}
+
+/* Tabela reduzida */
+.table-wrapper{max-height:340px;}
+.box-badge{font-size:.65rem;padding:.15rem .4rem;}
+
+/* Conclusão compacta */
+.cstat{padding:.55rem .8rem;}
+.cstat-num{font-size:1.2rem;}
+.conclusao-icon{font-size:2.2rem;}
+
+/* Toast full-width */
+.toast{left:.75rem;right:.75rem;bottom:.75rem;max-width:none;width:calc(100% - 1.5rem);font-size:.8rem;}
+
+/* Popup */
+.popup-alerta{width:95%;padding:1.25rem;}
+.popup-title{font-size:1.05rem;}
+.popup-desc{font-size:.8rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+<svg viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
+<path d="M0,100 C150,180 350,0 600,100 C850,200 1050,20 1200,100 L1200,200 L0,200 Z" fill="white"/>
+<path d="M0,140 C200,60 400,180 600,140 C800,100 1000,160 1200,140 L1200,200 L0,200 Z" fill="white" opacity="0.5"/>
+</svg>
+<div class="header-content">
+  <div class="header-icon"><i class="fas fa-anchor"></i></div>
+  <h1>Yate Clube de Imperatriz</h1>
+  <p>Sistema de Sócios — Chapa Legado e Futuro ⚓🚤</p>
+  <div class="stats-container">
+    <div class="stat-badge"><i class="fas fa-users"></i><span><span id="totalSocios">0</span> sócios</span></div>
+    <div class="stat-badge"><span class="stat-dot dot-green"></span><span><span id="totalAtivos">0</span> ativos</span></div>
+    <div class="stat-badge"><span class="stat-dot dot-gray"></span><span><span id="totalFalecidos">0</span> falecidos</span></div>
+    <div class="stat-badge"><span class="stat-dot dot-blue"></span><span><span id="totalSelecionados">0</span> selecionados</span></div>
+  </div>
+</div>
+</header>
+
+<!-- ── MAIN ── -->
+<main>
+
+<!-- ══════════════════════════════════════════════
+     PAINEL DE ENVIO EM MASSA
+═══════════════════════════════════════════════ -->
+<section class="envio-panel">
+  <div class="envio-header">
+    <div class="envio-header-left">
+      <div class="envio-header-icon"><i class="fab fa-whatsapp"></i></div>
+      <div>
+        <h2>📤 Envio em Massa — WhatsApp</h2>
+        <p>Selecione os sócios na lista abaixo e inicie o envio automático</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="envio-body">
+
+    <!-- Configurações -->
+    <div class="config-row">
+      <div class="config-item">
+        <label><i class="fas fa-clock"></i> Intervalo entre envios</label>
+        <select id="cfgIntervalo">
+          <option value="15">15 segundos</option>
+          <option value="20">20 segundos</option>
+          <option value="30" selected>30 segundos</option>
+          <option value="45">45 segundos</option>
+          <option value="60">60 segundos</option>
+          <option value="0">Manual (eu controlo)</option>
+        </select>
+      </div>
+      <div class="config-item">
+        <label><i class="fas fa-filter"></i> Enviar para</label>
+        <select id="cfgFiltro" onchange="aplicarFiltroEnvio()">
+          <option value="selecionados">Somente selecionados</option>
+          <option value="todos">Todos com telefone</option>
+          <option value="ativos">Somente ativos (não falecidos)</option>
+        </select>
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:flex-end;">
+        <span id="filaInfo" style="font-size:.8rem;color:#059669;font-weight:600;"></span>
+      </div>
+    </div>
+
+    <!-- Barra de Progresso -->
+    <div class="progress-section" id="progressSection" style="display:none;">
+      <div class="progress-header">
+        <span class="progress-title"><i class="fas fa-paper-plane"></i> Progresso do Envio</span>
+        <span class="progress-pct" id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+      <div class="progress-stats">
+        <div class="pstat pstat-enviado"><div class="pstat-dot"></div><span id="cntEnviado">0</span> enviados</div>
+        <div class="pstat pstat-pulado"><div class="pstat-dot"></div><span id="cntPulado">0</span> pulados</div>
+        <div class="pstat pstat-semtel"><div class="pstat-dot"></div><span id="cntSemTel">0</span> sem tel.</div>
+        <div class="pstat pstat-pendente"><div class="pstat-dot"></div><span id="cntPendente">0</span> pendentes</div>
+      </div>
+    </div>
+
+    <!-- Card Atual -->
+    <div class="atual-card" id="atualCard">
+      <div class="atual-label">📱 Enviando agora…</div>
+      <div class="atual-nome" id="atualNome">—</div>
+      <div class="atual-tel"><i class="fas fa-phone"></i><span id="atualTel">—</span></div>
+      <div class="atual-timer">
+        <div class="timer-circle">
+          <div class="timer-num" id="timerNum">—</div>
+          <div class="timer-label">seg</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <div class="controls" id="controles">
+      <button class="btn-start" id="btnIniciar" onclick="iniciarEnvio()">
+        <i class="fas fa-paper-plane"></i> Iniciar Envio em Massa
+      </button>
+      <button class="btn-pause" id="btnPausar" onclick="pausarEnvio()" style="display:none;">
+        <i class="fas fa-pause"></i> Pausar
+      </button>
+      <button class="btn-resume" id="btnRetomar" onclick="retornarEnvio()" style="display:none;">
+        <i class="fas fa-play"></i> Retomar
+      </button>
+      <button class="btn-skip" id="btnPular" onclick="pularAtual()" style="display:none;">
+        <i class="fas fa-forward"></i> Pular este
+      </button>
+      <button class="btn-proximo" id="btnProximo" onclick="proximoManual()" style="display:none;">
+        <i class="fas fa-check"></i> ✅ Enviado — Próximo
+      </button>
+      <button class="btn-stop" id="btnParar" onclick="pararEnvio()" style="display:none;">
+        <i class="fas fa-stop"></i> Parar
+      </button>
+    </div>
+
+    <!-- Conclusão -->
+    <div class="conclusao-card" id="conclusaoCard">
+      <div class="conclusao-icon">🎉</div>
+      <div class="conclusao-title">Envio Concluído!</div>
+      <p style="color:#6b7280;font-size:.875rem;">Todos os contatos da fila foram processados.</p>
+      <div class="conclusao-stats">
+        <div class="cstat"><div class="cstat-num" id="finalEnviado">0</div><div class="cstat-label">Enviados</div></div>
+        <div class="cstat"><div class="cstat-num" id="finalPulado" style="color:#f59e0b;">0</div><div class="cstat-label">Pulados</div></div>
+        <div class="cstat"><div class="cstat-num" id="finalSemTel" style="color:#9ca3af;">0</div><div class="cstat-label">Sem Tel.</div></div>
+      </div>
+      <button class="btn-start" style="margin:1.25rem auto 0;display:inline-flex;" onclick="resetarEnvio()">
+        <i class="fas fa-redo"></i> Novo Envio
+      </button>
+    </div>
+
+    <!-- Fila de Envio -->
+    <div id="filaContainer" style="display:none;">
+      <div style="font-size:.8rem;font-weight:700;color:#374151;margin-bottom:.5rem;display:flex;justify-content:space-between;">
+        <span><i class="fas fa-list"></i> Fila de Envio</span>
+        <span id="filaCount" style="color:#059669;"></span>
+      </div>
+      <div class="fila-section" id="filaLista">
+        <div class="fila-header-row">
+          <span>#</span><span>Sócio</span><span class="fila-col-tel">Telefone</span><span style="text-align:center;">Status</span>
+        </div>
+        <div id="filaItens"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     LISTA DE SÓCIOS
+═══════════════════════════════════════════════ -->
+<section class="table-section">
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-input-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" id="pesquisa" placeholder="Pesquisar por nome, box ou telefone…" onkeyup="listar()">
+      </div>
+      <button class="btn-select-all" onclick="selecionarTodos()"><i class="fas fa-check-double"></i> Todos</button>
+      <button class="btn-deselect" onclick="desmarcarTodos()"><i class="fas fa-times"></i> Limpar</button>
+    </div>
+    <div class="search-info" id="searchInfo"></div>
+    <div class="sel-info" id="selInfo" style="margin-top:.4rem;display:none;">
+      <i class="fas fa-check-circle"></i><span id="selCount">0</span> sócio(s) selecionado(s) para envio
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th class="th-check"><i class="fas fa-check"></i></th>
+          <th>Box</th>
+          <th>Sócio</th>
+          <th>Telefone</th>
+          <th>WhatsApp</th>
+        </tr>
+      </thead>
+      <tbody id="tabela"></tbody>
+    </table>
+  </div>
+
+  <div class="table-footer">
+    <span>Exibindo <strong id="exibindo">0</strong> de <strong id="total">0</strong> sócios</span>
+    <div class="footer-stats">
+      <div class="footer-stat"><span class="stat-dot dot-green"></span><span id="footerAtivos">0</span> ativos</div>
+      <div class="footer-stat"><span class="stat-dot dot-gray"></span><span id="footerFalecidos">0</span> falecidos</div>
+      <div class="footer-stat"><span class="stat-dot dot-yellow"></span><span id="footerSemTel">0</span> sem telefone</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Yate Clube de Imperatriz — Chapa Legado e Futuro ⚓🚤 — <span id="year">2026</span></p>
+</footer>
+
+<!-- Popup aviso popups -->
+<div class="popup-overlay" id="popupOverlay" onclick="fecharPopup()"></div>
+<div class="popup-alerta" id="popupAlerta">
+  <div class="popup-title">⚠️ Permitir Pop-ups</div>
+  <div class="popup-desc" id="popupDesc">
+    Para o envio automático funcionar, você precisa <strong>permitir pop-ups</strong> neste site no seu navegador.<br><br>
+    <b>Chrome:</b> Clique no ícone de bloqueio 🔒 na barra de endereços → Permitir pop-ups<br>
+    <b>Firefox:</b> Clique em "Opções" quando aparecer o aviso de pop-up bloqueado<br><br>
+    Após permitir, clique em <strong>Entendido</strong> e o envio continuará automaticamente.
+  </div>
+  <div class="popup-btns">
+    <button class="btn-wa" onclick="fecharPopup()"><i class="fas fa-check"></i> Entendido</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// DADOS
+// ══════════════════════════════════════════════════════
+const dadosIniciais = [
+    {"box":"2","socio":"CARLOS ALEXANDRE","telefone":"99992036546"},
+    {"box":"3","socio":"JEFFERSON RODOLFO","telefone":"99991126040"},
+    {"box":"4","socio":"ISMAR","telefone":"99988353693"},
+    {"box":"5","socio":"AUGUSTO","telefone":"99984060941"},
+    {"box":"6","socio":"ANTONIO CARLOS","telefone":"99981423992"},
+    {"box":"7","socio":"ANAX","telefone":"99981622551"},
+    {"box":"9","socio":"JOSÉ DJACY","telefone":"99999772882"},
+    {"box":"10","socio":"RODRIGO","telefone":"99985515353"},
+    {"box":"11","socio":"ROBERTO VELOSO","telefone":"99991370015"},
+    {"box":"13","socio":"MIRALDO","telefone":"99991221593"},
+    {"box":"14","socio":"BRUNO","telefone":"99991597080"},
+    {"box":"15","socio":"WILLIAM SANTOS","telefone":"99991412031"},
+    {"box":"17","socio":"MAXWELL","telefone":"99981055921"},
+    {"box":"18","socio":"RICARDO","telefone":"99999043927"},
+    {"box":"19","socio":"GUILHERME BATALHA","telefone":"99999847731"},
+    {"box":"21","socio":"CHARLES REIS","telefone":"99982027956"},
+    {"box":"23","socio":"ALFREDO WAGNER","telefone":"99988010001"},
+    {"box":"24","socio":"HASSAN","telefone":"99991211017"},
+    {"box":"25","socio":"CESAR FELIX","telefone":"98991930075"},
+    {"box":"26","socio":"GABRIEL","telefone":"99999553038"},
+    {"box":"27","socio":"ASSIS MAIA","telefone":"99981114626"},
+    {"box":"28","socio":"MIRES","telefone":"99985390163"},
+    {"box":"29","socio":"AMARAL NETO","telefone":"99984154498"},
+    {"box":"31","socio":"ROGERIO","telefone":"99981163066"},
+    {"box":"33","socio":"VASCO","telefone":"99991981007"},
+    {"box":"34","socio":"SERGIO BATISTA","telefone":"99991516317"},
+    {"box":"35","socio":"WAYNE","telefone":"99991554244"},
+    {"box":"37","socio":"PAULO SERGIO","telefone":"99999771217"},
+    {"box":"46","socio":"MESQUITA","telefone":"99999771851"},
+    {"box":"47","socio":"SAULO","telefone":"99981122090"},
+    {"box":"50","socio":"DR ROMULO","telefone":"99981570000"},
+    {"box":"52","socio":"DIOGO","telefone":"99984381315"},
+    {"box":"53","socio":"HELISSON LANDULFO","telefone":"99984194630"},
+    {"box":"54","socio":"YVÊS","telefone":"99991277171"},
+    {"box":"56","socio":"FERNANDO BATISTA","telefone":"99988120429"},
+    {"box":"57","socio":"MARCELO","telefone":"99991592711"},
+    {"box":"58","socio":"FELIPE MINEIRO","telefone":"99988238240"},
+    {"box":"59","socio":"SIDNEY","telefone":"99984404646"},
+    {"box":"60","socio":"FABRICIO","telefone":"99984327227"},
+    {"box":"63","socio":"CELSO TOMÉ","telefone":"99988279095"},
+    {"box":"64","socio":"ANDRE","telefone":"99992222926"},
+    {"box":"65","socio":"VALDINAR","telefone":"99991784475"},
+    {"box":"66","socio":"DR ISAIAS","telefone":"99981796464"},
+    {"box":"67","socio":"FLEUTON","telefone":"99991115504"},
+    {"box":"68","socio":"ROBSON","telefone":"99982210090"},
+    {"box":"72","socio":"LEOWDSON","telefone":"99988020280"},
+    {"box":"73","socio":"DR ANDRE","telefone":"99999775050"},
+    {"box":"74","socio":"RUBENS","telefone":"99991870410"},
+    {"box":"77","socio":"DR GUSTAVO","telefone":"99991366300"},
+    {"box":"78","socio":"CARLINHO","telefone":"99999771207"},
+    {"box":"79","socio":"ROBERTINHO","telefone":"99981185694"},
+    {"box":"81","socio":"DRª JOSELITA","telefone":"99981118940"},
+    {"box":"82","socio":"ROBERTO","telefone":"99999772090"},
+    {"box":"83","socio":"CARLOS","telefone":"99984088797"},
+    {"box":"84","socio":"ADELSON","telefone":"99991226085"},
+    {"box":"85","socio":"DR GENIVALDO","telefone":"99991598675"},
+    {"box":"86","socio":"DORGIVAL","telefone":"99988444712"},
+    {"box":"87","socio":"ALTOMIRANDO","telefone":"99981281867"},
+    {"box":"88","socio":"HAMON","telefone":"99984326404"},
+    {"box":"89","socio":"FABIANO","telefone":"99981114888"},
+    {"box":"91","socio":"LAERCIO","telefone":"99981570101"},
+    {"box":"92","socio":"DR ELISIO BRUNO","telefone":"99991769656"},
+    {"box":"93","socio":"DR ANFRIZIO","telefone":"99981165555"},
+    {"box":"94","socio":"FERNAO","telefone":"99981510000"},
+    {"box":"95","socio":"REGIANE","telefone":"99991516146"},
+    {"box":"97","socio":"ALEX","telefone":"99981590787"},
+    {"box":"99","socio":"JURANDIR","telefone":"99991574203"},
+    {"box":"101","socio":"RONALDO VASCONCELOS","telefone":"99988151343"},
+    {"box":"102","socio":"ROBERTO VASCONCELOS","telefone":"99991463693"},
+    {"box":"103","socio":"JUNIOR PINTO","telefone":"99981143100"},
+    {"box":"104","socio":"DARIO","telefone":"99981613122"},
+    {"box":"105","socio":"NAGIB","telefone":"94991121633"},
+    {"box":"106","socio":"JORCELIO","telefone":"99981161800"},
+    {"box":"107","socio":"GLEN MAIA","telefone":"99991285561"},
+    {"box":"111","socio":"JOAQUIM","telefone":"99981124145"},
+    {"box":"112","socio":"MARCOS ANDRE","telefone":"99988020251"},
+    {"box":"113","socio":"FONSECA","telefone":"99991220809"},
+    {"box":"114","socio":"DR PEIXOTO","telefone":"99999772219"},
+    {"box":"115","socio":"GUSTAVO","telefone":"99988484671"},
+    {"box":"116","socio":"JOSE ARDSON","telefone":"99991221660"},
+    {"box":"117","socio":"ADRIANO COIMBRA","telefone":"99991054311"},
+    {"box":"118","socio":"ANNA KELLY","telefone":"99992120220"},
+    {"box":"119","socio":"ALESSANDER LEITE","telefone":"99991617770"},
+    {"box":"120","socio":"MARCIA MAGNA","telefone":"99981470007"},
+    {"box":"122","socio":"SABINO","telefone":"99999771700"},
+    {"box":"123","socio":"MICHELLE","telefone":"99981021519"},
+    {"box":"126","socio":"JOSE AFONSO","telefone":"99991407699"},
+    {"box":"127","socio":"ARMELINDO","telefone":"99999771078"},
+    {"box":"128","socio":"GILBERTO","telefone":"99988064104"},
+    {"box":"129","socio":"MARIO","telefone":"99985329779"},
+    {"box":"131","socio":"ADRIANO","telefone":"99981087381"},
+    {"box":"135","socio":"FELIPE CASTORINO","telefone":"99981120698"},
+    {"box":"136","socio":"NAILTON","telefone":"99991990881"},
+    {"box":"137","socio":"JANOS","telefone":"99981110909"},
+    {"box":"139","socio":"AGNALDO","telefone":"99981622324"},
+    {"box":"140","socio":"DR TIBERIO","telefone":"99991956900"},
+    {"box":"141","socio":"DR ALESSIO","telefone":"99991222191"},
+    {"box":"142","socio":"ESTER ALVES","telefone":"99992301100"},
+    {"box":"144","socio":"ALBERTO SOUSA","telefone":"99991380012"},
+    {"box":"145","socio":"DR EVERSON","telefone":"99981162000"},
+    {"box":"146","socio":"DIEGO HELLISON","telefone":"99981331248"},
+    {"box":"147","socio":"PROFESSOR WILSON","telefone":"99988063877"},
+    {"box":"148","socio":"RUDNEY","telefone":"63992253337"},
+    {"box":"152","socio":"IVANEIDE LIRA","telefone":"99991260093"},
+    {"box":"153","socio":"DR ALAIR","telefone":"99992101555"},
+    {"box":"154","socio":"RIBAMAR","telefone":"99988184757"},
+    {"box":"155","socio":"DALDEMAR","telefone":"98981159939"},
+    {"box":"156","socio":"JUNIM","telefone":"99992168185"},
+    {"box":"160","socio":"LEONARDO","telefone":"99988133033"},
+    {"box":"161","socio":"NATALIA","telefone":"99992282804"},
+    {"box":"165","socio":"SUZANA","telefone":"99988461507"},
+    {"box":"166","socio":"DR SEVERINO","telefone":"99981115462"},
+    {"box":"171","socio":"HENRIQUE","telefone":"99981275131"},
+    {"box":"172","socio":"FERRAZ","telefone":"99991414804"},
+    {"box":"173","socio":"NEUDSON","telefone":"99981220138"},
+    {"box":"174","socio":"ADRIANO","telefone":"99991770707"},
+    {"box":"176","socio":"WSCLAY","telefone":"99984033729"},
+    {"box":"177","socio":"WESLEY","telefone":"99991778989"},
+    {"box":"178","socio":"CADU","telefone":"99992199999"},
+    {"box":"179","socio":"DR ALYSSON","telefone":"99981477799"},
+    {"box":"182","socio":"DUARTE","telefone":"99981372856"},
+    {"box":"183","socio":"JOEDNA","telefone":"99992079034"},
+    {"box":"186","socio":"CAIO LAGUNA","telefone":"99981044000"},
+    {"box":"189","socio":"GILVAN","telefone":"99999773016"},
+    {"box":"191","socio":"FRANCISCO JUNIOR","telefone":"99991400110"},
+    {"box":"192","socio":"DHEMISON","telefone":"98981094526"},
+    {"box":"193","socio":"MARCOS ANDRE","telefone":"99991220010"},
+    {"box":"194","socio":"LEONARDO ABREU","telefone":"99981001680"},
+    {"box":"197","socio":"LEANDRO","telefone":"99981381884"},
+    {"box":"198","socio":"GREGSON","telefone":"99991227670"},
+    {"box":"200","socio":"SANDRO","telefone":"99991628249"},
+    {"box":"201","socio":"BRUNO SALANI","telefone":"99991112200"},
+    {"box":"202","socio":"ALCIDES GAVA","telefone":"99991152608"},
+    {"box":"203","socio":"MAURYCIO","telefone":"99991069350"},
+    {"box":"204","socio":"DR CRUZ","telefone":"99999774948"},
+    {"box":"206","socio":"ÍTALO","telefone":"99981758786"},
+    {"box":"207","socio":"JUNIOR HERINGER","telefone":"99991221126"},
+    {"box":"209","socio":"PIM PIM","telefone":"99991990028"},
+    {"box":"210","socio":"TALMON","telefone":"99988028444"},
+    {"box":"211","socio":"MIQUEIAS","telefone":"99991444479"},
+    {"box":"212","socio":"RONNYVALME","telefone":"99991550795"},
+    {"box":"214","socio":"RAQUEL","telefone":"99981413464"},
+    {"box":"215","socio":"FREDSON","telefone":"99982691050"},
+    {"box":"216","socio":"MAURICIO","telefone":"98982029444"},
+    {"box":"218","socio":"MARCELO","telefone":"99991228855"},
+    {"box":"220","socio":"PEDRO JORGE","telefone":"99991440586"},
+    {"box":"113A","socio":"DR JANDUI","telefone":"99991373388"},
+    {"box":"129A","socio":"WELLISON","telefone":"99985102637"},
+    {"box":"YCI02","socio":"FREITAS","telefone":"99988068870"},
+    {"box":"YCI03","socio":"VILELA","telefone":"99999771644"},
+    {"box":"YCI04","socio":"ABNEAS","telefone":"99991225299"},
+    {"box":"YCI05","socio":"MARCELO LIRA","telefone":"99991222106"},
+    {"box":"YCI06","socio":"IRMÃO","telefone":"99981001441"},
+    {"box":"YCI07","socio":"ALMIR","telefone":"99999771623"},
+    {"box":"YCI08","socio":"FLAYNO","telefone":"99992085252"},
+    {"box":"YCI09","socio":"RICARDINHO","telefone":"99999773792"},
+    {"box":"YCI010","socio":"SALUA","telefone":"99999773792"},
+    {"box":"YCI011","socio":"JOHAN","telefone":"99981118500"},
+    {"box":"221","socio":"WAWRWYK","telefone":"99981113884"},
+    {"box":"98A","socio":"ELY","telefone":"99999770448"},
+    {"box":"","socio":"SERGIO CAMAPUM","telefone":"99991643002"}
+  ];
+
+// ══════════════════════════════════════════════════════
+// ESTADO GLOBAL
+// ══════════════════════════════════════════════════════
+let socios       = [];
+let selecionados = new Set();   // índices selecionados
+let fila         = [];          // [{idx, status:'pendente'|'enviado'|'pulado'|'semtel'}]
+let filaIdx      = 0;           // posição atual na fila
+let timerRef     = null;        // setInterval do countdown
+let timerSeg     = 0;
+let rodando      = false;
+let pausado      = false;
+let modoManual   = false;
+
+// ══════════════════════════════════════════════════════
+// MENSAGEM
+// ══════════════════════════════════════════════════════
+function montarMensagem(nome){
+  return `Amigo associado *${nome}*,
+
+Coloquei meu nome como candidato a Comodoro do Yate Clube de Imperatriz com o coração tranquilo e plena consciência da responsabilidade que isso representa.
+
+Nossa chapa, *Legado e Futuro*, nasce com um propósito claro: honrar a história construída pelo saudoso Luiz Carlos Salani, meu grande amigo, e dar continuidade ao trabalho sério e transformador realizado na gestão de Chafi.
+
+Nos últimos anos, o Yate evoluiu de forma concreta e visível: controle de portaria, rampa para lanchas, tratores novos, ampliação do píer, novo flutuante, revitalização do pátio, reforma completa do restaurante, novos banheiros, sistema de monitoramento, sistema de combate a incêndio, posto de combustível moderno e seguro, novos boxes, área de contemplação estruturada, espaço exclusivo para sócios, construção do escritório e sala de reuniões — tudo isso com a segurança de sermos donos do nosso título.
+
+Isso não é discurso. São fatos.
+
+Meu compromisso é simples e direto:
+✔ Preservar o que foi construído
+✔ Valorizar cada associado
+✔ Manter o clube organizado, seguro e financeiramente responsável
+✔ Continuar avançando com planejamento e transparência
+
+O Yate não é de uma pessoa. É de todos nós.
+E é com união, respeito e trabalho que vamos continuar fortalecendo esse patrimônio que é motivo de orgulho para nossa cidade.
+
+Conto com seu apoio.
+
+Dr. Nabarro
+Candidato a Comodoro
+*Chapa Legado e Futuro* ⚓🚤`;
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+function init(){
+  // Versão dos dados — atualizar quando os dados mudarem para forçar reload
+  const DATA_VERSION = '2026-02-26-v3';
+  const storedVersion = localStorage.getItem('socios_yate_version');
+  if(storedVersion !== DATA_VERSION){
+    // Dados novos: substituir localStorage pelos dados atualizados
+    socios = JSON.parse(JSON.stringify(dadosIniciais));
+    localStorage.setItem('socios_yate', JSON.stringify(socios));
+    localStorage.setItem('socios_yate_version', DATA_VERSION);
+  } else {
+    const d = localStorage.getItem('socios_yate');
+    socios = d ? JSON.parse(d) : JSON.parse(JSON.stringify(dadosIniciais));
+    if(!d) localStorage.setItem('socios_yate', JSON.stringify(socios));
+  }
+  document.getElementById('year').textContent = new Date().getFullYear();
+  listar();
+  atualizarEstatisticas();
+  atualizarFiltroInfo();
+}
+
+// ══════════════════════════════════════════════════════
+// UTILITÁRIOS
+// ══════════════════════════════════════════════════════
+const isFalecido = n => n.toUpperCase().includes('FALECIDO');
+const isSemTel   = t => !t || t.trim()==='';
+
+function formatTel(t){
+  const d=t.replace(/\D/g,'');
+  if(d.length===11)return`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;
+  if(d.length===10)return`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`;
+  return t;
+}
+
+function waURL(tel,nome){
+  let n=tel.replace(/\D/g,'');
+  if(!n.startsWith('55'))n='55'+n;
+  return `https://wa.me/${n}?text=${encodeURIComponent(montarMensagem(nome))}`;
+}
+
+// ══════════════════════════════════════════════════════
+// LISTAGEM
+// ══════════════════════════════════════════════════════
+function listar(){
+  const q=document.getElementById('pesquisa').value.toLowerCase().trim();
+  const tb=document.getElementById('tabela');
+  tb.innerHTML='';
+  const lista=socios.filter((s,i)=>!q||s.socio.toLowerCase().includes(q)||s.box.toLowerCase().includes(q)||s.telefone.toLowerCase().includes(q));
+  if(!lista.length){
+    tb.innerHTML=`<tr><td colspan="5" class="no-results"><i class="fas fa-search"></i><p>Nenhum resultado</p></td></tr>`;
+    document.getElementById('exibindo').textContent='0';
+    document.getElementById('searchInfo').textContent=q?`0 resultado(s) para "${q}"` :'';
+    return;
+  }
+  lista.forEach(s=>{
+    const idx=socios.indexOf(s);
+    const falecido=isFalecido(s.socio);
+    const semTel=isSemTel(s.telefone);
+    const sel=selecionados.has(idx);
+    const bc=s.box.startsWith('YCI')?'box-yci':/[A-Za-z]/.test(s.box)?'box-alpha':'box-numeric';
+    const tr=document.createElement('tr');
+    if(sel) tr.classList.add('row-selected');
+    if(semTel) tr.classList.add('row-semtel');
+    tr.innerHTML=`
+      <td class="check-col">
+        <input type="checkbox" ${sel?'checked':''} ${semTel||falecido?'disabled title="Sem telefone ou falecido"':''}
+          onchange="toggleSel(${idx},this.checked)">
+      </td>
+      <td><span class="box-badge ${bc}">${s.box}</span></td>
+      <td><div class="socio-name ${falecido?'falecido':''}">
+        <span>${s.socio}</span>
+        ${falecido?'<span style="font-size:.68rem;color:#9ca3af;"> (falecido)</span>':''}
+      </div></td>
+      <td>${semTel?'<span class="sem-telefone">Sem telefone</span>':`<div class="phone-number"><i class="fas fa-phone"></i>&nbsp;${formatTel(s.telefone)}</div>`}</td>
+      <td>
+        <button class="btn-small btn-wa" style="background:#25D366;color:white;padding:.35rem .8rem;font-size:.75rem;border-radius:.375rem;"
+          onclick="abrirWA('${s.telefone}','${s.socio.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')">
+          <i class="fab fa-whatsapp"></i> Enviar
+        </button>
+      </td>`;
+    tb.appendChild(tr);
+  });
+  document.getElementById('exibindo').textContent=lista.length;
+  document.getElementById('searchInfo').textContent=q?`${lista.length} resultado(s) para "${q}"` :'';
+  atualizarSelInfo();
+}
+
+function abrirWA(tel,nome){
+  if(isSemTel(tel)){mostrarToast('Sócio sem telefone.','warning');return;}
+  window.open(waURL(tel,nome),'_blank');
+}
+
+// ══════════════════════════════════════════════════════
+// SELEÇÃO
+// ══════════════════════════════════════════════════════
+function toggleSel(idx,v){
+  if(v) selecionados.add(idx);
+  else  selecionados.delete(idx);
+  atualizarSelInfo();
+  atualizarEstatisticas();
+  // atualiza row highlight
+  const rows=document.querySelectorAll('#tabela tr');
+  listar();
+}
+
+function selecionarTodos(){
+  socios.forEach((s,i)=>{
+    if(!isSemTel(s.telefone)&&!isFalecido(s.socio)) selecionados.add(i);
+  });
+  listar();
+  atualizarSelInfo();
+  atualizarEstatisticas();
+  mostrarToast(`${selecionados.size} sócios selecionados!`,'success');
+}
+
+function desmarcarTodos(){
+  selecionados.clear();
+  listar();
+  atualizarSelInfo();
+  atualizarEstatisticas();
+}
+
+function atualizarSelInfo(){
+  const n=selecionados.size;
+  document.getElementById('selCount').textContent=n;
+  const el=document.getElementById('selInfo');
+  el.style.display=n>0?'flex':'none';
+  atualizarFiltroInfo();
+}
+
+// ══════════════════════════════════════════════════════
+// ESTATÍSTICAS
+// ══════════════════════════════════════════════════════
+function atualizarEstatisticas(){
+  const a=socios.filter(s=>!isFalecido(s.socio)).length;
+  const f=socios.filter(s=>isFalecido(s.socio)).length;
+  const st=socios.filter(s=>isSemTel(s.telefone)).length;
+  document.getElementById('totalSocios').textContent=socios.length;
+  document.getElementById('totalAtivos').textContent=a;
+  document.getElementById('totalFalecidos').textContent=f;
+  document.getElementById('totalSelecionados').textContent=selecionados.size;
+  document.getElementById('footerAtivos').textContent=a;
+  document.getElementById('footerFalecidos').textContent=f;
+  document.getElementById('footerSemTel').textContent=st;
+  document.getElementById('total').textContent=socios.length;
+}
+
+// ══════════════════════════════════════════════════════
+// FILTRO ENVIO
+// ══════════════════════════════════════════════════════
+function aplicarFiltroEnvio(){
+  const v=document.getElementById('cfgFiltro').value;
+  if(v==='todos'){
+    socios.forEach((s,i)=>{if(!isSemTel(s.telefone)&&!isFalecido(s.socio))selecionados.add(i);});
+  } else if(v==='ativos'){
+    socios.forEach((s,i)=>{
+      if(!isFalecido(s.socio)&&!isSemTel(s.telefone)) selecionados.add(i);
+      else selecionados.delete(i);
+    });
+  }
+  listar();
+  atualizarEstatisticas();
+  atualizarFiltroInfo();
+}
+
+function atualizarFiltroInfo(){
+  const v=document.getElementById('cfgFiltro').value;
+  let n=0;
+  if(v==='selecionados') n=selecionados.size;
+  else if(v==='todos'||v==='ativos') n=socios.filter(s=>!isFalecido(s.socio)&&!isSemTel(s.telefone)).length;
+  document.getElementById('filaInfo').textContent=n>0?`${n} contatos na fila de envio`:'';
+}
+
+// ══════════════════════════════════════════════════════
+// MONTAR FILA
+// ══════════════════════════════════════════════════════
+function montarFila(){
+  const v=document.getElementById('cfgFiltro').value;
+  fila=[];
+  socios.forEach((s,i)=>{
+    let incluir=false;
+    if(v==='selecionados') incluir=selecionados.has(i);
+    else if(v==='todos'||v==='ativos') incluir=!isFalecido(s.socio);
+    if(incluir){
+      fila.push({idx:i, status: isSemTel(s.telefone)?'semtel':'pendente'});
+    }
+  });
+  return fila;
+}
+
+// ══════════════════════════════════════════════════════
+// RENDERIZAR FILA
+// ══════════════════════════════════════════════════════
+function renderFila(){
+  const el=document.getElementById('filaItens');
+  el.innerHTML='';
+  fila.forEach((item,pos)=>{
+    const s=socios[item.idx];
+    const isAtual=(pos===filaIdx&&rodando);
+    const div=document.createElement('div');
+    div.className='fila-item'+
+      (isAtual?' atual-row':'')+
+      (item.status==='enviado'?' enviado-row':'')+
+      (item.status==='pulado'?' pulado-row':'')+
+      (item.status==='semtel'?' semtel-row':'');
+    div.id='fila-row-'+pos;
+    const statusMap={
+      pendente:'<span class="status-badge status-pendente">Pendente</span>',
+      atual:   '<span class="status-badge status-atual">▶ Atual</span>',
+      enviado: '<span class="status-badge status-enviado">✅ Enviado</span>',
+      pulado:  '<span class="status-badge status-pulado">⏭ Pulado</span>',
+      semtel:  '<span class="status-badge status-semtel">Sem tel.</span>'
+    };
+    const badge=isAtual?statusMap.atual:statusMap[item.status]||statusMap.pendente;
+    div.innerHTML=`
+      <span class="fila-num">${pos+1}</span>
+      <span class="fila-nome">${s.socio}</span>
+      <span class="fila-tel">${isSemTel(s.telefone)?'—':formatTel(s.telefone)}</span>
+      <div class="fila-status">${badge}</div>`;
+    el.appendChild(div);
+  });
+  document.getElementById('filaCount').textContent=`${fila.length} contatos`;
+  // rolar para o atual
+  const atualEl=document.getElementById('fila-row-'+filaIdx);
+  if(atualEl) atualEl.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════════════════
+// PROGRESSO
+// ══════════════════════════════════════════════════════
+function atualizarProgresso(){
+  const env=fila.filter(x=>x.status==='enviado').length;
+  const pul=fila.filter(x=>x.status==='pulado').length;
+  const st=fila.filter(x=>x.status==='semtel').length;
+  const pend=fila.filter(x=>x.status==='pendente').length;
+  const total=fila.length;
+  const feito=env+pul+st;
+  const pct=total>0?Math.round(feito/total*100):0;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressPct').textContent=pct+'%';
+  document.getElementById('cntEnviado').textContent=env;
+  document.getElementById('cntPulado').textContent=pul;
+  document.getElementById('cntSemTel').textContent=st;
+  document.getElementById('cntPendente').textContent=pend;
+}
+
+// ══════════════════════════════════════════════════════
+// INICIAR ENVIO
+// ══════════════════════════════════════════════════════
+function iniciarEnvio(){
+  montarFila();
+  if(fila.filter(x=>x.status!=='semtel').length===0){
+    mostrarToast('Selecione ao menos um sócio com telefone!','warning');
+    return;
+  }
+  filaIdx=0;
+  rodando=true;
+  pausado=false;
+  modoManual=parseInt(document.getElementById('cfgIntervalo').value)===0;
+
+  // UI: mostrar controles
+  document.getElementById('btnIniciar').style.display='none';
+  document.getElementById('btnPausar').style.display=modoManual?'none':'inline-flex';
+  document.getElementById('btnPular').style.display='inline-flex';
+  document.getElementById('btnParar').style.display='inline-flex';
+  if(modoManual) document.getElementById('btnProximo').style.display='inline-flex';
+  document.getElementById('progressSection').style.display='block';
+  document.getElementById('filaContainer').style.display='block';
+  document.getElementById('atualCard').style.display='block';
+  document.getElementById('conclusaoCard').style.display='none';
+
+  renderFila();
+  processarAtual();
+}
+
+// ══════════════════════════════════════════════════════
+// PROCESSAR ATUAL
+// ══════════════════════════════════════════════════════
+function processarAtual(){
+  if(!rodando) return;
+  // pular sem telefone automaticamente
+  while(filaIdx<fila.length && fila[filaIdx].status==='semtel') filaIdx++;
+  if(filaIdx>=fila.length){ concluir(); return; }
+
+  const item=fila[filaIdx];
+  const s=socios[item.idx];
+
+  // Atualizar card atual
+  document.getElementById('atualNome').textContent=`Box ${s.box} — ${s.socio}`;
+  document.getElementById('atualTel').textContent=formatTel(s.telefone);
+
+  // Abrir WhatsApp
+  const popup=window.open(waURL(s.telefone,s.socio),'_blank');
+  if(!popup){
+    document.getElementById('popupOverlay').classList.add('active');
+    document.getElementById('popupAlerta').classList.add('active');
+  }
+
+  renderFila();
+  atualizarProgresso();
+
+  if(modoManual){
+    document.getElementById('timerNum').textContent='✋';
+    document.getElementById('timerNum').style.fontSize='.9rem';
+  } else {
+    iniciarCountdown();
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// COUNTDOWN
+// ══════════════════════════════════════════════════════
+function iniciarCountdown(){
+  clearInterval(timerRef);
+  timerSeg=parseInt(document.getElementById('cfgIntervalo').value);
+  document.getElementById('timerNum').style.fontSize='1.1rem';
+  document.getElementById('timerNum').textContent=timerSeg;
+  timerRef=setInterval(()=>{
+    if(pausado) return;
+    timerSeg--;
+    document.getElementById('timerNum').textContent=timerSeg;
+    if(timerSeg<=0){
+      clearInterval(timerRef);
+      marcarEnviado();
+      avancar();
+    }
+  },1000);
+}
+
+// ══════════════════════════════════════════════════════
+// MARCAR / AVANCAR
+// ══════════════════════════════════════════════════════
+function marcarEnviado(){
+  if(filaIdx<fila.length) fila[filaIdx].status='enviado';
+}
+
+function avancar(){
+  filaIdx++;
+  while(filaIdx<fila.length && fila[filaIdx].status==='semtel') filaIdx++;
+  renderFila();
+  atualizarProgresso();
+  if(filaIdx>=fila.length){ concluir(); return; }
+  processarAtual();
+}
+
+// ══════════════════════════════════════════════════════
+// CONTROLES
+// ══════════════════════════════════════════════════════
+function pausarEnvio(){
+  pausado=true;
+  document.getElementById('btnPausar').style.display='none';
+  document.getElementById('btnRetomar').style.display='inline-flex';
+  document.getElementById('timerNum').textContent='⏸';
+  mostrarToast('Envio pausado.','info');
+}
+
+function retornarEnvio(){
+  pausado=false;
+  document.getElementById('btnRetomar').style.display='none';
+  document.getElementById('btnPausar').style.display='inline-flex';
+  mostrarToast('Envio retomado!','success');
+  if(!modoManual) iniciarCountdown();
+}
+
+function pularAtual(){
+  clearInterval(timerRef);
+  if(filaIdx<fila.length) fila[filaIdx].status='pulado';
+  atualizarProgresso();
+  renderFila();
+  filaIdx++;
+  while(filaIdx<fila.length && fila[filaIdx].status==='semtel') filaIdx++;
+  if(filaIdx>=fila.length){ concluir(); return; }
+  processarAtual();
+}
+
+function proximoManual(){
+  // modo manual: marca como enviado e avança
+  clearInterval(timerRef);
+  marcarEnviado();
+  atualizarProgresso();
+  filaIdx++;
+  while(filaIdx<fila.length && fila[filaIdx].status==='semtel') filaIdx++;
+  renderFila();
+  if(filaIdx>=fila.length){ concluir(); return; }
+  processarAtual();
+}
+
+function pararEnvio(){
+  clearInterval(timerRef);
+  rodando=false;
+  pausado=false;
+  resetUI();
+  mostrarToast('Envio interrompido.','warning');
+}
+
+// ══════════════════════════════════════════════════════
+// CONCLUSÃO
+// ══════════════════════════════════════════════════════
+function concluir(){
+  clearInterval(timerRef);
+  rodando=false;
+  document.getElementById('atualCard').style.display='none';
+  document.getElementById('conclusaoCard').style.display='block';
+  const env=fila.filter(x=>x.status==='enviado').length;
+  const pul=fila.filter(x=>x.status==='pulado').length;
+  const st=fila.filter(x=>x.status==='semtel').length;
+  document.getElementById('finalEnviado').textContent=env;
+  document.getElementById('finalPulado').textContent=pul;
+  document.getElementById('finalSemTel').textContent=st;
+  document.getElementById('btnPausar').style.display='none';
+  document.getElementById('btnRetomar').style.display='none';
+  document.getElementById('btnPular').style.display='none';
+  document.getElementById('btnParar').style.display='none';
+  document.getElementById('btnProximo').style.display='none';
+  atualizarProgresso();
+  renderFila();
+  mostrarToast(`✅ Envio concluído! ${env} mensagens enviadas.`,'success');
+}
+
+function resetarEnvio(){
+  fila=[];
+  filaIdx=0;
+  clearInterval(timerRef);
+  rodando=false;
+  pausado=false;
+  resetUI();
+  document.getElementById('conclusaoCard').style.display='none';
+  document.getElementById('progressSection').style.display='none';
+  document.getElementById('filaContainer').style.display='none';
+  document.getElementById('atualCard').style.display='none';
+  document.getElementById('filaItens').innerHTML='';
+}
+
+function resetUI(){
+  document.getElementById('btnIniciar').style.display='inline-flex';
+  document.getElementById('btnPausar').style.display='none';
+  document.getElementById('btnRetomar').style.display='none';
+  document.getElementById('btnPular').style.display='none';
+  document.getElementById('btnParar').style.display='none';
+  document.getElementById('btnProximo').style.display='none';
+  document.getElementById('atualCard').style.display='none';
+}
+
+// ══════════════════════════════════════════════════════
+// POPUP
+// ══════════════════════════════════════════════════════
+function fecharPopup(){
+  document.getElementById('popupOverlay').classList.remove('active');
+  document.getElementById('popupAlerta').classList.remove('active');
+}
+
+// ══════════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════════
+function mostrarToast(msg,tipo='success'){
+  const t=document.createElement('div');
+  t.className=`toast ${tipo}`;
+  t.innerHTML=`<i class="fas fa-${tipo==='success'?'check-circle':tipo==='warning'?'exclamation-triangle':tipo==='info'?'info-circle':'times-circle'}"></i> ${msg}`;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3500);
+}
+
+window.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
+                                                                                                       
