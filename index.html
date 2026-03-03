@@ -137,6 +137,30 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none;}
 .btn-deselect{background:#e5e7eb;color:#374151;font-size:.78rem;padding:.45rem .9rem;white-space:nowrap;}
 .sel-info{font-size:.8rem;color:#0369a1;font-weight:600;display:flex;align-items:center;gap:.3rem;}
 
+/* ── PAINEL 10 SELECIONADOS ── */
+.painel10{background:white;border-radius:1rem;box-shadow:0 4px 24px rgba(5,150,105,.15);border:2px solid #059669;overflow:hidden;}
+.painel10-header{background:linear-gradient(135deg,#065f46,#059669,#10b981);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+.painel10-header-left{display:flex;align-items:center;gap:.75rem;}
+.painel10-header-icon{width:38px;height:38px;border-radius:.5rem;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:white;font-size:1.1rem;}
+.painel10-header h2{color:white;font-size:1rem;font-weight:700;}
+.painel10-header p{color:#a7f3d0;font-size:.78rem;}
+.painel10-counter{background:rgba(255,255,255,.2);color:white;padding:.35rem .9rem;border-radius:9999px;font-weight:800;font-size:.9rem;border:1px solid rgba(255,255,255,.4);}
+.painel10-body{padding:1.25rem 1.5rem;}
+.chips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.6rem;margin-bottom:1rem;min-height:80px;}
+.chip-slot{background:#f0fdf4;border:2px dashed #a7f3d0;border-radius:.6rem;padding:.55rem .85rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.8rem;transition:all .2s;}
+.chip-slot.filled{background:#f0fdf4;border:2px solid #059669;}
+.chip-slot.empty{background:#f9fafb;border:2px dashed #d1d5db;color:#9ca3af;}
+.chip-name{font-weight:700;color:#065f46;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.chip-tel{font-size:.72rem;color:#6b7280;}
+.chip-box{background:#059669;color:white;border-radius:.25rem;padding:.1rem .35rem;font-size:.65rem;font-weight:700;flex-shrink:0;}
+.chip-remove{width:20px;height:20px;border-radius:50%;background:#fee2e2;border:none;color:#dc2626;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0;min-height:unset;}
+.chip-remove:hover{background:#fca5a5;transform:scale(1.1);}
+.chip-empty-icon{font-size:1rem;color:#d1d5db;margin-right:.3rem;}
+.painel10-actions{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid #dcfce7;padding-top:1rem;margin-top:.25rem;}
+.painel10-hint{font-size:.75rem;color:#6b7280;}
+.bar-limit{height:8px;background:#dcfce7;border-radius:9999px;overflow:hidden;margin-bottom:.75rem;}
+.bar-limit-fill{height:100%;background:linear-gradient(90deg,#059669,#34d399);border-radius:9999px;transition:width .3s ease;}
+
 *{-webkit-tap-highlight-color:transparent;}
 input,button,select{-webkit-appearance:none;}
 @supports (-webkit-touch-callout:none){.search-input-wrapper input,.config-item input{font-size:16px;}button{min-height:44px;}}
@@ -312,7 +336,7 @@ table{min-width:260px;}
     <div class="stat-badge"><i class="fas fa-users"></i><span><span id="totalSocios">0</span> sócios</span></div>
     <div class="stat-badge"><span class="stat-dot dot-green"></span><span><span id="totalAtivos">0</span> ativos</span></div>
     <div class="stat-badge"><span class="stat-dot dot-gray"></span><span><span id="totalFalecidos">0</span> falecidos</span></div>
-    <div class="stat-badge"><span class="stat-dot dot-blue"></span><span><span id="totalSelecionados">0</span> selecionados</span></div>
+    <div class="stat-badge"><span class="stat-dot dot-blue"></span><span><span id="totalSelecionados">0</span>/10 selecionados</span></div>
   </div>
 </div>
 </header>
@@ -447,6 +471,35 @@ table{min-width:260px;}
 <!-- ══════════════════════════════════════════════
      LISTA DE SÓCIOS
 ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════
+     PAINEL: CONTATOS SELECIONADOS (ATÉ 10)
+══════════════════════════════════════════════════════ -->
+<section class="painel10" id="painel10">
+  <div class="painel10-header">
+    <div class="painel10-header-left">
+      <div class="painel10-header-icon"><i class="fas fa-user-check"></i></div>
+      <div>
+        <h2>✅ Contatos Selecionados para Envio</h2>
+        <p>Selecione até 10 sócios na lista abaixo para enviar a mensagem</p>
+      </div>
+    </div>
+    <div class="painel10-counter"><span id="sel10count">0</span>/10</div>
+  </div>
+  <div class="painel10-body">
+    <div class="bar-limit"><div class="bar-limit-fill" id="barLimitFill" style="width:0%"></div></div>
+    <div class="chips-grid" id="chipsGrid"></div>
+    <div class="painel10-actions">
+      <span class="painel10-hint"><i class="fas fa-info-circle"></i> Clique no <strong>✕</strong> do chip para remover um contato</span>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+        <button class="btn-deselect" style="font-size:.78rem;padding:.45rem .9rem;" onclick="desmarcarTodos()"><i class="fas fa-times"></i> Limpar tudo</button>
+        <button class="btn-start" id="btnEnviar10" style="font-size:.85rem;padding:.55rem 1.2rem;" onclick="iniciarEnvio10()" disabled>
+          <i class="fab fa-whatsapp"></i> Enviar para Selecionados
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="table-section">
   <div class="search-bar">
     <div class="search-row">
@@ -454,12 +507,12 @@ table{min-width:260px;}
         <i class="fas fa-search"></i>
         <input type="text" id="pesquisa" placeholder="Pesquisar por nome, box ou telefone…" onkeyup="listar()">
       </div>
-      <button class="btn-select-all" onclick="selecionarTodos()"><i class="fas fa-check-double"></i> Todos</button>
+      <button class="btn-select-all" onclick="selecionarTodos()"><i class="fas fa-check-double"></i> Primeiros 10</button>
       <button class="btn-deselect" onclick="desmarcarTodos()"><i class="fas fa-times"></i> Limpar</button>
     </div>
     <div class="search-info" id="searchInfo"></div>
     <div class="sel-info" id="selInfo" style="margin-top:.4rem;display:none;">
-      <i class="fas fa-check-circle"></i><span id="selCount">0</span> sócio(s) selecionado(s) para envio
+      <i class="fas fa-check-circle"></i><span id="selCount">0</span>/10 sócio(s) selecionado(s) para envio
     </div>
   </div>
 
@@ -681,6 +734,7 @@ const dadosIniciais = [
 // ESTADO GLOBAL
 // ══════════════════════════════════════════════════════
 let socios       = [];
+const MAX_SEL = 10;              // limite máximo de seleção
 let selecionados = new Set();   // índices selecionados
 let fila         = [];          // [{idx, status:'pendente'|'enviado'|'pulado'|'semtel'}]
 let filaIdx      = 0;           // posição atual na fila
@@ -741,6 +795,7 @@ function init(){
   listar();
   atualizarEstatisticas();
   atualizarFiltroInfo();
+  renderChips();
 }
 
 // ══════════════════════════════════════════════════════
@@ -818,23 +873,37 @@ function abrirWA(tel,nome){
 // SELEÇÃO
 // ══════════════════════════════════════════════════════
 function toggleSel(idx,v){
-  if(v) selecionados.add(idx);
-  else  selecionados.delete(idx);
+  if(v){
+    if(selecionados.size>=MAX_SEL){
+      mostrarToast(`⚠️ Limite de ${MAX_SEL} contatos atingido! Remova um para adicionar outro.`,'warning');
+      setTimeout(()=>listar(),50);
+      return;
+    }
+    selecionados.add(idx);
+  } else {
+    selecionados.delete(idx);
+  }
   atualizarSelInfo();
   atualizarEstatisticas();
-  // atualiza row highlight
-  const rows=document.querySelectorAll('#tabela tr');
+  renderChips();
   listar();
 }
 
 function selecionarTodos(){
-  socios.forEach((s,i)=>{
-    if(!isSemTel(s.telefone)&&!isFalecido(s.socio)) selecionados.add(i);
-  });
+  let count=selecionados.size;
+  for(let i=0;i<socios.length;i++){
+    if(count>=MAX_SEL) break;
+    const s=socios[i];
+    if(!isSemTel(s.telefone)&&!isFalecido(s.socio)&&!selecionados.has(i)){
+      selecionados.add(i);
+      count++;
+    }
+  }
   listar();
   atualizarSelInfo();
   atualizarEstatisticas();
-  mostrarToast(`${selecionados.size} sócios selecionados!`,'success');
+  renderChips();
+  mostrarToast(`${selecionados.size} sócios selecionados (máx. ${MAX_SEL})!`,'success');
 }
 
 function desmarcarTodos(){
@@ -842,6 +911,7 @@ function desmarcarTodos(){
   listar();
   atualizarSelInfo();
   atualizarEstatisticas();
+  renderChips();
 }
 
 function atualizarSelInfo(){
@@ -849,6 +919,10 @@ function atualizarSelInfo(){
   document.getElementById('selCount').textContent=n;
   const el=document.getElementById('selInfo');
   el.style.display=n>0?'flex':'none';
+  document.getElementById('sel10count').textContent=n;
+  const pct=Math.round(n/MAX_SEL*100);
+  document.getElementById('barLimitFill').style.width=pct+'%';
+  document.getElementById('btnEnviar10').disabled=(n===0);
   atualizarFiltroInfo();
 }
 
@@ -872,6 +946,51 @@ function atualizarEstatisticas(){
 // ══════════════════════════════════════════════════════
 // FILTRO ENVIO
 // ══════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// RENDERIZAR CHIPS (painel dos 10 selecionados)
+// ══════════════════════════════════════════════════════
+function renderChips(){
+  const grid=document.getElementById('chipsGrid');
+  grid.innerHTML='';
+  const selArr=Array.from(selecionados);
+  selArr.forEach(idx=>{
+    const s=socios[idx];
+    const chip=document.createElement('div');
+    chip.className='chip-slot filled';
+    chip.innerHTML=`
+      <span class="chip-box">${s.box}</span>
+      <div style="flex:1;min-width:0;">
+        <div class="chip-name">${s.socio}</div>
+        <div class="chip-tel"><i class="fas fa-phone" style="font-size:.6rem;"></i> ${formatTel(s.telefone)}</div>
+      </div>
+      <button class="chip-remove" onclick="removerChip(${idx})" title="Remover">✕</button>`;
+    grid.appendChild(chip);
+  });
+  const vazios=MAX_SEL-selArr.length;
+  for(let i=0;i<vazios;i++){
+    const slot=document.createElement('div');
+    slot.className='chip-slot empty';
+    slot.innerHTML=`<span class="chip-empty-icon">👤</span><span>Vaga ${selArr.length+i+1} — clique na lista</span>`;
+    grid.appendChild(slot);
+  }
+}
+
+function removerChip(idx){
+  selecionados.delete(idx);
+  atualizarSelInfo();
+  atualizarEstatisticas();
+  renderChips();
+  listar();
+  mostrarToast('Contato removido da seleção.','info');
+}
+
+function iniciarEnvio10(){
+  document.getElementById('cfgFiltro').value='selecionados';
+  atualizarFiltroInfo();
+  iniciarEnvio();
+  document.querySelector('.envio-panel').scrollIntoView({behavior:'smooth'});
+}
+
 function aplicarFiltroEnvio(){
   const v=document.getElementById('cfgFiltro').value;
   if(v==='todos'){
@@ -1188,4 +1307,3 @@ window.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
 </html>
-                                                                                                       
