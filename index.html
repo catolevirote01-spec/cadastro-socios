@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, user-scalable=yes" />
     <title>Yate Clube de Imperatriz — Sistema de Cadastro de Sócios</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -312,6 +312,9 @@
         .table-wrapper {
             max-height: 600px;
             overflow-y: auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
         }
 
         table {
@@ -565,7 +568,25 @@
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 1.875rem;
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 0.85rem;
+            }
+
+            .header-content {
+                padding: 1rem;
+            }
+
+            .stats-container {
+                flex-wrap: wrap;
+                gap: 0.4rem;
+            }
+
+            .stat-badge {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
             }
 
             .form-grid {
@@ -580,25 +601,89 @@
                 margin-left: 0;
             }
 
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+            }
+
             table {
-                font-size: 0.75rem;
+                font-size: 0.72rem;
+                min-width: 560px;
             }
 
             th, td {
-                padding: 0.5rem;
+                padding: 0.4rem 0.45rem;
+                white-space: nowrap;
             }
 
             .actions {
                 flex-direction: column;
+                gap: 0.2rem;
             }
 
             .btn-small {
                 width: 100%;
                 justify-content: center;
+                font-size: 0.7rem;
+                padding: 0.3rem 0.5rem;
             }
 
             .table-footer {
                 flex-direction: column;
+                gap: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .search-bar input {
+                font-size: 0.9rem;
+            }
+
+            .modal-content {
+                margin: 0.5rem;
+                padding: 1.2rem;
+                max-height: 95vh;
+                overflow-y: auto;
+            }
+
+            .btn {
+                font-size: 0.85rem;
+                padding: 0.55rem 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .footer-info {
+                flex-direction: column;
+                gap: 0.3rem;
+                font-size: 0.72rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2rem;
+            }
+
+            .header-icon i {
+                font-size: 1.8rem;
+            }
+
+            table {
+                font-size: 0.68rem;
+                min-width: 480px;
+            }
+
+            th, td {
+                padding: 0.35rem 0.3rem;
+            }
+
+            .stat-badge {
+                font-size: 0.68rem;
             }
         }
 
@@ -655,18 +740,6 @@
             <h1>Yate Clube de Imperatriz</h1>
             <p>Sistema de Cadastro de Sócios</p>
             <div class="stats-container">
-                <div class="stat-badge">
-                    <i class="fas fa-users"></i>
-                    <span><span id="totalSocios">228</span> sócios cadastrados</span>
-                </div>
-                <div class="stat-badge">
-                    <span class="stat-dot dot-green"></span>
-                    <span><span id="totalAtivos">223</span> ativos</span>
-                </div>
-                <div class="stat-badge">
-                    <span class="stat-dot dot-gray"></span>
-                    <span><span id="totalFalecidos">5</span> falecidos</span>
-                </div>
                 <div class="stat-badge highlight" id="aniversarioBadge" style="display: none;">
                     <i class="fas fa-birthday-cake"></i>
                     <span id="aniversarioNomes">🎉 Aniversariante(s) hoje!</span>
@@ -754,18 +827,6 @@
             <div class="table-footer">
                 <span>Exibindo <strong id="exibindo">228</strong> de <strong id="total">228</strong> sócios</span>
                 <div class="footer-stats">
-                    <div class="footer-stat">
-                        <span class="stat-dot dot-green"></span>
-                        <span id="footerAtivos">223</span> ativos
-                    </div>
-                    <div class="footer-stat">
-                        <span class="stat-dot dot-gray"></span>
-                        <span id="footerFalecidos">5</span> falecidos
-                    </div>
-                    <div class="footer-stat">
-                        <span class="stat-dot dot-yellow"></span>
-                        <span id="footerSemTel">0</span> sem telefone
-                    </div>
                     <div class="footer-stat" id="footerAniversario" style="display: none;">
                         <i class="fas fa-birthday-cake" style="color: #fbbf24;"></i>
                         <span id="footerAniversarioNomes">aniversariante(s)</span>
@@ -1273,25 +1334,15 @@
 
         // ─── ESTATÍSTICAS ──────────────────────────────────────────────────────
         function atualizarEstatisticas() {
-            const totalAtivos = socios.filter(s => !isFalecido(s.socio)).length;
-            const totalFalecidos = socios.filter(s => isFalecido(s.socio)).length;
-            const totalSemTel = socios.filter(s => isSemTelefone(s.telefone)).length;
-            const listAniversariantes = socios.filter(s => !isFalecido(s.socio) && estaAniversariando(s.dataNascimento));
+            const listAniversariantes = socios.filter(s => estaAniversariando(s.dataNascimento));
             const aniversariantes = listAniversariantes.length;
 
-            document.getElementById('totalSocios').textContent = socios.length;
-            document.getElementById('totalAtivos').textContent = totalAtivos;
-            document.getElementById('totalFalecidos').textContent = totalFalecidos;
-            document.getElementById('footerAtivos').textContent = totalAtivos;
-            document.getElementById('footerFalecidos').textContent = totalFalecidos;
-            document.getElementById('footerSemTel').textContent = totalSemTel;
             document.getElementById('total').textContent = socios.length;
 
             if (aniversariantes > 0) {
-                // Formata os nomes: pega apenas o primeiro nome para ficar compacto no badge
+                // Formata os nomes: exibe o NOME COMPLETO do aniversariante
                 const nomesCompletos = listAniversariantes.map(s => {
-                    const partes = s.socio.trim().split(' ');
-                    return partes[0].charAt(0).toUpperCase() + partes[0].slice(1).toLowerCase();
+                    return s.socio.trim().split(' ').map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
                 });
                 const textoNomes = nomesCompletos.join(', ');
                 const textoBadge = aniversariantes === 1
