@@ -1,1309 +1,1381 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5"/>
-<title>Yate Clube de Imperatriz — Sócios</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Source Sans 3',sans-serif;background:#f1f5f9;color:#1e293b;}
-h1,h2,h3,h4,h5,h6{font-family:'Raleway',sans-serif;}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Yate Clube de Imperatriz — Sistema de Cadastro de Sócios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* ── HEADER ── */
-header{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#1d4ed8 100%);position:relative;overflow:hidden;padding:2rem 1.5rem;}
-header svg{position:absolute;top:0;left:0;width:100%;height:100%;opacity:.1;}
-.header-content{position:relative;max-width:1280px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem;}
-.header-icon{width:64px;height:64px;border-radius:50%;background:rgba(245,158,11,.2);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;border:2px solid rgba(245,158,11,.5);}
-.header-icon i{color:white;font-size:32px;}
-header h1{color:white;font-size:2.4rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;}
-header p{color:#bfdbfe;font-size:1.05rem;font-weight:500;letter-spacing:.01em;}
-.stats-container{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-top:1.25rem;}
-.stat-badge{display:flex;align-items:center;gap:.5rem;padding:.45rem 1.1rem;border-radius:9999px;color:white;font-size:.85rem;font-weight:600;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);}
-.stat-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
-.dot-green{background:#22c55e;}.dot-gray{background:#9ca3af;}.dot-yellow{background:#ffc107;}.dot-blue{background:#60a5fa;}
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: #f5f8fc;
+            color: #2d3748;
+        }
 
-/* ── MAIN ── */
-main{max-width:1280px;margin:0 auto;padding:1.5rem 1rem;display:flex;flex-direction:column;gap:1.5rem;}
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Raleway', sans-serif;
+        }
 
-/* ── PAINEL ENVIO ── */
-.envio-panel{background:white;border-radius:1rem;box-shadow:0 4px 32px rgba(3,105,161,.15);border:1px solid #bae6fd;overflow:hidden;}
-.envio-header{background:linear-gradient(135deg,#0c2340,#0369a1,#0ea5e9);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
-.envio-header-left{display:flex;align-items:center;gap:.75rem;}
-.envio-header-icon{width:40px;height:40px;border-radius:.5rem;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:white;font-size:1.1rem;}
-.envio-header h2{color:white;font-size:1.1rem;font-weight:700;}
-.envio-header p{color:#bae6fd;font-size:.8rem;}
-.envio-body{padding:1.5rem;}
+        /* ─── HEADER ─── */
+        header {
+            background: linear-gradient(135deg, #0f3460 0%, #1d4ed8 60%, #2563eb 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 1.5rem;
+        }
 
-/* Configurações */
-.config-row{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;align-items:flex-end;}
-.config-item{display:flex;flex-direction:column;gap:.3rem;}
-.config-item label{font-size:.7rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;}
-.config-item select,.config-item input[type=number]{padding:.5rem .75rem;border-radius:.5rem;border:1px solid #e5e7eb;font-size:.875rem;font-family:'Source Sans 3',sans-serif;background:white;}
-.config-item select:focus,.config-item input:focus{outline:none;box-shadow:0 0 0 2px #0369a1;border-color:transparent;}
+        header svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
 
-/* Barra de progresso */
-.progress-section{background:#f0f9ff;border:1px solid #bae6fd;border-radius:.75rem;padding:1.25rem;margin-bottom:1.5rem;}
-.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;}
-.progress-title{font-weight:700;color:#0c4a6e;font-size:.95rem;}
-.progress-pct{font-size:1.5rem;font-weight:800;color:#0369a1;}
-.progress-bar-bg{height:14px;background:#dbeafe;border-radius:9999px;overflow:hidden;margin-bottom:.75rem;}
-.progress-bar-fill{height:100%;background:linear-gradient(90deg,#0369a1,#38bdf8);border-radius:9999px;transition:width .5s ease;width:0%;}
-.progress-stats{display:flex;flex-wrap:wrap;gap:.75rem;}
-.pstat{display:flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;}
-.pstat-dot{width:10px;height:10px;border-radius:50%;}
-.pstat-enviado .pstat-dot{background:#0ea5e9;}
-.pstat-pulado .pstat-dot{background:#f59e0b;}
-.pstat-semtel .pstat-dot{background:#9ca3af;}
-.pstat-pendente .pstat-dot{background:#dbeafe;border:1px solid #93c5fd;}
+        .header-content {
+            position: relative;
+            max-width: 1280px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
 
-/* Card atual */
-.atual-card{background:white;border:2px solid #0369a1;border-radius:.75rem;padding:1.25rem;margin-bottom:1.5rem;display:none;position:relative;overflow:hidden;}
-.atual-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#0369a1;}
-.atual-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0369a1;margin-bottom:.5rem;}
-.atual-nome{font-size:1.1rem;font-weight:700;color:#1f2937;margin-bottom:.25rem;}
-.atual-tel{font-size:.875rem;color:#6b7280;display:flex;align-items:center;gap:.35rem;}
-.atual-timer{position:absolute;top:1rem;right:1rem;text-align:center;}
-.timer-circle{width:56px;height:56px;border-radius:50%;background:#f0f9ff;border:3px solid #0369a1;display:flex;align-items:center;justify-content:center;flex-direction:column;}
-.timer-num{font-size:1.1rem;font-weight:800;color:#0369a1;line-height:1;}
-.timer-label{font-size:.55rem;color:#6b7280;text-transform:uppercase;}
+        .header-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
 
-/* Controles */
-.controls{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem;}
-button{padding:.55rem 1.1rem;border-radius:.5rem;border:none;font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;font-family:'Source Sans 3',sans-serif;}
-button:hover{opacity:.88;transform:scale(1.02);}
-button:active{transform:scale(.97);}
-button:disabled{opacity:.4;cursor:not-allowed;transform:none;}
-.btn-start{background:linear-gradient(135deg,#0369a1,#0ea5e9);color:white;font-size:.95rem;padding:.7rem 1.5rem;}
-.btn-pause{background:#f59e0b;color:white;}
-.btn-resume{background:#0369a1;color:white;}
-.btn-skip{background:#e5e7eb;color:#374151;}
-.btn-stop{background:#dc3545;color:white;}
-.btn-proximo{background:#0369a1;color:white;font-size:1rem;padding:.75rem 2rem;}
-.btn-wa{background:#25D366;color:white;}
+        .header-icon i {
+            color: white;
+            font-size: 32px;
+        }
 
-/* Fila */
-.fila-section{max-height:320px;overflow-y:auto;border:1px solid #e5e7eb;border-radius:.75rem;}
-.fila-header-row{display:grid;grid-template-columns:40px 1fr 1fr 80px;gap:.5rem;padding:.6rem 1rem;background:#f3f4f6;border-bottom:1px solid #e5e7eb;font-size:.7rem;font-weight:700;text-transform:uppercase;color:#6b7280;letter-spacing:.05em;position:sticky;top:0;}
-.fila-item{display:grid;grid-template-columns:40px 1fr 1fr 80px;gap:.5rem;padding:.65rem 1rem;border-bottom:1px solid #f3f4f6;align-items:center;font-size:.82rem;transition:background .15s;}
-.fila-item:hover{background:#f9fafb;}
-.fila-item.atual-row{background:#eff6ff;border-left:3px solid #0369a1;}
-.fila-item.enviado-row{background:#f0fdf4;opacity:.7;}
-.fila-item.pulado-row{background:#fffbeb;opacity:.65;}
-.fila-item.semtel-row{background:#f9fafb;opacity:.5;}
-.fila-num{font-size:.75rem;font-weight:700;color:#9ca3af;text-align:center;}
-.fila-nome{font-weight:600;color:#1f2937;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.fila-tel{color:#6b7280;font-size:.78rem;}
-.fila-status{display:flex;justify-content:center;}
-.status-badge{display:inline-flex;align-items:center;gap:.25rem;padding:.18rem .5rem;border-radius:9999px;font-size:.65rem;font-weight:700;white-space:nowrap;}
-.status-pendente{background:#dbeafe;color:#1d4ed8;}
-.status-atual{background:#dbeafe;color:#1e40af;animation:pulseBadge 1.2s infinite;}
-.status-enviado{background:#dcfce7;color:#166534;}
-.status-pulado{background:#fef3c7;color:#92400e;}
-.status-semtel{background:#f3f4f6;color:#6b7280;}
-@keyframes pulseBadge{0%,100%{opacity:1;}50%{opacity:.6;}}
+        header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
 
-/* Alerta popup */
-.popup-alerta{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border-radius:.75rem;padding:2rem;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:5000;border-top:5px solid #059669;display:none;}
-.popup-alerta.active{display:block;}
-.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:4999;display:none;}
-.popup-overlay.active{display:block;}
-.popup-title{font-size:1.2rem;font-weight:800;color:#065f46;margin-bottom:.5rem;}
-.popup-desc{font-size:.875rem;color:#6b7280;margin-bottom:1.5rem;line-height:1.6;}
-.popup-btns{display:flex;gap:.75rem;}
+        header p {
+            color: #e0e7ff;
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
 
-/* Conclusão */
-.conclusao-card{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #93c5fd;border-radius:.75rem;padding:1.5rem;text-align:center;display:none;}
-.conclusao-icon{font-size:3rem;margin-bottom:.75rem;}
-.conclusao-title{font-size:1.25rem;font-weight:800;color:#1e3a8a;margin-bottom:.5rem;}
-.conclusao-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:1rem;}
-.cstat{background:white;border-radius:.5rem;padding:.75rem 1.25rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.cstat-num{font-size:1.5rem;font-weight:800;color:#0369a1;}
-.cstat-label{font-size:.72rem;color:#6b7280;text-transform:uppercase;}
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
 
-/* ── TABLE ── */
-.table-section{background:white;border-radius:1rem;box-shadow:0 4px 24px rgba(15,23,42,.08);border:1px solid #e2e8f0;overflow:hidden;}
-.search-bar{padding:1rem;border-bottom:1px solid #f3f4f6;}
-.search-row{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;}
-.search-input-wrapper{position:relative;flex:1;min-width:200px;}
-.search-input-wrapper i{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:#9ca3af;font-size:1rem;}
-.search-input-wrapper input{width:100%;padding:.625rem .75rem .625rem 2.5rem;border-radius:.5rem;border:1px solid #e5e7eb;font-size:.875rem;font-family:'Source Sans 3',sans-serif;}
-.search-input-wrapper input:focus{outline:none;box-shadow:0 0 0 2px #0369a1;border-color:transparent;}
-.search-info{font-size:.75rem;color:#9ca3af;margin-top:.4rem;}
-.btn-select-all{background:#0f172a;color:white;font-size:.78rem;padding:.45rem .9rem;white-space:nowrap;}
-.btn-deselect{background:#e5e7eb;color:#374151;font-size:.78rem;padding:.45rem .9rem;white-space:nowrap;}
-.sel-info{font-size:.8rem;color:#0369a1;font-weight:600;display:flex;align-items:center;gap:.3rem;}
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(8px);
+        }
 
-/* ── PAINEL 10 SELECIONADOS ── */
-.painel10{background:white;border-radius:1rem;box-shadow:0 4px 24px rgba(5,150,105,.15);border:2px solid #059669;overflow:hidden;}
-.painel10-header{background:linear-gradient(135deg,#065f46,#059669,#10b981);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
-.painel10-header-left{display:flex;align-items:center;gap:.75rem;}
-.painel10-header-icon{width:38px;height:38px;border-radius:.5rem;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:white;font-size:1.1rem;}
-.painel10-header h2{color:white;font-size:1rem;font-weight:700;}
-.painel10-header p{color:#a7f3d0;font-size:.78rem;}
-.painel10-counter{background:rgba(255,255,255,.2);color:white;padding:.35rem .9rem;border-radius:9999px;font-weight:800;font-size:.9rem;border:1px solid rgba(255,255,255,.4);}
-.painel10-body{padding:1.25rem 1.5rem;}
-.chips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.6rem;margin-bottom:1rem;min-height:80px;}
-.chip-slot{background:#f0fdf4;border:2px dashed #a7f3d0;border-radius:.6rem;padding:.55rem .85rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.8rem;transition:all .2s;}
-.chip-slot.filled{background:#f0fdf4;border:2px solid #059669;}
-.chip-slot.empty{background:#f9fafb;border:2px dashed #d1d5db;color:#9ca3af;}
-.chip-name{font-weight:700;color:#065f46;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.chip-tel{font-size:.72rem;color:#6b7280;}
-.chip-box{background:#059669;color:white;border-radius:.25rem;padding:.1rem .35rem;font-size:.65rem;font-weight:700;flex-shrink:0;}
-.chip-remove{width:20px;height:20px;border-radius:50%;background:#fee2e2;border:none;color:#dc2626;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0;min-height:unset;}
-.chip-remove:hover{background:#fca5a5;transform:scale(1.1);}
-.chip-empty-icon{font-size:1rem;color:#d1d5db;margin-right:.3rem;}
-.painel10-actions{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid #dcfce7;padding-top:1rem;margin-top:.25rem;}
-.painel10-hint{font-size:.75rem;color:#6b7280;}
-.bar-limit{height:8px;background:#dcfce7;border-radius:9999px;overflow:hidden;margin-bottom:.75rem;}
-.bar-limit-fill{height:100%;background:linear-gradient(90deg,#059669,#34d399);border-radius:9999px;transition:width .3s ease;}
+        .stat-badge.highlight {
+            background: rgba(255, 193, 7, 0.3);
+            animation: pulse 2s infinite;
+        }
 
-*{-webkit-tap-highlight-color:transparent;}
-input,button,select{-webkit-appearance:none;}
-@supports (-webkit-touch-callout:none){.search-input-wrapper input,.config-item input{font-size:16px;}button{min-height:44px;}}
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
 
-.table-wrapper{max-height:500px;overflow-y:auto;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-table{width:100%;border-collapse:collapse;font-size:.875rem;}
-thead{background:#0f172a;color:white;position:sticky;top:0;z-index:2;}
-th{padding:.65rem 1rem;text-align:left;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;min-width:70px;}
-th.th-check{width:40px;text-align:center;}
-td{padding:.65rem 1rem;border-bottom:1px solid #f3f4f6;vertical-align:middle;}
-tbody tr{transition:background .15s;}
-tbody tr:nth-child(even){background:#f8fafc;}
-tbody tr:hover{background:#e0f2fe;}
-tbody tr.row-selected{background:#f0fdf4 !important;border-left:3px solid #059669;}
-tbody tr.row-semtel{opacity:.55;}
+        .stat-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
 
-.box-badge{display:inline-block;padding:.2rem .55rem;border-radius:.25rem;font-size:.72rem;font-weight:700;}
-.box-numeric{background:#eff6ff;color:#1e40af;}
-.box-alpha{background:#fef3c7;color:#92400e;}
-.box-yci{background:#dbeafe;color:#1d4ed8;}
-.socio-name{display:flex;align-items:center;gap:.4rem;}
-.socio-name.falecido{text-decoration:line-through;color:#9ca3af;font-style:italic;opacity:.65;}
-.phone-number{display:flex;align-items:center;gap:.3rem;color:#4b5563;}
-.phone-number i{color:#9ca3af;font-size:.7rem;}
-.sem-telefone{color:#d1d5db;font-size:.75rem;font-style:italic;}
-.check-col{text-align:center;}
-input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:#059669;}
+        .dot-green { background: #22c55e; }
+        .dot-gray { background: #9ca3af; }
+        .dot-yellow { background: #ffc107; }
 
-.table-footer{padding:.75rem 1rem;border-top:1px solid #f3f4f6;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;font-size:.75rem;color:#9ca3af;}
-.footer-stats{display:flex;gap:1rem;flex-wrap:wrap;}
-.footer-stat{display:flex;align-items:center;gap:.25rem;}
-.no-results{text-align:center;padding:3rem 1rem;color:#9ca3af;}
-.no-results i{font-size:2rem;opacity:.3;display:block;margin-bottom:.5rem;}
+        /* ─── MAIN ─── */
+        main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
 
-/* Toast */
-.toast{position:fixed;bottom:1rem;right:1rem;padding:.875rem 1.25rem;background:white;border-radius:.5rem;box-shadow:0 10px 25px rgba(0,0,0,.12);z-index:6000;animation:slideIn .3s ease-out;font-size:.85rem;display:flex;align-items:center;gap:.5rem;max-width:320px;}
-@keyframes slideIn{from{transform:translateX(400px);opacity:0;}to{transform:translateX(0);opacity:1;}}
-.toast.success{border-left:4px solid #22c55e;color:#166534;}
-.toast.warning{border-left:4px solid #fbbf24;color:#92400e;}
-.toast.error{border-left:4px solid #dc3545;color:#991b1b;}
-.toast.info{border-left:4px solid #3b82f6;color:#1e40af;}
+        /* ─── FORM SECTION ─── */
+        .form-section {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 24px rgba(29, 78, 216, 0.08);
+            border: 1px solid #e0e7ff;
+            padding: 1.5rem;
+        }
 
-footer{text-align:center;padding:1.5rem;font-size:.75rem;color:#9ca3af;}
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
 
-/* ── TABLET / LARGE PHONE (≤768px) ── */
-@media(max-width:768px){
-body{overflow-x:hidden;}
+        .form-header-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 0.5rem;
+            background: #1d4ed8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
 
-/* Header */
-header{padding:1.5rem 1rem;}
-header h1{font-size:1.55rem;}
-.header-icon{width:50px;height:50px;}
-.header-icon i{font-size:24px;}
-.stat-badge{padding:.35rem .75rem;font-size:.78rem;}
-.stats-container{gap:.4rem;}
+        .form-header h2 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
 
-/* Layout principal */
-main{padding:1rem .75rem;gap:1rem;}
+        .form-header .badge {
+            margin-left: auto;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            background: #fef3c7;
+            color: #92400e;
+        }
 
-/* Painel de envio */
-.envio-body{padding:1rem;}
-.envio-header{flex-direction:column;align-items:flex-start;gap:.4rem;}
-.envio-header h2{font-size:1rem;}
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
 
-/* Config */
-.config-row{flex-direction:column;gap:.65rem;margin-bottom:1rem;align-items:stretch;}
-.config-item{width:100%;}
-.config-item select,.config-item input[type=number]{width:100%;font-size:1rem;}
-.config-row>div[style]{margin-left:0 !important;width:100%;}
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
 
-/* Progresso */
-.progress-section{padding:1rem;}
-.progress-stats{gap:.5rem;flex-wrap:wrap;}
+        .form-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-/* Card atual — timer saindo do fluxo absoluto */
-.atual-card{padding:1rem 1rem 1rem 1.5rem;}
-.atual-timer{position:static;margin-top:.75rem;display:flex;justify-content:flex-end;}
+        .form-group input {
+            padding: 0.625rem 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+            font-family: 'Source Sans 3', sans-serif;
+            transition: all 0.2s;
+        }
 
-/* Controles: todos full-width */
-.controls{flex-direction:column;gap:.5rem;}
-.controls button{width:100%;justify-content:center;}
+        .form-group input:focus {
+            outline: none;
+            ring: 2px solid #1d4ed8;
+            border-color: transparent;
+            box-shadow: 0 0 0 2px #1d4ed8;
+        }
 
-/* Fila */
-.fila-header-row,.fila-item{grid-template-columns:30px 1fr 80px;}
-.fila-header-row .fila-col-tel,.fila-item .fila-tel{display:none;}
-.fila-section{max-height:260px;}
+        .form-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
 
-/* Barra de busca */
-.search-bar{padding:.875rem;}
-.search-row{flex-wrap:wrap;gap:.5rem;}
-.search-input-wrapper{min-width:100%;flex:0 0 100%;}
-.btn-select-all,.btn-deselect{flex:1;min-width:0;justify-content:center;}
+        button {
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Source Sans 3', sans-serif;
+        }
 
-/* Tabela */
-table{min-width:300px;font-size:.75rem;}
-th,td{padding:.45rem .5rem;}
-.table-wrapper{max-height:400px;}
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
 
-/* Popup */
-.popup-alerta{padding:1.5rem;width:92%;}
+        button:active {
+            transform: scale(0.98);
+        }
 
-/* Conclusão */
-.conclusao-stats{gap:.6rem;}
+        .btn-primary {
+            background: #198754;
+            color: white;
+        }
 
-/* Footer */
-footer{padding:1rem;}
-}
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #4b5563;
+        }
 
-/* ── SMALL PHONE (≤480px) ── */
-@media(max-width:480px){
-/* Header compacto */
-header{padding:1.25rem .875rem;}
-header h1{font-size:1.2rem;letter-spacing:-.01em;}
-header p{font-size:.82rem;}
-.header-icon{width:42px;height:42px;}
-.header-icon i{font-size:20px;}
-.stat-badge{padding:.25rem .55rem;font-size:.68rem;}
-.stats-container{gap:.3rem;}
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            margin-left: auto;
+        }
 
-/* Envio header */
-.envio-header{padding:.875rem;}
-.envio-header h2{font-size:.925rem;}
-.envio-header-icon{width:34px;height:34px;font-size:.9rem;}
+        /* ─── TABLE SECTION ─── */
+        .table-section {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 24px rgba(29, 78, 216, 0.08);
+            border: 1px solid #e0e7ff;
+            overflow: hidden;
+        }
 
-/* Progresso vertical */
-.progress-stats{flex-direction:column;gap:.35rem;}
-.pstat{font-size:.78rem;}
+        .search-bar {
+            padding: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
 
-/* Card atual */
-.atual-nome{font-size:.95rem;}
-.atual-tel{font-size:.8rem;}
+        .search-input-wrapper {
+            position: relative;
+        }
 
-/* Fila menor */
-.fila-section{max-height:200px;}
-.fila-item{font-size:.78rem;}
+        .search-input-wrapper i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1rem;
+        }
 
-/* Tabela — oculta coluna Telefone (redundante no mobile) */
-table th:nth-child(4),table td:nth-child(4){display:none;}
-table{min-width:260px;}
+        .search-input-wrapper input {
+            width: 100%;
+            padding: 0.625rem 0.75rem 0.625rem 2.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+            font-family: 'Source Sans 3', sans-serif;
+        }
 
-/* Tabela reduzida */
-.table-wrapper{max-height:340px;}
-.box-badge{font-size:.65rem;padding:.15rem .4rem;}
+        .search-input-wrapper input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #1d4ed8;
+            border-color: transparent;
+        }
 
-/* Conclusão compacta */
-.cstat{padding:.55rem .8rem;}
-.cstat-num{font-size:1.2rem;}
-.conclusao-icon{font-size:2.2rem;}
+        .search-info {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 0.5rem;
+        }
 
-/* Toast full-width */
-.toast{left:.75rem;right:.75rem;bottom:.75rem;max-width:none;width:calc(100% - 1.5rem);font-size:.8rem;}
+        .table-wrapper {
+            max-height: 600px;
+            overflow-y: auto;
+        }
 
-/* Popup */
-.popup-alerta{width:95%;padding:1.25rem;}
-.popup-title{font-size:1.05rem;}
-.popup-desc{font-size:.8rem;}
-}
-</style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        thead {
+            background: #1d4ed8;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        th {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            min-width: 100px;
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f0f6ff;
+        }
+
+        tbody tr:hover {
+            background: #e0ecff;
+        }
+
+        tbody tr.aniversario {
+            background: #fffbea;
+            box-shadow: inset 0 0 0 2px rgba(255, 193, 7, 0.3);
+        }
+
+        tbody tr.aniversario:nth-child(even) {
+            background: #fffbea;
+        }
+
+        .box-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .box-numeric {
+            background: #eff6ff;
+            color: #1e40af;
+        }
+
+        .box-alpha {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .box-yci {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .socio-name {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .socio-name.falecido {
+            text-decoration: line-through;
+            color: #9ca3af;
+            font-style: italic;
+            opacity: 0.65;
+        }
+
+        .socio-name .cake-icon {
+            color: #fbbf24;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .phone-number {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #4b5563;
+        }
+
+        .phone-number i {
+            color: #9ca3af;
+            font-size: 0.75rem;
+        }
+
+        .sem-telefone {
+            color: #d1d5db;
+            font-size: 0.75rem;
+            font-style: italic;
+        }
+
+        .data-nasc {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .data-nasc.aniversario {
+            color: #92400e;
+            font-weight: 700;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-small {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+            border-radius: 0.375rem;
+        }
+
+        .btn-edit {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .table-footer {
+            padding: 0.75rem 1rem;
+            border-top: 1px solid #f3f4f6;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .footer-stats {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #9ca3af;
+        }
+
+        .no-results i {
+            font-size: 2rem;
+            opacity: 0.3;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        /* ─── MODAL ─── */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .modal-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.875rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .form-buttons .btn-danger {
+                margin-left: 0;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn-small {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .table-footer {
+                flex-direction: column;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            border-left: 4px solid #22c55e;
+            color: #22c55e;
+        }
+
+        .toast.error {
+            border-left: 4px solid #dc3545;
+            color: #dc3545;
+        }
+
+        .toast.warning {
+            border-left: 4px solid #ffc107;
+            color: #ffc107;
+        }
+    </style>
 </head>
 <body>
-
-<!-- ── HEADER ── -->
-<header>
-<svg viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
-<path d="M0,100 C150,180 350,0 600,100 C850,200 1050,20 1200,100 L1200,200 L0,200 Z" fill="white"/>
-<path d="M0,140 C200,60 400,180 600,140 C800,100 1000,160 1200,140 L1200,200 L0,200 Z" fill="white" opacity="0.5"/>
-</svg>
-<div class="header-content">
-  <div class="header-icon"><i class="fas fa-anchor"></i></div>
-  <h1>Yate Clube de Imperatriz</h1>
-  <p>Sistema de Sócios — Chapa Legado e Futuro ⚓🚤</p>
-  <div class="stats-container">
-    <div class="stat-badge"><i class="fas fa-users"></i><span><span id="totalSocios">0</span> sócios</span></div>
-    <div class="stat-badge"><span class="stat-dot dot-green"></span><span><span id="totalAtivos">0</span> ativos</span></div>
-    <div class="stat-badge"><span class="stat-dot dot-gray"></span><span><span id="totalFalecidos">0</span> falecidos</span></div>
-    <div class="stat-badge"><span class="stat-dot dot-blue"></span><span><span id="totalSelecionados">0</span>/10 selecionados</span></div>
-  </div>
-</div>
-</header>
-
-<!-- ── MAIN ── -->
-<main>
-
-<!-- ══════════════════════════════════════════════
-     PAINEL DE ENVIO EM MASSA
-═══════════════════════════════════════════════ -->
-<section class="envio-panel">
-  <div class="envio-header">
-    <div class="envio-header-left">
-      <div class="envio-header-icon"><i class="fab fa-whatsapp"></i></div>
-      <div>
-        <h2>📤 Envio em Massa — WhatsApp</h2>
-        <p>Selecione os sócios na lista abaixo e inicie o envio automático</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="envio-body">
-
-    <!-- Configurações -->
-    <div class="config-row">
-      <div class="config-item">
-        <label><i class="fas fa-clock"></i> Intervalo entre envios</label>
-        <select id="cfgIntervalo">
-          <option value="15">15 segundos</option>
-          <option value="20">20 segundos</option>
-          <option value="30" selected>30 segundos</option>
-          <option value="45">45 segundos</option>
-          <option value="60">60 segundos</option>
-          <option value="0">Manual (eu controlo)</option>
-        </select>
-      </div>
-      <div class="config-item">
-        <label><i class="fas fa-filter"></i> Enviar para</label>
-        <select id="cfgFiltro" onchange="aplicarFiltroEnvio()">
-          <option value="selecionados">Somente selecionados</option>
-          <option value="todos">Todos com telefone</option>
-          <option value="ativos">Somente ativos (não falecidos)</option>
-        </select>
-      </div>
-      <div style="margin-left:auto;display:flex;align-items:flex-end;">
-        <span id="filaInfo" style="font-size:.8rem;color:#059669;font-weight:600;"></span>
-      </div>
-    </div>
-
-    <!-- Barra de Progresso -->
-    <div class="progress-section" id="progressSection" style="display:none;">
-      <div class="progress-header">
-        <span class="progress-title"><i class="fas fa-paper-plane"></i> Progresso do Envio</span>
-        <span class="progress-pct" id="progressPct">0%</span>
-      </div>
-      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
-      <div class="progress-stats">
-        <div class="pstat pstat-enviado"><div class="pstat-dot"></div><span id="cntEnviado">0</span> enviados</div>
-        <div class="pstat pstat-pulado"><div class="pstat-dot"></div><span id="cntPulado">0</span> pulados</div>
-        <div class="pstat pstat-semtel"><div class="pstat-dot"></div><span id="cntSemTel">0</span> sem tel.</div>
-        <div class="pstat pstat-pendente"><div class="pstat-dot"></div><span id="cntPendente">0</span> pendentes</div>
-      </div>
-    </div>
-
-    <!-- Card Atual -->
-    <div class="atual-card" id="atualCard">
-      <div class="atual-label">📱 Enviando agora…</div>
-      <div class="atual-nome" id="atualNome">—</div>
-      <div class="atual-tel"><i class="fas fa-phone"></i><span id="atualTel">—</span></div>
-      <div class="atual-timer">
-        <div class="timer-circle">
-          <div class="timer-num" id="timerNum">—</div>
-          <div class="timer-label">seg</div>
+    <!-- HEADER -->
+    <header>
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,100 C150,180 350,0 600,100 C850,200 1050,20 1200,100 L1200,200 L0,200 Z" fill="white" />
+            <path d="M0,140 C200,60 400,180 600,140 C800,100 1000,160 1200,140 L1200,200 L0,200 Z" fill="white" opacity="0.5" />
+        </svg>
+        <div class="header-content">
+            <div class="header-icon">
+                <i class="fas fa-anchor"></i>
+            </div>
+            <h1>Yate Clube de Imperatriz</h1>
+            <p>Sistema de Cadastro de Sócios</p>
+            <div class="stats-container">
+                <div class="stat-badge">
+                    <i class="fas fa-users"></i>
+                    <span><span id="totalSocios">228</span> sócios cadastrados</span>
+                </div>
+                <div class="stat-badge">
+                    <span class="stat-dot dot-green"></span>
+                    <span><span id="totalAtivos">223</span> ativos</span>
+                </div>
+                <div class="stat-badge">
+                    <span class="stat-dot dot-gray"></span>
+                    <span><span id="totalFalecidos">5</span> falecidos</span>
+                </div>
+                <div class="stat-badge highlight" id="aniversarioBadge" style="display: none;">
+                    <i class="fas fa-birthday-cake"></i>
+                    <span><span id="aniversarioCount">0</span> aniversariante(s) hoje! 🎉</span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </header>
 
-    <!-- Controles -->
-    <div class="controls" id="controles">
-      <button class="btn-start" id="btnIniciar" onclick="iniciarEnvio()">
-        <i class="fas fa-paper-plane"></i> Iniciar Envio em Massa
-      </button>
-      <button class="btn-pause" id="btnPausar" onclick="pausarEnvio()" style="display:none;">
-        <i class="fas fa-pause"></i> Pausar
-      </button>
-      <button class="btn-resume" id="btnRetomar" onclick="retornarEnvio()" style="display:none;">
-        <i class="fas fa-play"></i> Retomar
-      </button>
-      <button class="btn-skip" id="btnPular" onclick="pularAtual()" style="display:none;">
-        <i class="fas fa-forward"></i> Pular este
-      </button>
-      <button class="btn-proximo" id="btnProximo" onclick="proximoManual()" style="display:none;">
-        <i class="fas fa-check"></i> ✅ Enviado — Próximo
-      </button>
-      <button class="btn-stop" id="btnParar" onclick="pararEnvio()" style="display:none;">
-        <i class="fas fa-stop"></i> Parar
-      </button>
-    </div>
+    <!-- MAIN -->
+    <main>
+        <!-- FORM SECTION -->
+        <section class="form-section">
+            <div class="form-header">
+                <div class="form-header-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h2 id="formTitle">Cadastrar Novo Sócio</h2>
+                <span class="badge" id="editBadge" style="display: none;">Editando</span>
+            </div>
 
-    <!-- Conclusão -->
-    <div class="conclusao-card" id="conclusaoCard">
-      <div class="conclusao-icon">🎉</div>
-      <div class="conclusao-title">Envio Concluído!</div>
-      <p style="color:#6b7280;font-size:.875rem;">Todos os contatos da fila foram processados.</p>
-      <div class="conclusao-stats">
-        <div class="cstat"><div class="cstat-num" id="finalEnviado">0</div><div class="cstat-label">Enviados</div></div>
-        <div class="cstat"><div class="cstat-num" id="finalPulado" style="color:#f59e0b;">0</div><div class="cstat-label">Pulados</div></div>
-        <div class="cstat"><div class="cstat-num" id="finalSemTel" style="color:#9ca3af;">0</div><div class="cstat-label">Sem Tel.</div></div>
-      </div>
-      <button class="btn-start" style="margin:1.25rem auto 0;display:inline-flex;" onclick="resetarEnvio()">
-        <i class="fas fa-redo"></i> Novo Envio
-      </button>
-    </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="box">Box</label>
+                    <input type="text" id="box" placeholder="Ex: 42, 113A, YCI01">
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label for="socio">Nome do Sócio *</label>
+                    <input type="text" id="socio" placeholder="Nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" id="telefone" placeholder="Ex: 99991234567">
+                </div>
+                <div class="form-group">
+                    <label for="dataNascimento">Data de Nascimento</label>
+                    <input type="date" id="dataNascimento">
+                </div>
+            </div>
 
-    <!-- Fila de Envio -->
-    <div id="filaContainer" style="display:none;">
-      <div style="font-size:.8rem;font-weight:700;color:#374151;margin-bottom:.5rem;display:flex;justify-content:space-between;">
-        <span><i class="fas fa-list"></i> Fila de Envio</span>
-        <span id="filaCount" style="color:#059669;"></span>
-      </div>
-      <div class="fila-section" id="filaLista">
-        <div class="fila-header-row">
-          <span>#</span><span>Sócio</span><span class="fila-col-tel">Telefone</span><span style="text-align:center;">Status</span>
+            <div class="form-buttons">
+                <button class="btn-primary" onclick="salvar()">
+                    <i class="fas fa-save"></i>
+                    <span id="btnSalvarText">Salvar</span>
+                </button>
+                <button class="btn-secondary" id="btnCancelar" onclick="limpar()" style="display: none;">
+                    <i class="fas fa-times"></i>
+                    Cancelar
+                </button>
+                <button class="btn-secondary" onclick="limpar()">
+                    <i class="fas fa-redo"></i>
+                    Limpar
+                </button>
+                <button class="btn-danger" onclick="gerarPDF()">
+                    <i class="fas fa-file-pdf"></i>
+                    Gerar PDF
+                </button>
+            </div>
+        </section>
+
+        <!-- TABLE SECTION -->
+        <section class="table-section">
+            <div class="search-bar">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="pesquisa" placeholder="Pesquisar por nome, box ou telefone..." onkeyup="listar()">
+                </div>
+                <div class="search-info" id="searchInfo"></div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Box</th>
+                            <th>Sócio</th>
+                            <th>Telefone</th>
+                            <th>Data Nasc.</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela"></tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <span>Exibindo <strong id="exibindo">228</strong> de <strong id="total">228</strong> sócios</span>
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <span class="stat-dot dot-green"></span>
+                        <span id="footerAtivos">223</span> ativos
+                    </div>
+                    <div class="footer-stat">
+                        <span class="stat-dot dot-gray"></span>
+                        <span id="footerFalecidos">5</span> falecidos
+                    </div>
+                    <div class="footer-stat">
+                        <span class="stat-dot dot-yellow"></span>
+                        <span id="footerSemTel">0</span> sem telefone
+                    </div>
+                    <div class="footer-stat" id="footerAniversario" style="display: none;">
+                        <i class="fas fa-birthday-cake" style="color: #fbbf24;"></i>
+                        <span id="footerAniversarioCount">0</span> aniversariante(s)
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Yate Clube de Imperatriz — Sistema de Cadastro de Sócios — <span id="year">2026</span></p>
+    </footer>
+
+    <!-- MODAL DE CONFIRMAÇÃO -->
+    <div class="modal" id="modalConfirm">
+        <div class="modal-content">
+            <div class="modal-header">Confirmar exclusão</div>
+            <div class="modal-description">Tem certeza que deseja excluir o sócio <strong id="modalSocioName"></strong>? Esta ação não pode ser desfeita.</div>
+            <div class="modal-buttons">
+                <button class="btn-secondary" onclick="fecharModal()">Cancelar</button>
+                <button class="btn-delete" onclick="confirmarExcluir()">Excluir</button>
+            </div>
         </div>
-        <div id="filaItens"></div>
-      </div>
     </div>
 
-  </div>
-</section>
+    <script>
+        // ─── DADOS ─────────────────────────────────────────────────────────────
+        const dadosIniciais = [
+            {"box":"1","socio":"MICAELA MIDORI SUZUKI","telefone":"99982065656","dataNascimento":"1990-04-09"},
+            {"box":"2","socio":"CARLOS ALEXANDRE DE SOUZA","telefone":"99992036546","dataNascimento":"1981-10-07"},
+            {"box":"3","socio":"JEFFERSON RODOLFO ARRUDA NASCIMENTO","telefone":"99991126040","dataNascimento":"1990-10-18"},
+            {"box":"4","socio":"ISMAR ISAC DA SILVA","telefone":"99988353693","dataNascimento":"1985-01-09"},
+            {"box":"5","socio":"JOSE AUGUSTO OLIVEIRA SOUSA JUNIOR","telefone":"99984060941","dataNascimento":"1979-05-21"},
+            {"box":"6","socio":"ANTONIO CARLOS MOREIRA DE SOUZA","telefone":"99981423992","dataNascimento":"1975-06-18"},
+            {"box":"7","socio":"ANAXMANDRO DA SILVA SOARES","telefone":"99981622551","dataNascimento":"1976-01-04"},
+            {"box":"8","socio":"WILSON ARAUJO SILVA (CONTADOR)","telefone":"99999773256","dataNascimento":"1963-08-04"},
+            {"box":"9","socio":"JOSÉ DJACY FERREIRA DE MELO","telefone":"99999772882","dataNascimento":"1962-06-20"},
+            {"box":"10","socio":"RODRIGO CARDOSO CORREIA","telefone":"99985515353","dataNascimento":"1992-11-09"},
+            {"box":"11","socio":"JOSE ROBERTO SOUSA VELOSO","telefone":"99991370015","dataNascimento":"1967-06-16"},
+            {"box":"12","socio":"LUANN SOUSA CARVALHO","telefone":"99981525111","dataNascimento":"1989-02-20"},
+            {"box":"13","socio":"MIRALDO FERREIRA DA COSTA","telefone":"99991221593","dataNascimento":"1959-09-22"},
+            {"box":"14","socio":"BRUNO BEZERRA DE SOUSA","telefone":"99991597080","dataNascimento":"1989-06-15"},
+            {"box":"15","socio":"WILLIAM ROMEU SANTOS","telefone":"99991412031","dataNascimento":"1982-02-15"},
+            {"box":"16","socio":"CHAFI BRAIDE JUNIOR","telefone":"99991220040","dataNascimento":"1961-08-12"},
+            {"box":"17","socio":"MAXWELL CARVALHO BARBOSA","telefone":"99981055921","dataNascimento":"1985-01-04"},
+            {"box":"18","socio":"RICARDO WAGNER PEREIRA PERPETUO","telefone":"99999043927","dataNascimento":"1992-02-15"},
+            {"box":"19","socio":"GUILHERME AUGUSTO BRAGANOLO BATALHA","telefone":"99999847731","dataNascimento":"1984-06-18"},
+            {"box":"20","socio":"EDSON ALVARES PACHECO","telefone":"99999771247","dataNascimento":"1946-12-09"},
+            {"box":"21","socio":"CHARLES PEREIRA REIS","telefone":"99982027956","dataNascimento":"1983-10-06"},
+            {"box":"22","socio":"FREDSON LIMA DA ROCHA","telefone":"99996491970","dataNascimento":"1970-02-16"},
+            {"box":"23","socio":"ALFREDO WAGNER MACHADO SANTOS","telefone":"99988010001","dataNascimento":"1981-06-12"},
+            {"box":"24","socio":"HASSAN HUSUF","telefone":"99991211017","dataNascimento":"1949-09-24"},
+            {"box":"25","socio":"CESAR FELIX","telefone":"98991930075","dataNascimento":"1972-02-20"},
+            {"box":"26","socio":"GABRIEL SOUSA DA SILVA","telefone":"99999553038","dataNascimento":"1990-07-07"},
+            {"box":"27","socio":"FRANCISCO DE ASSIS MAIA","telefone":"99981114626","dataNascimento":"1962-03-21"},
+            {"box":"28","socio":"MIRES DA SILVA MIRANDA","telefone":"99985390163","dataNascimento":"1984-03-30"},
+            {"box":"29","socio":"FRANCISCO LEITE AMARAL NETO","telefone":"99984154498","dataNascimento":"2000-03-23"},
+            {"box":"30","socio":"JOSE AUGUSTO ALVES DE OLIVEIRA","telefone":"9499286346"},
+            {"box":"31","socio":"ROGERIO SANTOS GOMES","telefone":"99981163066","dataNascimento":"1982-09-07"},
+            {"box":"32","socio":"EDISON DONIZETE CALIXTO NUNES","telefone":"99981254833","dataNascimento":"1958-02-17"},
+            {"box":"33","socio":"ISRAEL RIBEIRO VASCONCELOS","telefone":"99991981007","dataNascimento":"1952-05-09"},
+            {"box":"34","socio":"SERGIO BATISTA DO AMARAL BRITO","telefone":"99991516317","dataNascimento":"1961-07-22"},
+            {"box":"35","socio":"WAYNE RIBEIRO GUIMARÃES","telefone":"99991554244","dataNascimento":"1973-12-31"},
+            {"box":"36","socio":"MARCOS STEINNMETZ","telefone":"99991131213","dataNascimento":"1979-11-27"},
+            {"box":"37","socio":"PAULO SERGIO GUNDIM","telefone":"99999771217","dataNascimento":"1969-08-31"},
+            {"box":"38","socio":"WAGNER TAVARES DA SILVA","telefone":"99982190021","dataNascimento":"1970-04-28"},
+            {"box":"45","socio":"GERALDO EMANUEL DO PRADO SANTOS","telefone":"11971223210","dataNascimento":"1967-06-29"},
+            {"box":"46","socio":"JOSE BASTOS DE MESQUITA","telefone":"99999771851","dataNascimento":"1960-12-10"},
+            {"box":"47","socio":"SAULO ROCHA RAMOS","telefone":"99981122090","dataNascimento":"1985-07-14"},
+            {"box":"48","socio":"ADAILTON LIMA BEZERRA","telefone":"99999771603","dataNascimento":"1952-04-23"},
+            {"box":"49","socio":"KAIO SILVA DOS SANTOS","telefone":"99991042243","dataNascimento":"1987-11-13"},
+            {"box":"50","socio":"ROMULO BESERRA DA CRUZ","telefone":"99981570000","dataNascimento":"1977-04-06"},
+            {"box":"51","socio":"ADÃO GONÇALVES DE OLIVEIRA JUNIOR","telefone":"18997713362","dataNascimento":"1968-05-16"},
+            {"box":"52","socio":"DIOGO PINHEIRO ARAUJO","telefone":"99984381315","dataNascimento":"1988-03-31"},
+            {"box":"53","socio":"HELISSON DE JESUS LANDULFO","telefone":"99984194630","dataNascimento":"1985-11-24"},
+            {"box":"54","socio":"YVÊS CLÊUDER LIMA DE JESUS","telefone":"99991277171","dataNascimento":"1995-10-20"},
+            {"box":"55","socio":"VALDERI MOURA DE CARVALHO JUNIOR","telefone":"63981089363","dataNascimento":"1986-01-12"},
+            {"box":"56","socio":"FERNANDO BATISTA DO AMARAL BRITO","telefone":"99988120429","dataNascimento":"1960-01-23"},
+            {"box":"57","socio":"MARCELO MARTINS DE SOUSA","telefone":"99991592711","dataNascimento":"1972-01-13"},
+            {"box":"58","socio":"FELIPE HENRIQUE ALMEIDA DE CARVALHO","telefone":"99988238240","dataNascimento":"1992-03-20"},
+            {"box":"59","socio":"SIDNEY LIMA PEREIRA","telefone":"99984404646","dataNascimento":"1961-05-03"},
+            {"box":"60","socio":"FABRICIO LIMA GOUVEIA","telefone":"99984327227","dataNascimento":"1983-07-07"},
+            {"box":"61","socio":"ILKER LIMA GOUVEIA","telefone":"99984096163","dataNascimento":"1986-09-08"},
+            {"box":"62","socio":"MARCOS EDUARDO DE SA MARINHO","telefone":"99981205000","dataNascimento":"1990-08-03"},
+            {"box":"63","socio":"CELSO TOMÉ ROSA JUNIOR","telefone":"99988279095","dataNascimento":"1975-11-25"},
+            {"box":"64","socio":"ANDRE LUIS BATISTA","telefone":"99992222926","dataNascimento":"1977-01-18"},
+            {"box":"65","socio":"LUIS MOREIRA  GOMES","telefone":"99991784475","dataNascimento":"1957-07-10"},
+            {"box":"66","socio":"ISAIAS BORGES TELLES","telefone":"99981796464","dataNascimento":"1966-02-13"},
+            {"box":"67","socio":"JOCIFLEUTON DE ARAUJO SILVA","telefone":"99991115504","dataNascimento":"1975-12-14"},
+            {"box":"68","socio":"ROBSON DE SOUSA PEREIRA","telefone":"99982210090","dataNascimento":"1969-01-18"},
+            {"box":"69","socio":"PAIXÃO DE JESUS COSTA ASSUNÇÃO","telefone":"99981782226","dataNascimento":"1972-03-31"},
+            {"box":"70","socio":"MAGNO HELMAR BORGES VAZ","telefone":"99981123899","dataNascimento":"1979-09-30"},
+            {"box":"71","socio":"SANDRO BARROS DOS SANTOS","telefone":"99981440464","dataNascimento":"1972-11-28"},
+            {"box":"72","socio":"LEOWDSON DE SOUSA CUNHA","telefone":"99988020280","dataNascimento":"1963-04-04"},
+            {"box":"73","socio":"ANDRE LUIZ MARQUES","telefone":"99999775050","dataNascimento":"1976-03-10"},
+            {"box":"74","socio":"RUBENS DE CARVALHO ANDRADE","telefone":"99991870410","dataNascimento":"1971-07-29"},
+            {"box":"75","socio":"JOSÉ WILSON FERREIRA CAMPOS","telefone":"99999775474","dataNascimento":"1973-03-20"},
+            {"box":"76","socio":"WALDIR JOAQUIM DE OLIVEIRA","telefone":"99999772021","dataNascimento":"1952-07-12"},
+            {"box":"77","socio":"GUSTAVO MACENA CORREIRA DE LIMA","telefone":"99991366300","dataNascimento":"1984-05-01"},
+            {"box":"78","socio":"FRANCISCO CARLOS PESSOA","telefone":"99999771207","dataNascimento":"1967-10-14"},
+            {"box":"79","socio":"ROBERTO SILVA BRITO","telefone":"99981185694","dataNascimento":"1979-05-13"},
+            {"box":"80","socio":"WESLEY RIBEIRO GUIMARAES","telefone":"99981560300","dataNascimento":"1982-07-25"},
+            {"box":"81","socio":"JOSELITA AGUIAR DE SOUSA","telefone":"99981118940","dataNascimento":"1953-03-31"},
+            {"box":"82","socio":"CARLOS ROBERTO RIBEIRO","telefone":"99999772090","dataNascimento":"1959-10-04"},
+            {"box":"83","socio":"CARLOS ANDRE SANTANA","telefone":"99984088797","dataNascimento":"1980-04-26"},
+            {"box":"84","socio":"ADELSON ALVES REIS","telefone":"99991226085","dataNascimento":"1973-09-29"},
+            {"box":"85","socio":"GENIVALDO PEREIRA SILVA","telefone":"99991598675","dataNascimento":"1956-04-19"},
+            {"box":"86","socio":"DORGIVAL PINHEIRO DE SOUZA FILHO","telefone":"99988444712","dataNascimento":"1963-11-09"},
+            {"box":"87","socio":"ALTOMIRANDO PLACEDÔNIO MACHADO","telefone":"99981281867","dataNascimento":"1956-07-24"},
+            {"box":"88","socio":"HAMON DOS SANTOS BRAGA","telefone":"99984326404","dataNascimento":"1974-07-02"},
+            {"box":"89","socio":"FABIANO PIRES CERQUEIRA","telefone":"99981114888","dataNascimento":"1975-02-18"},
+            {"box":"90","socio":"LUIS EDUARDO MARINHO ALMEIDA - FALECIDO","telefone":""},
+            {"box":"91","socio":"LAERCIO PRATES DOS SANTOS","telefone":"99981570101","dataNascimento":"1971-08-12"},
+            {"box":"92","socio":"ELISIO BRUNO DRUMOND FRAGA","telefone":"99991769656","dataNascimento":"1981-05-05"},
+            {"box":"93","socio":"ANFRIZIO DE MORAIS MENESES FILHO","telefone":"99981165555","dataNascimento":"1964-03-20"},
+            {"box":"94","socio":"FERNAO JORGE HERENIO ALCOFORADO","telefone":"99981510000","dataNascimento":"1979-10-20"},
+            {"box":"95","socio":"REGIANE DE MORAIS PEREIRA SAVACINI","telefone":"99991516146","dataNascimento":"1992-04-15"},
+            {"box":"96","socio":"CARLOS ANDRE SANTANA","telefone":"99984088797","dataNascimento":"1980-04-26"},
+            {"box":"97","socio":"ALEX FORMIGA CAMPOS","telefone":"99981590787","dataNascimento":"1984-08-01"},
+            {"box":"98","socio":"WALTERLEY MOREIRA DE JESUS","telefone":"99988055846","dataNascimento":"1946-05-11"},
+            {"box":"99","socio":"JURANDIR TEIXEIRA DA SILVA","telefone":"99991574203","dataNascimento":"1949-04-14"},
+            {"box":"100","socio":"LUIS CARLOS EVANGELISTA COSTA","telefone":"99984440016","dataNascimento":"1956-08-25"},
+            {"box":"101","socio":"RONALDO VASCONCELOS ALENCAR","telefone":"99988151343"},
+            {"box":"102","socio":"ROBERTO VASCONCELOS ALENCAR","telefone":"99991463693","dataNascimento":"1970-03-15"},
+            {"box":"103","socio":"MANOEL MOREIRA PINTO JUNIOR","telefone":"99981143100"},
+            {"box":"104","socio":"DARIO TAVARES DA SILVA FILHO","telefone":"99991959691","dataNascimento":"1974-07-15"},
+            {"box":"105","socio":"NAGIB SABBAG","telefone":"94991121633","dataNascimento":"1992-05-07"},
+            {"box":"106","socio":"JORCELIO LUSTOSA LOPES","telefone":"99981161800","dataNascimento":"1977-12-14"},
+            {"box":"107","socio":"GLEN ANDERSON MAIA OLIVEIRA","telefone":"99991285561","dataNascimento":"1971-07-20"},
+            {"box":"108","socio":"ANTONIO LEITE ANDRADE - FALECIDO","telefone":""},
+            {"box":"109","socio":"ANTONIO LEITE ANDRADE - FALECIDO","telefone":""},
+            {"box":"110","socio":"PAULINO BRAGA FILHO","telefone":"99981722324","dataNascimento":"1952-01-12"},
+            {"box":"111","socio":"JOAQUIM PONTES MARIANO","telefone":"99981124145","dataNascimento":"1960-08-05"},
+            {"box":"112","socio":"MARCOS ANDRE FAGUNDES","telefone":"99988020251","dataNascimento":"1967-06-25"},
+            {"box":"113","socio":"ROBERTO FONSECA SILVA","telefone":"99991220809","dataNascimento":"1985-01-09"},
+            {"box":"114","socio":"JOÃO PEIXOTO FILHO","telefone":"99999772219","dataNascimento":"1948-01-07"},
+            {"box":"115","socio":"GUSTAVO BERNARDES MAIA","telefone":"99988484671","dataNascimento":"1978-03-09"},
+            {"box":"116","socio":"JOSE ARDSON FIRMIANO DA SILVA","telefone":"99991221660","dataNascimento":"1969-06-04"},
+            {"box":"117","socio":"ADRIANO DA SILVA COIMBRA","telefone":"99991054311","dataNascimento":"1991-09-29"},
+            {"box":"118","socio":"ANNA KELLY LEITE","telefone":"99992120220","dataNascimento":"1978-07-01"},
+            {"box":"119","socio":"ALESSANDER SOUZA LEITE ANDRADE","telefone":"99991617770","dataNascimento":"1976-05-06"},
+            {"box":"120","socio":"MARCIA MAGNA BOSCO","telefone":"99981470007","dataNascimento":"1972-03-14"},
+            {"box":"121","socio":"MOISES GENTIL  BRETAS JUNIOR","telefone":"99999770099","dataNascimento":"1969-10-17"},
+            {"box":"122","socio":"SABINO SIQUEIRA DA COSTA","telefone":"99999771700","dataNascimento":"1957-08-04"},
+            {"box":"123","socio":"MICHELLE MIRANDA ANDRADE","telefone":"99981021519","dataNascimento":"1978-01-20"},
+            {"box":"124","socio":"JOÃO ERNESTO FEUERSTEIN","telefone":"99999772020","dataNascimento":"1955-01-30"},
+            {"box":"125","socio":"ESTER MOREIRA AMBROSIO DE CARVALHO","telefone":"99991667070","dataNascimento":"1978-11-11"},
+            {"box":"126","socio":"JOSE AFONSO RIBEIRO DE CARVALHO","telefone":"99991407699","dataNascimento":"1982-04-24"},
+            {"box":"127","socio":"ARMELINDO FERRARI JUNIOR","telefone":"99999771078","dataNascimento":"1953-06-30"},
+            {"box":"128","socio":"GILBERTO CARVALHO COSTA","telefone":"99988064104","dataNascimento":"1961-03-20"},
+            {"box":"129","socio":"MARIO ARTHUR PICOLI ROSSI","telefone":"99985329779","dataNascimento":"1981-11-19"},
+            {"box":"130","socio":"MARIO ROBERTO MUNIZ DE CARVALHO FILHO","telefone":"99988139777","dataNascimento":"1971-06-13"},
+            {"box":"131","socio":"ADRIANO SANTOS BARBOZA","telefone":"99981087381","dataNascimento":"1994-02-20"},
+            {"box":"132","socio":"FERNANDO ALMEIDA MORAIS","telefone":"99981000128","dataNascimento":"1993-07-28"},
+            {"box":"133","socio":"GILSON DE SOUSA KYT","telefone":"99991242158","dataNascimento":"1964-10-31"},
+            {"box":"134","socio":"MIQUEIAS DE OLIVEIRA MARTINS","telefone":"99984087593","dataNascimento":"1989-10-13"},
+            {"box":"135","socio":"FELIPE CASTORINO BATISTA","telefone":"99981120698","dataNascimento":"1988-02-02"},
+            {"box":"136","socio":"NAILTON JORGE FERREIRA LIRA","telefone":"99991990881","dataNascimento":"1955-04-16"},
+            {"box":"137","socio":"JANOS BORGES DE SOUZA RODRIGUES","telefone":"99981110909","dataNascimento":"1980-09-05"},
+            {"box":"138","socio":"REBERT ALMEIDA COELHO","telefone":"99999773030","dataNascimento":"1963-07-17"},
+            {"box":"139","socio":"JOSE AGNALDO RODRIGUES SILVA","telefone":"99981622324","dataNascimento":"1970-03-11"},
+            {"box":"140","socio":"TIBERIO MIRANDA COSTA","telefone":"99991956900","dataNascimento":"1982-10-05"},
+            {"box":"141","socio":"ALESSIO CAVALCANTE","telefone":"99991222191","dataNascimento":"1978-04-04"},
+            {"box":"142","socio":"ESTER ALVES","telefone":"99992301100","dataNascimento":"1981-09-02"},
+            {"box":"143","socio":"GILBERTO FRANCISCO DE SOUSA - FALECIDO","telefone":""},
+            {"box":"144","socio":"AMAURI ALBERTO PEREIRA DE SOUSA","telefone":"99991380012","dataNascimento":"1976-06-26"},
+            {"box":"145","socio":"EVERSON GOMES CAVALCANTI","telefone":"99981162000","dataNascimento":"1972-11-05"},
+            {"box":"146","socio":"DIEGO HELLISON BARROS DA CRUZ","telefone":"99981331248","dataNascimento":"1990-06-28"},
+            {"box":"147","socio":"WILSON  ARAUJO DA SILVA","telefone":"99988063877","dataNascimento":"1974-03-22"},
+            {"box":"148","socio":"RUDNEY VILANOVA SANTANA","telefone":"63992253337","dataNascimento":"1984-08-31"},
+            {"box":"149","socio":"ROMILDO ASSUNÇÃO SILVA","telefone":"98991789513","dataNascimento":"1987-10-02"},
+            {"box":"150","socio":"MOISES VIEIRA FILHO","telefone":"","dataNascimento":"1946-10-28"},
+            {"box":"151","socio":"EDMAR DE OLIVEIRA NABARRO","telefone":"99999042004","dataNascimento":"1978-01-22"},
+            {"box":"152","socio":"IVANEIDES SANTOS LIRA","telefone":"99991260093","dataNascimento":"1965-06-22"},
+            {"box":"153","socio":"ALAIR BATISTA FIRMIANO","telefone":"99992101555","dataNascimento":"1965-10-02"},
+            {"box":"154","socio":"JOSE DE RIBAMAR LIMA FERREIRA FILHO","telefone":"99988184757","dataNascimento":"1968-04-03"},
+            {"box":"155","socio":"DALDEMAR AFONSO ATTA FREITAS","telefone":"98981159939","dataNascimento":"1955-12-07"},
+            {"box":"156","socio":"CICERO SOARES COSTA JUNIOR","telefone":"99992168185","dataNascimento":"1990-06-01"},
+            {"box":"157","socio":"ILDON MARQUES DE SOUSA","telefone":"","dataNascimento":"1945-10-20"},
+            {"box":"158","socio":"ILDON MARQUES DE SOUSA JUNIOR","telefone":"","dataNascimento":"1966-12-07"},
+            {"box":"159","socio":"WEVERSON SILVA DE DEUS","telefone":"99981229050","dataNascimento":"1981-10-17"},
+            {"box":"160","socio":"LEONARDO BARROS BIANCHINI","telefone":"99988133033","dataNascimento":"1995-02-22"},
+            {"box":"161","socio":"NATALIA TORRES GIACOMIN","telefone":"99992282804","dataNascimento":"1987-04-28"},
+            {"box":"162","socio":"HÉLIO BORGES PING","telefone":"99991724574","dataNascimento":"1973-05-02"},
+            {"box":"163","socio":"RAIVONE GOMES DE CARVALHO","telefone":"99991146177","dataNascimento":"1967-02-15"},
+            {"box":"164","socio":"RODRIGO DO CARMO COSTA","telefone":"99991411585","dataNascimento":"1977-11-28"},
+            {"box":"165","socio":"SUZANA OLIVEIRA SANTOS","telefone":"99988461507","dataNascimento":"1978-08-11"},
+            {"box":"166","socio":"SEVERINO ALVES DA SILVA","telefone":"99981115462","dataNascimento":"1962-12-02"},
+            {"box":"167","socio":"VICENTE BATISTA SOARES","telefone":"99988619184","dataNascimento":"1956-06-02"},
+            {"box":"171","socio":"HENRIQUE AZEVEDO MAMEDIO DESOUSA","telefone":"99981275131","dataNascimento":"1986-10-31"},
+            {"box":"172","socio":"UBALDINO NELSON PEREIRA FERRAZ","telefone":"99991414804","dataNascimento":"1972-02-09"},
+            {"box":"173","socio":"NEUDSON NERE DE SOUSA COSTA","telefone":"99981220138","dataNascimento":"1974-12-20"},
+            {"box":"174","socio":"ADRIANO GALDINO","telefone":"99991770707","dataNascimento":"1972-12-19"},
+            {"box":"175","socio":"ABSAY MACEDO ROCHA","telefone":"99981381919","dataNascimento":"1957-09-26"},
+            {"box":"176","socio":"WSCLAY OLIVEIRA LIMA","telefone":"99984033729","dataNascimento":"1979-09-02"},
+            {"box":"177","socio":"WESLEY OLIVEIRA LIMA","telefone":"99991778989","dataNascimento":"1980-12-02"},
+            {"box":"178","socio":"CARLOS EDUARDO DEL CASTILHO","telefone":"99992199999","dataNascimento":"1981-07-08"},
+            {"box":"179","socio":"ALYSSON RÊGO MENDES","telefone":"99981477799","dataNascimento":"1979-05-24"},
+            {"box":"180","socio":"BRUNO CABRAL SILVA","telefone":"99991164313","dataNascimento":"1992-09-09"},
+            {"box":"181","socio":"INALDO LEAL DE CARVALHO","telefone":"99981100655","dataNascimento":"1972-07-09"},
+            {"box":"182","socio":"DENES SOUSA DUARTE","telefone":"99981372856","dataNascimento":"1989-11-18"},
+            {"box":"183","socio":"JOEDNA DE SANTANA DE ARAUJO SILVA","telefone":"99992079034","dataNascimento":"1980-11-20"},
+            {"box":"184","socio":"BRUNO LARCEDA","telefone":"99984214483","dataNascimento":"1993-03-16"},
+            {"box":"185","socio":"GUSTAVO DE QUIROZ COSTA","telefone":"99981445107","dataNascimento":"1978-10-03"},
+            {"box":"186","socio":"CAIO CARVALHO LAGUNA","telefone":"99981044000","dataNascimento":"1986-08-29"},
+            {"box":"187","socio":"ELI ALVES DA SILVA","telefone":"99991994614","dataNascimento":"1960-09-14"},
+            {"box":"188","socio":"EDSON LIMA DO CARMO","telefone":"99981584774","dataNascimento":"1987-02-06"},
+            {"box":"189","socio":"GILVAN MARINHO BANDEIRA","telefone":"99999773016","dataNascimento":"1958-10-16"},
+            {"box":"190","socio":"JUNIOR FERREIRA SANTOS","telefone":"99981401234","dataNascimento":"1979-05-16"},
+            {"box":"191","socio":"FRANCISCO SANTOS SOARES JUNIOR","telefone":"99991400110","dataNascimento":"1984-01-06"},
+            {"box":"192","socio":"DHEMISON SANTOS LISBOA","telefone":"98981094526","dataNascimento":"1994-05-29"},
+            {"box":"193","socio":"MARCOS ANDRE NASCIMENTO MORAIS","telefone":"99991220010","dataNascimento":"1987-08-10"},
+            {"box":"194","socio":"LEONARDO OLIVEIRA ABREU","telefone":"99981001680","dataNascimento":"1989-05-02"},
+            {"box":"195","socio":"FRANCISCO CRISANTE NASCIMENTO DE LIMA","telefone":"99981493130","dataNascimento":"1979-12-19"},
+            {"box":"196","socio":"PAULO RENATO CUNHA GRITTI","telefone":"99981305363","dataNascimento":"1990-12-20"},
+            {"box":"197","socio":"LEANDRO MARTINS","telefone":"99981381884","dataNascimento":"1980-09-24"},
+            {"box":"198","socio":"WYGREGSON OLIVEIRA LIMA","telefone":"99991227670","dataNascimento":"1984-02-27"},
+            {"box":"199","socio":"FRANCISCO MACHADO PORTELA","telefone":"99999771417","dataNascimento":"1957-05-02"},
+            {"box":"200","socio":"WARLEY SANDRODA SILVA NERES","telefone":"99991628249","dataNascimento":"1986-03-22"},
+            {"box":"201","socio":"BRUNO FERREIRO SALANI","telefone":"99991112200"},
+            {"box":"202","socio":"ALCIDES GALLETTI GAVA","telefone":"99991152608","dataNascimento":"1972-02-23"},
+            {"box":"203","socio":"MAURYCIO MODESTO SILVA","telefone":"99991069350","dataNascimento":"1988-11-19"},
+            {"box":"204","socio":"JOSE PEREIRA DA CRUZ JUNIOR","telefone":"99999774948","dataNascimento":"1963-09-23"},
+            {"box":"205","socio":"JOSE PEREIRA DA CRUZ JUNIOR","telefone":"","dataNascimento":"1963-09-23"},
+            {"box":"206","socio":"ÍTALO GABRYEL MELO DE ANDRADE","telefone":"99981758786","dataNascimento":"1994-12-28"},
+            {"box":"207","socio":"AIRLER HERINGER JUNIOR","telefone":"99991221126","dataNascimento":"1965-03-24"},
+            {"box":"208","socio":"REUBER NOGUEIRA JARDIM","telefone":"99981150883","dataNascimento":"1968-09-16"},
+            {"box":"209","socio":"JOSE CARLOS DA SILVA DOS SANTOS","telefone":"99991990028","dataNascimento":"1972-09-13"},
+            {"box":"210","socio":"WAIRES TALMON COSTA JUNIOR","telefone":"99988028444","dataNascimento":"1982-02-09"},
+            {"box":"211","socio":"MIQUEIAS RODRIGUES SILVA","telefone":"99991444479","dataNascimento":"1995-11-27"},
+            {"box":"212","socio":"RONNYVALME MILHOMEM DA SILVA","telefone":"99991550795","dataNascimento":"1983-08-22"},
+            {"box":"213","socio":"EDSON LIMA DO CARMO","telefone":"99981584774","dataNascimento":"1987-02-06"},
+            {"box":"214","socio":"RAQUEL GONÇALVES DE ANDRADE PAZ","telefone":"99981413464","dataNascimento":"1974-03-07"},
+            {"box":"215","socio":"FREDSON SILVA COSTA","telefone":"99982691050","dataNascimento":"1986-10-03"},
+            {"box":"216","socio":"MAURICIO DAS NEVES ROCHA","telefone":"98982029444","dataNascimento":"1991-09-16"},
+            {"box":"217","socio":"ROGERIO CARDOSO MACEDO","telefone":"99991366132","dataNascimento":"1983-09-07"},
+            {"box":"218","socio":"MARCELO MARTINUZZI BREITENBACH","telefone":"99991228855","dataNascimento":"1992-02-16"},
+            {"box":"219","socio":"ANTONIO FERREIRA CAMPOS","telefone":"99991392003","dataNascimento":"1967-04-28"},
+            {"box":"220","socio":"PEDRO JORGE DE SOUSA PEREIRA","telefone":"99991440586","dataNascimento":"1968-11-04"},
+            {"box":"113A","socio":"JANDUI MEDEIROS LOPES","telefone":"99991373388","dataNascimento":"1979-08-04"},
+            {"box":"114A","socio":"ALMIR SIMMÕES VIEIRA FILHO","telefone":"99991221800","dataNascimento":"1971-02-14"},
+            {"box":"129A","socio":"WELLISON SOUSA CAMAPUM","telefone":"99985102637","dataNascimento":"1999-03-04"},
+            {"box":"YCI01","socio":"RONALDO PEREIRA AIRES","telefone":"99991103902","dataNascimento":"1972-06-17"},
+            {"box":"YCI02","socio":"DIVINO FERREIRA DE FREITAS","telefone":"99988068870","dataNascimento":"1957-12-30"},
+            {"box":"YCI03","socio":"VALDEMAR ALVES VILELA","telefone":"99999771644","dataNascimento":"1955-11-11"},
+            {"box":"YCI04","socio":"ABNEAS OLIVEIRA LIMA","telefone":"99991225299","dataNascimento":"1970-10-01"},
+            {"box":"YCI05","socio":"MARCELO LIRA CHAVES DOS SANTOS","telefone":"99991222106","dataNascimento":"1966-06-21"},
+            {"box":"YCI06","socio":"PEDRO SANTOS SOUSA","telefone":"99981001441","dataNascimento":"1967-06-27"},
+            {"box":"YCI07","socio":"JOSE ALMIR DE SOUZA","telefone":"99999771623","dataNascimento":"1953-06-23"},
+            {"box":"YCI08","socio":"FLAYNO STENIO SOARES BARROS","telefone":"99992085252","dataNascimento":"1978-10-07"},
+            {"box":"YCI09","socio":"RICARDO  BARROSO DEL CASTILHO","telefone":"99999773792","dataNascimento":"1975-06-20"},
+            {"box":"YCI010","socio":"SALUA SABAG DEL CASTILHO","telefone":"99999773792","dataNascimento":"1977-05-04"},
+            {"box":"YCI011","socio":"ROMULO JOHAN DA SILVA COSTA","telefone":"99981118500","dataNascimento":"1991-03-19"},
+            {"box":"YCI012","socio":"JOSE AFONSO RIBEIRO DE CARVALHO","telefone":"99991407699","dataNascimento":"1982-04-24"},
+            {"box":"221","socio":"WAWRWYK BEZERRA MENDONCA","telefone":"99981113884","dataNascimento":"1967-07-16"},
+            {"box":"98A","socio":"ELY PUENTE SANTOS FILHO","telefone":"99999770448","dataNascimento":"1960-10-26"}
+        ];
 
-<!-- ══════════════════════════════════════════════
-     LISTA DE SÓCIOS
-═══════════════════════════════════════════════ -->
-<!-- ══════════════════════════════════════════════════════
-     PAINEL: CONTATOS SELECIONADOS (ATÉ 10)
-══════════════════════════════════════════════════════ -->
-<section class="painel10" id="painel10">
-  <div class="painel10-header">
-    <div class="painel10-header-left">
-      <div class="painel10-header-icon"><i class="fas fa-user-check"></i></div>
-      <div>
-        <h2>✅ Contatos Selecionados para Envio</h2>
-        <p>Selecione até 10 sócios na lista abaixo para enviar a mensagem</p>
-      </div>
-    </div>
-    <div class="painel10-counter"><span id="sel10count">0</span>/10</div>
-  </div>
-  <div class="painel10-body">
-    <div class="bar-limit"><div class="bar-limit-fill" id="barLimitFill" style="width:0%"></div></div>
-    <div class="chips-grid" id="chipsGrid"></div>
-    <div class="painel10-actions">
-      <span class="painel10-hint"><i class="fas fa-info-circle"></i> Clique no <strong>✕</strong> do chip para remover um contato</span>
-      <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
-        <button class="btn-deselect" style="font-size:.78rem;padding:.45rem .9rem;" onclick="desmarcarTodos()"><i class="fas fa-times"></i> Limpar tudo</button>
-        <button class="btn-start" id="btnEnviar10" style="font-size:.85rem;padding:.55rem 1.2rem;" onclick="iniciarEnvio10()" disabled>
-          <i class="fab fa-whatsapp"></i> Enviar para Selecionados
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
+        let socios = [];
+        let editandoIndex = -1;
+        let excluirIndex = -1;
 
-<section class="table-section">
-  <div class="search-bar">
-    <div class="search-row">
-      <div class="search-input-wrapper">
-        <i class="fas fa-search"></i>
-        <input type="text" id="pesquisa" placeholder="Pesquisar por nome, box ou telefone…" onkeyup="listar()">
-      </div>
-      <button class="btn-select-all" onclick="selecionarTodos()"><i class="fas fa-check-double"></i> Primeiros 10</button>
-      <button class="btn-deselect" onclick="desmarcarTodos()"><i class="fas fa-times"></i> Limpar</button>
-    </div>
-    <div class="search-info" id="searchInfo"></div>
-    <div class="sel-info" id="selInfo" style="margin-top:.4rem;display:none;">
-      <i class="fas fa-check-circle"></i><span id="selCount">0</span>/10 sócio(s) selecionado(s) para envio
-    </div>
-  </div>
+        // ─── INICIALIZAÇÃO ─────────────────────────────────────────────────────
+        function init() {
+            carregarDoStorage();
+            document.getElementById('year').textContent = new Date().getFullYear();
+            listar();
+            atualizarEstatisticas();
+        }
 
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th class="th-check"><i class="fas fa-check"></i></th>
-          <th>Box</th>
-          <th>Sócio</th>
-          <th>Telefone</th>
-          <th>WhatsApp</th>
-        </tr>
-      </thead>
-      <tbody id="tabela"></tbody>
-    </table>
-  </div>
+        function carregarDoStorage() {
+            const dados = localStorage.getItem('socios_yate');
+            if (dados) {
+                socios = JSON.parse(dados);
+                // ─── MIGRAÇÃO: preenche dataNascimento ausente usando dadosIniciais ───
+                let migrado = false;
+                dadosIniciais.forEach(function(inicial) {
+                    if (!inicial.dataNascimento) return;
+                    const socio = socios.find(function(s) { return s.box === inicial.box; });
+                    if (socio && !socio.dataNascimento) {
+                        socio.dataNascimento = inicial.dataNascimento;
+                        migrado = true;
+                    }
+                });
+                if (migrado) salvarNoStorage();
+                // ─────────────────────────────────────────────────────────────────────
+            } else {
+                socios = JSON.parse(JSON.stringify(dadosIniciais));
+                salvarNoStorage();
+            }
+        }
 
-  <div class="table-footer">
-    <span>Exibindo <strong id="exibindo">0</strong> de <strong id="total">0</strong> sócios</span>
-    <div class="footer-stats">
-      <div class="footer-stat"><span class="stat-dot dot-green"></span><span id="footerAtivos">0</span> ativos</div>
-      <div class="footer-stat"><span class="stat-dot dot-gray"></span><span id="footerFalecidos">0</span> falecidos</div>
-      <div class="footer-stat"><span class="stat-dot dot-yellow"></span><span id="footerSemTel">0</span> sem telefone</div>
-    </div>
-  </div>
-</section>
+        function salvarNoStorage() {
+            localStorage.setItem('socios_yate', JSON.stringify(socios));
+        }
 
-</main>
+        // ─── UTILITÁRIOS ───────────────────────────────────────────────────────
+        function isFalecido(nome) {
+            return nome.toUpperCase().includes('FALECIDO');
+        }
 
-<footer>
-  <p>Yate Clube de Imperatriz — Chapa Legado e Futuro ⚓🚤 — <span id="year">2026</span></p>
-</footer>
+        function isSemTelefone(tel) {
+            return !tel || tel.trim() === '';
+        }
 
-<!-- Popup aviso popups -->
-<div class="popup-overlay" id="popupOverlay" onclick="fecharPopup()"></div>
-<div class="popup-alerta" id="popupAlerta">
-  <div class="popup-title">⚠️ Permitir Pop-ups</div>
-  <div class="popup-desc" id="popupDesc">
-    Para o envio automático funcionar, você precisa <strong>permitir pop-ups</strong> neste site no seu navegador.<br><br>
-    <b>Chrome:</b> Clique no ícone de bloqueio 🔒 na barra de endereços → Permitir pop-ups<br>
-    <b>Firefox:</b> Clique em "Opções" quando aparecer o aviso de pop-up bloqueado<br><br>
-    Após permitir, clique em <strong>Entendido</strong> e o envio continuará automaticamente.
-  </div>
-  <div class="popup-btns">
-    <button class="btn-wa" onclick="fecharPopup()"><i class="fas fa-check"></i> Entendido</button>
-  </div>
-</div>
+        function estaAniversariando(dataNascimento) {
+            if (!dataNascimento) return false;
+            try {
+                const hoje = new Date();
+                const [ano, mes, dia] = dataNascimento.split('-');
+                const mesAtual = String(hoje.getMonth() + 1).padStart(2, '0');
+                const diaAtual = String(hoje.getDate()).padStart(2, '0');
+                return mes === mesAtual && dia === diaAtual;
+            } catch {
+                return false;
+            }
+        }
 
-<script>
-// ══════════════════════════════════════════════════════
-// DADOS
-// ══════════════════════════════════════════════════════
-const dadosIniciais = [
-    {"box":"2","socio":"CARLOS ALEXANDRE","telefone":"99992036546"},
-    {"box":"3","socio":"JEFFERSON RODOLFO","telefone":"99991126040"},
-    {"box":"4","socio":"ISMAR","telefone":"99988353693"},
-    {"box":"5","socio":"AUGUSTO","telefone":"99984060941"},
-    {"box":"6","socio":"ANTONIO CARLOS","telefone":"99981423992"},
-    {"box":"7","socio":"ANAX","telefone":"99981622551"},
-    {"box":"9","socio":"JOSÉ DJACY","telefone":"99999772882"},
-    {"box":"10","socio":"RODRIGO","telefone":"99985515353"},
-    {"box":"11","socio":"ROBERTO VELOSO","telefone":"99991370015"},
-    {"box":"13","socio":"MIRALDO","telefone":"99991221593"},
-    {"box":"14","socio":"BRUNO","telefone":"99991597080"},
-    {"box":"15","socio":"WILLIAM SANTOS","telefone":"99991412031"},
-    {"box":"17","socio":"MAXWELL","telefone":"99981055921"},
-    {"box":"18","socio":"RICARDO","telefone":"99999043927"},
-    {"box":"19","socio":"GUILHERME BATALHA","telefone":"99999847731"},
-    {"box":"21","socio":"CHARLES REIS","telefone":"99982027956"},
-    {"box":"23","socio":"ALFREDO WAGNER","telefone":"99988010001"},
-    {"box":"24","socio":"HASSAN","telefone":"99991211017"},
-    {"box":"25","socio":"CESAR FELIX","telefone":"98991930075"},
-    {"box":"26","socio":"GABRIEL","telefone":"99999553038"},
-    {"box":"27","socio":"ASSIS MAIA","telefone":"99981114626"},
-    {"box":"28","socio":"MIRES","telefone":"99985390163"},
-    {"box":"29","socio":"AMARAL NETO","telefone":"99984154498"},
-    {"box":"31","socio":"ROGERIO","telefone":"99981163066"},
-    {"box":"33","socio":"VASCO","telefone":"99991981007"},
-    {"box":"34","socio":"SERGIO BATISTA","telefone":"99991516317"},
-    {"box":"35","socio":"WAYNE","telefone":"99991554244"},
-    {"box":"37","socio":"PAULO SERGIO","telefone":"99999771217"},
-    {"box":"46","socio":"MESQUITA","telefone":"99999771851"},
-    {"box":"47","socio":"SAULO","telefone":"99981122090"},
-    {"box":"50","socio":"DR ROMULO","telefone":"99981570000"},
-    {"box":"52","socio":"DIOGO","telefone":"99984381315"},
-    {"box":"53","socio":"HELISSON LANDULFO","telefone":"99984194630"},
-    {"box":"54","socio":"YVÊS","telefone":"99991277171"},
-    {"box":"56","socio":"FERNANDO BATISTA","telefone":"99988120429"},
-    {"box":"57","socio":"MARCELO","telefone":"99991592711"},
-    {"box":"58","socio":"FELIPE MINEIRO","telefone":"99988238240"},
-    {"box":"59","socio":"SIDNEY","telefone":"99984404646"},
-    {"box":"60","socio":"FABRICIO","telefone":"99984327227"},
-    {"box":"63","socio":"CELSO TOMÉ","telefone":"99988279095"},
-    {"box":"64","socio":"ANDRE","telefone":"99992222926"},
-    {"box":"65","socio":"VALDINAR","telefone":"99991784475"},
-    {"box":"66","socio":"DR ISAIAS","telefone":"99981796464"},
-    {"box":"67","socio":"FLEUTON","telefone":"99991115504"},
-    {"box":"68","socio":"ROBSON","telefone":"99982210090"},
-    {"box":"72","socio":"LEOWDSON","telefone":"99988020280"},
-    {"box":"73","socio":"DR ANDRE","telefone":"99999775050"},
-    {"box":"74","socio":"RUBENS","telefone":"99991870410"},
-    {"box":"77","socio":"DR GUSTAVO","telefone":"99991366300"},
-    {"box":"78","socio":"CARLINHO","telefone":"99999771207"},
-    {"box":"79","socio":"ROBERTINHO","telefone":"99981185694"},
-    {"box":"81","socio":"DRª JOSELITA","telefone":"99981118940"},
-    {"box":"82","socio":"ROBERTO","telefone":"99999772090"},
-    {"box":"83","socio":"CARLOS","telefone":"99984088797"},
-    {"box":"84","socio":"ADELSON","telefone":"99991226085"},
-    {"box":"85","socio":"DR GENIVALDO","telefone":"99991598675"},
-    {"box":"86","socio":"DORGIVAL","telefone":"99988444712"},
-    {"box":"87","socio":"ALTOMIRANDO","telefone":"99981281867"},
-    {"box":"88","socio":"HAMON","telefone":"99984326404"},
-    {"box":"89","socio":"FABIANO","telefone":"99981114888"},
-    {"box":"91","socio":"LAERCIO","telefone":"99981570101"},
-    {"box":"92","socio":"DR ELISIO BRUNO","telefone":"99991769656"},
-    {"box":"93","socio":"DR ANFRIZIO","telefone":"99981165555"},
-    {"box":"94","socio":"FERNAO","telefone":"99981510000"},
-    {"box":"95","socio":"REGIANE","telefone":"99991516146"},
-    {"box":"97","socio":"ALEX","telefone":"99981590787"},
-    {"box":"99","socio":"JURANDIR","telefone":"99991574203"},
-    {"box":"101","socio":"RONALDO VASCONCELOS","telefone":"99988151343"},
-    {"box":"102","socio":"ROBERTO VASCONCELOS","telefone":"99991463693"},
-    {"box":"103","socio":"JUNIOR PINTO","telefone":"99981143100"},
-    {"box":"104","socio":"DARIO","telefone":"99981613122"},
-    {"box":"105","socio":"NAGIB","telefone":"94991121633"},
-    {"box":"106","socio":"JORCELIO","telefone":"99981161800"},
-    {"box":"107","socio":"GLEN MAIA","telefone":"99991285561"},
-    {"box":"111","socio":"JOAQUIM","telefone":"99981124145"},
-    {"box":"112","socio":"MARCOS ANDRE","telefone":"99988020251"},
-    {"box":"113","socio":"FONSECA","telefone":"99991220809"},
-    {"box":"114","socio":"DR PEIXOTO","telefone":"99999772219"},
-    {"box":"115","socio":"GUSTAVO","telefone":"99988484671"},
-    {"box":"116","socio":"JOSE ARDSON","telefone":"99991221660"},
-    {"box":"117","socio":"ADRIANO COIMBRA","telefone":"99991054311"},
-    {"box":"118","socio":"ANNA KELLY","telefone":"99992120220"},
-    {"box":"119","socio":"ALESSANDER LEITE","telefone":"99991617770"},
-    {"box":"120","socio":"MARCIA MAGNA","telefone":"99981470007"},
-    {"box":"122","socio":"SABINO","telefone":"99999771700"},
-    {"box":"123","socio":"MICHELLE","telefone":"99981021519"},
-    {"box":"126","socio":"JOSE AFONSO","telefone":"99991407699"},
-    {"box":"127","socio":"ARMELINDO","telefone":"99999771078"},
-    {"box":"128","socio":"GILBERTO","telefone":"99988064104"},
-    {"box":"129","socio":"MARIO","telefone":"99985329779"},
-    {"box":"131","socio":"ADRIANO","telefone":"99981087381"},
-    {"box":"135","socio":"FELIPE CASTORINO","telefone":"99981120698"},
-    {"box":"136","socio":"NAILTON","telefone":"99991990881"},
-    {"box":"137","socio":"JANOS","telefone":"99981110909"},
-    {"box":"139","socio":"AGNALDO","telefone":"99981622324"},
-    {"box":"140","socio":"DR TIBERIO","telefone":"99991956900"},
-    {"box":"141","socio":"DR ALESSIO","telefone":"99991222191"},
-    {"box":"142","socio":"ESTER ALVES","telefone":"99992301100"},
-    {"box":"144","socio":"ALBERTO SOUSA","telefone":"99991380012"},
-    {"box":"145","socio":"DR EVERSON","telefone":"99981162000"},
-    {"box":"146","socio":"DIEGO HELLISON","telefone":"99981331248"},
-    {"box":"147","socio":"PROFESSOR WILSON","telefone":"99988063877"},
-    {"box":"148","socio":"RUDNEY","telefone":"63992253337"},
-    {"box":"152","socio":"IVANEIDE LIRA","telefone":"99991260093"},
-    {"box":"153","socio":"DR ALAIR","telefone":"99992101555"},
-    {"box":"154","socio":"RIBAMAR","telefone":"99988184757"},
-    {"box":"155","socio":"DALDEMAR","telefone":"98981159939"},
-    {"box":"156","socio":"JUNIM","telefone":"99992168185"},
-    {"box":"160","socio":"LEONARDO","telefone":"99988133033"},
-    {"box":"161","socio":"NATALIA","telefone":"99992282804"},
-    {"box":"165","socio":"SUZANA","telefone":"99988461507"},
-    {"box":"166","socio":"DR SEVERINO","telefone":"99981115462"},
-    {"box":"171","socio":"HENRIQUE","telefone":"99981275131"},
-    {"box":"172","socio":"FERRAZ","telefone":"99991414804"},
-    {"box":"173","socio":"NEUDSON","telefone":"99981220138"},
-    {"box":"174","socio":"ADRIANO","telefone":"99991770707"},
-    {"box":"176","socio":"WSCLAY","telefone":"99984033729"},
-    {"box":"177","socio":"WESLEY","telefone":"99991778989"},
-    {"box":"178","socio":"CADU","telefone":"99992199999"},
-    {"box":"179","socio":"DR ALYSSON","telefone":"99981477799"},
-    {"box":"182","socio":"DUARTE","telefone":"99981372856"},
-    {"box":"183","socio":"JOEDNA","telefone":"99992079034"},
-    {"box":"186","socio":"CAIO LAGUNA","telefone":"99981044000"},
-    {"box":"189","socio":"GILVAN","telefone":"99999773016"},
-    {"box":"191","socio":"FRANCISCO JUNIOR","telefone":"99991400110"},
-    {"box":"192","socio":"DHEMISON","telefone":"98981094526"},
-    {"box":"193","socio":"MARCOS ANDRE","telefone":"99991220010"},
-    {"box":"194","socio":"LEONARDO ABREU","telefone":"99981001680"},
-    {"box":"197","socio":"LEANDRO","telefone":"99981381884"},
-    {"box":"198","socio":"GREGSON","telefone":"99991227670"},
-    {"box":"200","socio":"SANDRO","telefone":"99991628249"},
-    {"box":"201","socio":"BRUNO SALANI","telefone":"99991112200"},
-    {"box":"202","socio":"ALCIDES GAVA","telefone":"99991152608"},
-    {"box":"203","socio":"MAURYCIO","telefone":"99991069350"},
-    {"box":"204","socio":"DR CRUZ","telefone":"99999774948"},
-    {"box":"206","socio":"ÍTALO","telefone":"99981758786"},
-    {"box":"207","socio":"JUNIOR HERINGER","telefone":"99991221126"},
-    {"box":"209","socio":"PIM PIM","telefone":"99991990028"},
-    {"box":"210","socio":"TALMON","telefone":"99988028444"},
-    {"box":"211","socio":"MIQUEIAS","telefone":"99991444479"},
-    {"box":"212","socio":"RONNYVALME","telefone":"99991550795"},
-    {"box":"214","socio":"RAQUEL","telefone":"99981413464"},
-    {"box":"215","socio":"FREDSON","telefone":"99982691050"},
-    {"box":"216","socio":"MAURICIO","telefone":"98982029444"},
-    {"box":"218","socio":"MARCELO","telefone":"99991228855"},
-    {"box":"220","socio":"PEDRO JORGE","telefone":"99991440586"},
-    {"box":"113A","socio":"DR JANDUI","telefone":"99991373388"},
-    {"box":"129A","socio":"WELLISON","telefone":"99985102637"},
-    {"box":"YCI02","socio":"FREITAS","telefone":"99988068870"},
-    {"box":"YCI03","socio":"VILELA","telefone":"99999771644"},
-    {"box":"YCI04","socio":"ABNEAS","telefone":"99991225299"},
-    {"box":"YCI05","socio":"MARCELO LIRA","telefone":"99991222106"},
-    {"box":"YCI06","socio":"IRMÃO","telefone":"99981001441"},
-    {"box":"YCI07","socio":"ALMIR","telefone":"99999771623"},
-    {"box":"YCI08","socio":"FLAYNO","telefone":"99992085252"},
-    {"box":"YCI09","socio":"RICARDINHO","telefone":"99999773792"},
-    {"box":"YCI010","socio":"SALUA","telefone":"99999773792"},
-    {"box":"YCI011","socio":"JOHAN","telefone":"99981118500"},
-    {"box":"221","socio":"WAWRWYK","telefone":"99981113884"},
-    {"box":"98A","socio":"ELY","telefone":"99999770448"},
-    {"box":"","socio":"SERGIO CAMAPUM","telefone":"99991643002"}
-  ];
+        function formatarDataNascimento(data) {
+            if (!data) return '—';
+            try {
+                const [ano, mes, dia] = data.split('-');
+                const idade = new Date().getFullYear() - parseInt(ano);
+                return `${dia}/${mes} (${idade} anos)`;
+            } catch {
+                return '—';
+            }
+        }
 
-// ══════════════════════════════════════════════════════
-// ESTADO GLOBAL
-// ══════════════════════════════════════════════════════
-let socios       = [];
-const MAX_SEL = 10;              // limite máximo de seleção
-let selecionados = new Set();   // índices selecionados
-let fila         = [];          // [{idx, status:'pendente'|'enviado'|'pulado'|'semtel'}]
-let filaIdx      = 0;           // posição atual na fila
-let timerRef     = null;        // setInterval do countdown
-let timerSeg     = 0;
-let rodando      = false;
-let pausado      = false;
-let modoManual   = false;
+        function formatarTelefone(tel) {
+            const d = tel.replace(/\D/g, '');
+            if (d.length === 11) return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+            if (d.length === 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+            return tel;
+        }
 
-// ══════════════════════════════════════════════════════
-// MENSAGEM
-// ══════════════════════════════════════════════════════
-function montarMensagem(nome){
-  return `Amigo associado *${nome}*,
+        function abrirWhatsApp(telefone) {
+            if (isSemTelefone(telefone)) {
+                mostrarToast('Este sócio não possui telefone cadastrado.', 'warning');
+                return;
+            }
+            let limpo = telefone.replace(/\D/g, '');
+            if (!limpo.startsWith('55')) limpo = '55' + limpo;
+            window.open(`https://wa.me/${limpo}`, '_blank');
+        }
 
-Coloquei meu nome como candidato a Comodoro do Yate Clube de Imperatriz com o coração tranquilo e plena consciência da responsabilidade que isso representa.
+        // ─── CRUD ──────────────────────────────────────────────────────────────
+        function salvar() {
+            const socio = document.getElementById('socio').value.trim();
+            const box = document.getElementById('box').value.trim();
+            const telefone = document.getElementById('telefone').value.trim();
+            const dataNascimento = document.getElementById('dataNascimento').value;
 
-Nossa chapa, *Legado e Futuro*, nasce com um propósito claro: honrar a história construída pelo saudoso Luiz Carlos Salani, meu grande amigo, e dar continuidade ao trabalho sério e transformador realizado na gestão de Chafi.
+            if (!socio) {
+                mostrarToast('Digite o nome do sócio', 'warning');
+                return;
+            }
 
-Nos últimos anos, o Yate evoluiu de forma concreta e visível: controle de portaria, rampa para lanchas, tratores novos, ampliação do píer, novo flutuante, revitalização do pátio, reforma completa do restaurante, novos banheiros, sistema de monitoramento, sistema de combate a incêndio, posto de combustível moderno e seguro, novos boxes, área de contemplação estruturada, espaço exclusivo para sócios, construção do escritório e sala de reuniões — tudo isso com a segurança de sermos donos do nosso título.
+            const dados = {
+                box,
+                socio: socio.toUpperCase(),
+                telefone,
+                dataNascimento: dataNascimento || undefined
+            };
 
-Isso não é discurso. São fatos.
+            if (editandoIndex !== -1) {
+                socios[editandoIndex] = dados;
+                mostrarToast('Sócio atualizado com sucesso!', 'success');
+            } else {
+                socios.push(dados);
+                mostrarToast('Sócio adicionado com sucesso!', 'success');
+            }
 
-Meu compromisso é simples e direto:
-✔ Preservar o que foi construído
-✔ Valorizar cada associado
-✔ Manter o clube organizado, seguro e financeiramente responsável
-✔ Continuar avançando com planejamento e transparência
+            salvarNoStorage();
+            limpar();
+            listar();
+            atualizarEstatisticas();
+        }
 
-O Yate não é de uma pessoa. É de todos nós.
-E é com união, respeito e trabalho que vamos continuar fortalecendo esse patrimônio que é motivo de orgulho para nossa cidade.
+        function editar(index) {
+            const s = socios[index];
+            document.getElementById('socio').value = s.socio;
+            document.getElementById('box').value = s.box;
+            document.getElementById('telefone').value = s.telefone;
+            document.getElementById('dataNascimento').value = s.dataNascimento || '';
+            editandoIndex = index;
+            document.getElementById('formTitle').textContent = 'Editar Sócio';
+            document.getElementById('editBadge').style.display = 'inline-block';
+            document.getElementById('btnCancelar').style.display = 'inline-flex';
+            document.getElementById('btnSalvarText').textContent = 'Atualizar';
+            document.getElementById('socio').focus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-Conto com seu apoio.
+        function abrirModalExcluir(index) {
+            excluirIndex = index;
+            document.getElementById('modalSocioName').textContent = socios[index].socio;
+            document.getElementById('modalConfirm').classList.add('active');
+        }
 
-Dr. Nabarro
-Candidato a Comodoro
-*Chapa Legado e Futuro* ⚓🚤`;
-}
+        function fecharModal() {
+            document.getElementById('modalConfirm').classList.remove('active');
+            excluirIndex = -1;
+        }
 
-// ══════════════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════════════
-function init(){
-  // Versão dos dados — atualizar quando os dados mudarem para forçar reload
-  const DATA_VERSION = '2026-02-26-v3';
-  const storedVersion = localStorage.getItem('socios_yate_version');
-  if(storedVersion !== DATA_VERSION){
-    // Dados novos: substituir localStorage pelos dados atualizados
-    socios = JSON.parse(JSON.stringify(dadosIniciais));
-    localStorage.setItem('socios_yate', JSON.stringify(socios));
-    localStorage.setItem('socios_yate_version', DATA_VERSION);
-  } else {
-    const d = localStorage.getItem('socios_yate');
-    socios = d ? JSON.parse(d) : JSON.parse(JSON.stringify(dadosIniciais));
-    if(!d) localStorage.setItem('socios_yate', JSON.stringify(socios));
-  }
-  document.getElementById('year').textContent = new Date().getFullYear();
-  listar();
-  atualizarEstatisticas();
-  atualizarFiltroInfo();
-  renderChips();
-}
+        function confirmarExcluir() {
+            if (excluirIndex !== -1) {
+                socios.splice(excluirIndex, 1);
+                salvarNoStorage();
+                listar();
+                atualizarEstatisticas();
+                mostrarToast('Sócio removido com sucesso!', 'success');
+                fecharModal();
+            }
+        }
 
-// ══════════════════════════════════════════════════════
-// UTILITÁRIOS
-// ══════════════════════════════════════════════════════
-const isFalecido = n => n.toUpperCase().includes('FALECIDO');
-const isSemTel   = t => !t || t.trim()==='';
+        function limpar() {
+            document.getElementById('socio').value = '';
+            document.getElementById('box').value = '';
+            document.getElementById('telefone').value = '';
+            document.getElementById('dataNascimento').value = '';
+            editandoIndex = -1;
+            document.getElementById('formTitle').textContent = 'Cadastrar Novo Sócio';
+            document.getElementById('editBadge').style.display = 'none';
+            document.getElementById('btnCancelar').style.display = 'none';
+            document.getElementById('btnSalvarText').textContent = 'Salvar';
+        }
 
-function formatTel(t){
-  const d=t.replace(/\D/g,'');
-  if(d.length===11)return`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;
-  if(d.length===10)return`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`;
-  return t;
-}
+        // ─── LISTAGEM ──────────────────────────────────────────────────────────
+        function listar() {
+            const pesquisa = document.getElementById('pesquisa').value.toLowerCase().trim();
+            const tabela = document.getElementById('tabela');
+            tabela.innerHTML = '';
 
-function waURL(tel,nome){
-  let n=tel.replace(/\D/g,'');
-  if(!n.startsWith('55'))n='55'+n;
-  return `https://wa.me/${n}?text=${encodeURIComponent(montarMensagem(nome))}`;
-}
+            let filtrados = socios.filter((s, i) => {
+                if (!pesquisa) return true;
+                return s.socio.toLowerCase().includes(pesquisa) ||
+                       s.box.toLowerCase().includes(pesquisa) ||
+                       s.telefone.toLowerCase().includes(pesquisa);
+            });
 
-// ══════════════════════════════════════════════════════
-// LISTAGEM
-// ══════════════════════════════════════════════════════
-function listar(){
-  const q=document.getElementById('pesquisa').value.toLowerCase().trim();
-  const tb=document.getElementById('tabela');
-  tb.innerHTML='';
-  const lista=socios.filter((s,i)=>!q||s.socio.toLowerCase().includes(q)||s.box.toLowerCase().includes(q)||s.telefone.toLowerCase().includes(q));
-  if(!lista.length){
-    tb.innerHTML=`<tr><td colspan="5" class="no-results"><i class="fas fa-search"></i><p>Nenhum resultado</p></td></tr>`;
-    document.getElementById('exibindo').textContent='0';
-    document.getElementById('searchInfo').textContent=q?`0 resultado(s) para "${q}"` :'';
-    return;
-  }
-  lista.forEach(s=>{
-    const idx=socios.indexOf(s);
-    const falecido=isFalecido(s.socio);
-    const semTel=isSemTel(s.telefone);
-    const sel=selecionados.has(idx);
-    const bc=s.box.startsWith('YCI')?'box-yci':/[A-Za-z]/.test(s.box)?'box-alpha':'box-numeric';
-    const tr=document.createElement('tr');
-    if(sel) tr.classList.add('row-selected');
-    if(semTel) tr.classList.add('row-semtel');
-    tr.innerHTML=`
-      <td class="check-col">
-        <input type="checkbox" ${sel?'checked':''} ${semTel||falecido?'disabled title="Sem telefone ou falecido"':''}
-          onchange="toggleSel(${idx},this.checked)">
-      </td>
-      <td><span class="box-badge ${bc}">${s.box}</span></td>
-      <td><div class="socio-name ${falecido?'falecido':''}">
-        <span>${s.socio}</span>
-        ${falecido?'<span style="font-size:.68rem;color:#9ca3af;"> (falecido)</span>':''}
-      </div></td>
-      <td>${semTel?'<span class="sem-telefone">Sem telefone</span>':`<div class="phone-number"><i class="fas fa-phone"></i>&nbsp;${formatTel(s.telefone)}</div>`}</td>
-      <td>
-        <button class="btn-small btn-wa" style="background:#25D366;color:white;padding:.35rem .8rem;font-size:.75rem;border-radius:.375rem;"
-          onclick="abrirWA('${s.telefone}','${s.socio.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')">
-          <i class="fab fa-whatsapp"></i> Enviar
-        </button>
-      </td>`;
-    tb.appendChild(tr);
-  });
-  document.getElementById('exibindo').textContent=lista.length;
-  document.getElementById('searchInfo').textContent=q?`${lista.length} resultado(s) para "${q}"` :'';
-  atualizarSelInfo();
-}
+            if (filtrados.length === 0) {
+                tabela.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="no-results">
+                            <div>
+                                <i class="fas fa-search"></i>
+                                <p>Nenhum sócio encontrado</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                document.getElementById('exibindo').textContent = '0';
+                document.getElementById('searchInfo').textContent = pesquisa ? `${filtrados.length} resultado(s) encontrado(s) para "${pesquisa}"` : '';
+                return;
+            }
 
-function abrirWA(tel,nome){
-  if(isSemTel(tel)){mostrarToast('Sócio sem telefone.','warning');return;}
-  window.open(waURL(tel,nome),'_blank');
-}
+            filtrados.forEach((s, rowIdx) => {
+                const index = socios.indexOf(s);
+                const falecido = isFalecido(s.socio);
+                const semTel = isSemTelefone(s.telefone);
+                const aniversariando = estaAniversariando(s.dataNascimento);
 
-// ══════════════════════════════════════════════════════
-// SELEÇÃO
-// ══════════════════════════════════════════════════════
-function toggleSel(idx,v){
-  if(v){
-    if(selecionados.size>=MAX_SEL){
-      mostrarToast(`⚠️ Limite de ${MAX_SEL} contatos atingido! Remova um para adicionar outro.`,'warning');
-      setTimeout(()=>listar(),50);
-      return;
-    }
-    selecionados.add(idx);
-  } else {
-    selecionados.delete(idx);
-  }
-  atualizarSelInfo();
-  atualizarEstatisticas();
-  renderChips();
-  listar();
-}
+                const row = document.createElement('tr');
+                if (aniversariando) row.classList.add('aniversario');
 
-function selecionarTodos(){
-  let count=selecionados.size;
-  for(let i=0;i<socios.length;i++){
-    if(count>=MAX_SEL) break;
-    const s=socios[i];
-    if(!isSemTel(s.telefone)&&!isFalecido(s.socio)&&!selecionados.has(i)){
-      selecionados.add(i);
-      count++;
-    }
-  }
-  listar();
-  atualizarSelInfo();
-  atualizarEstatisticas();
-  renderChips();
-  mostrarToast(`${selecionados.size} sócios selecionados (máx. ${MAX_SEL})!`,'success');
-}
+                const boxClass = s.box.startsWith('YCI') ? 'box-yci' : /[A-Za-z]/.test(s.box) ? 'box-alpha' : 'box-numeric';
 
-function desmarcarTodos(){
-  selecionados.clear();
-  listar();
-  atualizarSelInfo();
-  atualizarEstatisticas();
-  renderChips();
-}
+                row.innerHTML = `
+                    <td><span class="box-badge ${boxClass}">${s.box}</span></td>
+                    <td>
+                        <div class="socio-name ${falecido ? 'falecido' : ''}">
+                            ${aniversariando ? '<i class="fas fa-birthday-cake cake-icon"></i>' : ''}
+                            <span>${s.socio}</span>
+                            ${falecido ? '<span style="font-size: 0.75rem; color: #9ca3af;">(falecido)</span>' : ''}
+                        </div>
+                    </td>
+                    <td>
+                        ${semTel ? '<span class="sem-telefone">Sem telefone</span>' : `<div class="phone-number"><i class="fas fa-phone"></i> ${formatarTelefone(s.telefone)}</div>`}
+                    </td>
+                    <td>
+                        <span class="data-nasc ${aniversariando ? 'aniversario' : ''}">${formatarDataNascimento(s.dataNascimento)}</span>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn-small btn-edit" onclick="editar(${index})">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="btn-small btn-delete" onclick="abrirModalExcluir(${index})">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                            <button class="btn-small btn-whatsapp" onclick="abrirWhatsApp('${s.telefone}')" ${semTel ? 'disabled' : ''}>
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tabela.appendChild(row);
+            });
 
-function atualizarSelInfo(){
-  const n=selecionados.size;
-  document.getElementById('selCount').textContent=n;
-  const el=document.getElementById('selInfo');
-  el.style.display=n>0?'flex':'none';
-  document.getElementById('sel10count').textContent=n;
-  const pct=Math.round(n/MAX_SEL*100);
-  document.getElementById('barLimitFill').style.width=pct+'%';
-  document.getElementById('btnEnviar10').disabled=(n===0);
-  atualizarFiltroInfo();
-}
+            document.getElementById('exibindo').textContent = filtrados.length;
+            document.getElementById('searchInfo').textContent = pesquisa ? `${filtrados.length} resultado(s) encontrado(s) para "${pesquisa}"` : '';
+        }
 
-// ══════════════════════════════════════════════════════
-// ESTATÍSTICAS
-// ══════════════════════════════════════════════════════
-function atualizarEstatisticas(){
-  const a=socios.filter(s=>!isFalecido(s.socio)).length;
-  const f=socios.filter(s=>isFalecido(s.socio)).length;
-  const st=socios.filter(s=>isSemTel(s.telefone)).length;
-  document.getElementById('totalSocios').textContent=socios.length;
-  document.getElementById('totalAtivos').textContent=a;
-  document.getElementById('totalFalecidos').textContent=f;
-  document.getElementById('totalSelecionados').textContent=selecionados.size;
-  document.getElementById('footerAtivos').textContent=a;
-  document.getElementById('footerFalecidos').textContent=f;
-  document.getElementById('footerSemTel').textContent=st;
-  document.getElementById('total').textContent=socios.length;
-}
+        // ─── ESTATÍSTICAS ──────────────────────────────────────────────────────
+        function atualizarEstatisticas() {
+            const totalAtivos = socios.filter(s => !isFalecido(s.socio)).length;
+            const totalFalecidos = socios.filter(s => isFalecido(s.socio)).length;
+            const totalSemTel = socios.filter(s => isSemTelefone(s.telefone)).length;
+            const aniversariantes = socios.filter(s => estaAniversariando(s.dataNascimento)).length;
 
-// ══════════════════════════════════════════════════════
-// FILTRO ENVIO
-// ══════════════════════════════════════════════════════
-// ══════════════════════════════════════════════════════
-// RENDERIZAR CHIPS (painel dos 10 selecionados)
-// ══════════════════════════════════════════════════════
-function renderChips(){
-  const grid=document.getElementById('chipsGrid');
-  grid.innerHTML='';
-  const selArr=Array.from(selecionados);
-  selArr.forEach(idx=>{
-    const s=socios[idx];
-    const chip=document.createElement('div');
-    chip.className='chip-slot filled';
-    chip.innerHTML=`
-      <span class="chip-box">${s.box}</span>
-      <div style="flex:1;min-width:0;">
-        <div class="chip-name">${s.socio}</div>
-        <div class="chip-tel"><i class="fas fa-phone" style="font-size:.6rem;"></i> ${formatTel(s.telefone)}</div>
-      </div>
-      <button class="chip-remove" onclick="removerChip(${idx})" title="Remover">✕</button>`;
-    grid.appendChild(chip);
-  });
-  const vazios=MAX_SEL-selArr.length;
-  for(let i=0;i<vazios;i++){
-    const slot=document.createElement('div');
-    slot.className='chip-slot empty';
-    slot.innerHTML=`<span class="chip-empty-icon">👤</span><span>Vaga ${selArr.length+i+1} — clique na lista</span>`;
-    grid.appendChild(slot);
-  }
-}
+            document.getElementById('totalSocios').textContent = socios.length;
+            document.getElementById('totalAtivos').textContent = totalAtivos;
+            document.getElementById('totalFalecidos').textContent = totalFalecidos;
+            document.getElementById('footerAtivos').textContent = totalAtivos;
+            document.getElementById('footerFalecidos').textContent = totalFalecidos;
+            document.getElementById('footerSemTel').textContent = totalSemTel;
+            document.getElementById('total').textContent = socios.length;
 
-function removerChip(idx){
-  selecionados.delete(idx);
-  atualizarSelInfo();
-  atualizarEstatisticas();
-  renderChips();
-  listar();
-  mostrarToast('Contato removido da seleção.','info');
-}
+            if (aniversariantes > 0) {
+                document.getElementById('aniversarioBadge').style.display = 'flex';
+                document.getElementById('aniversarioCount').textContent = aniversariantes;
+                document.getElementById('footerAniversario').style.display = 'flex';
+                document.getElementById('footerAniversarioCount').textContent = aniversariantes;
+            } else {
+                document.getElementById('aniversarioBadge').style.display = 'none';
+                document.getElementById('footerAniversario').style.display = 'none';
+            }
+        }
 
-function iniciarEnvio10(){
-  document.getElementById('cfgFiltro').value='selecionados';
-  atualizarFiltroInfo();
-  iniciarEnvio();
-  document.querySelector('.envio-panel').scrollIntoView({behavior:'smooth'});
-}
+        // ─── PDF ───────────────────────────────────────────────────────────────
+        function gerarPDF() {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+            script.onload = () => {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                const largura = doc.internal.pageSize.getWidth();
+                const data = new Date().toLocaleString('pt-BR');
 
-function aplicarFiltroEnvio(){
-  const v=document.getElementById('cfgFiltro').value;
-  if(v==='todos'){
-    socios.forEach((s,i)=>{if(!isSemTel(s.telefone)&&!isFalecido(s.socio))selecionados.add(i);});
-  } else if(v==='ativos'){
-    socios.forEach((s,i)=>{
-      if(!isFalecido(s.socio)&&!isSemTel(s.telefone)) selecionados.add(i);
-      else selecionados.delete(i);
-    });
-  }
-  listar();
-  atualizarEstatisticas();
-  atualizarFiltroInfo();
-}
+                doc.setFillColor(29, 78, 216);
+                doc.rect(0, 0, largura, 40, 'F');
 
-function atualizarFiltroInfo(){
-  const v=document.getElementById('cfgFiltro').value;
-  let n=0;
-  if(v==='selecionados') n=selecionados.size;
-  else if(v==='todos'||v==='ativos') n=socios.filter(s=>!isFalecido(s.socio)&&!isSemTel(s.telefone)).length;
-  document.getElementById('filaInfo').textContent=n>0?`${n} contatos na fila de envio`:'';
-}
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(20);
+                doc.setFont('helvetica', 'bold');
+                doc.text('YATE CLUBE DE IMPERATRIZ', largura / 2, 18, { align: 'center' });
 
-// ══════════════════════════════════════════════════════
-// MONTAR FILA
-// ══════════════════════════════════════════════════════
-function montarFila(){
-  const v=document.getElementById('cfgFiltro').value;
-  fila=[];
-  socios.forEach((s,i)=>{
-    let incluir=false;
-    if(v==='selecionados') incluir=selecionados.has(i);
-    else if(v==='todos'||v==='ativos') incluir=!isFalecido(s.socio);
-    if(incluir){
-      fila.push({idx:i, status: isSemTel(s.telefone)?'semtel':'pendente'});
-    }
-  });
-  return fila;
-}
+                doc.setFontSize(11);
+                doc.setFont('helvetica', 'normal');
+                doc.text('Relatório de Sócios', largura / 2, 27, { align: 'center' });
+                doc.text(`Gerado em: ${data}`, largura / 2, 34, { align: 'center' });
 
-// ══════════════════════════════════════════════════════
-// RENDERIZAR FILA
-// ══════════════════════════════════════════════════════
-function renderFila(){
-  const el=document.getElementById('filaItens');
-  el.innerHTML='';
-  fila.forEach((item,pos)=>{
-    const s=socios[item.idx];
-    const isAtual=(pos===filaIdx&&rodando);
-    const div=document.createElement('div');
-    div.className='fila-item'+
-      (isAtual?' atual-row':'')+
-      (item.status==='enviado'?' enviado-row':'')+
-      (item.status==='pulado'?' pulado-row':'')+
-      (item.status==='semtel'?' semtel-row':'');
-    div.id='fila-row-'+pos;
-    const statusMap={
-      pendente:'<span class="status-badge status-pendente">Pendente</span>',
-      atual:   '<span class="status-badge status-atual">▶ Atual</span>',
-      enviado: '<span class="status-badge status-enviado">✅ Enviado</span>',
-      pulado:  '<span class="status-badge status-pulado">⏭ Pulado</span>',
-      semtel:  '<span class="status-badge status-semtel">Sem tel.</span>'
-    };
-    const badge=isAtual?statusMap.atual:statusMap[item.status]||statusMap.pendente;
-    div.innerHTML=`
-      <span class="fila-num">${pos+1}</span>
-      <span class="fila-nome">${s.socio}</span>
-      <span class="fila-tel">${isSemTel(s.telefone)?'—':formatTel(s.telefone)}</span>
-      <div class="fila-status">${badge}</div>`;
-    el.appendChild(div);
-  });
-  document.getElementById('filaCount').textContent=`${fila.length} contatos`;
-  // rolar para o atual
-  const atualEl=document.getElementById('fila-row-'+filaIdx);
-  if(atualEl) atualEl.scrollIntoView({block:'nearest',behavior:'smooth'});
-}
+                let y = 55;
+                doc.setFillColor(29, 78, 216);
+                doc.rect(10, y - 7, 190, 10, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Box', 12, y);
+                doc.text('Sócio', 40, y);
+                doc.text('Telefone', 155, y);
+                doc.setTextColor(0, 0, 0);
+                y += 10;
 
-// ══════════════════════════════════════════════════════
-// PROGRESSO
-// ══════════════════════════════════════════════════════
-function atualizarProgresso(){
-  const env=fila.filter(x=>x.status==='enviado').length;
-  const pul=fila.filter(x=>x.status==='pulado').length;
-  const st=fila.filter(x=>x.status==='semtel').length;
-  const pend=fila.filter(x=>x.status==='pendente').length;
-  const total=fila.length;
-  const feito=env+pul+st;
-  const pct=total>0?Math.round(feito/total*100):0;
-  document.getElementById('progressFill').style.width=pct+'%';
-  document.getElementById('progressPct').textContent=pct+'%';
-  document.getElementById('cntEnviado').textContent=env;
-  document.getElementById('cntPulado').textContent=pul;
-  document.getElementById('cntSemTel').textContent=st;
-  document.getElementById('cntPendente').textContent=pend;
-}
+                socios.forEach((s, index) => {
+                    if (index % 2 === 0) doc.setFillColor(239, 246, 255);
+                    else doc.setFillColor(255, 255, 255);
 
-// ══════════════════════════════════════════════════════
-// INICIAR ENVIO
-// ══════════════════════════════════════════════════════
-function iniciarEnvio(){
-  montarFila();
-  if(fila.filter(x=>x.status!=='semtel').length===0){
-    mostrarToast('Selecione ao menos um sócio com telefone!','warning');
-    return;
-  }
-  filaIdx=0;
-  rodando=true;
-  pausado=false;
-  modoManual=parseInt(document.getElementById('cfgIntervalo').value)===0;
+                    doc.rect(10, y - 7, 190, 10, 'F');
+                    doc.rect(10, y - 7, 190, 10);
 
-  // UI: mostrar controles
-  document.getElementById('btnIniciar').style.display='none';
-  document.getElementById('btnPausar').style.display=modoManual?'none':'inline-flex';
-  document.getElementById('btnPular').style.display='inline-flex';
-  document.getElementById('btnParar').style.display='inline-flex';
-  if(modoManual) document.getElementById('btnProximo').style.display='inline-flex';
-  document.getElementById('progressSection').style.display='block';
-  document.getElementById('filaContainer').style.display='block';
-  document.getElementById('atualCard').style.display='block';
-  document.getElementById('conclusaoCard').style.display='none';
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(9);
+                    doc.text(s.box, 12, y);
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(s.socio.substring(0, 40), 40, y);
+                    doc.text(s.telefone || '—', 155, y);
 
-  renderFila();
-  processarAtual();
-}
+                    y += 10;
+                    if (y > 280) {
+                        doc.addPage();
+                        y = 20;
+                    }
+                });
 
-// ══════════════════════════════════════════════════════
-// PROCESSAR ATUAL
-// ══════════════════════════════════════════════════════
-function processarAtual(){
-  if(!rodando) return;
-  // pular sem telefone automaticamente
-  while(filaIdx<fila.length && fila[filaIdx].status==='semtel') filaIdx++;
-  if(filaIdx>=fila.length){ concluir(); return; }
+                y += 10;
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Total de Sócios: ${socios.length}`, 10, y);
 
-  const item=fila[filaIdx];
-  const s=socios[item.idx];
+                doc.save('Relatorio_Socios_Yate_Clube.pdf');
+                mostrarToast('PDF gerado com sucesso!', 'success');
+            };
+            script.onerror = () => mostrarToast('Erro ao carregar biblioteca de PDF.', 'error');
+            document.head.appendChild(script);
+        }
 
-  // Atualizar card atual
-  document.getElementById('atualNome').textContent=`Box ${s.box} — ${s.socio}`;
-  document.getElementById('atualTel').textContent=formatTel(s.telefone);
+        // ─── TOAST ────────────────────────────────────────────────────────────
+        function mostrarToast(mensagem, tipo = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${tipo}`;
+            toast.textContent = mensagem;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
 
-  // Abrir WhatsApp
-  const popup=window.open(waURL(s.telefone,s.socio),'_blank');
-  if(!popup){
-    document.getElementById('popupOverlay').classList.add('active');
-    document.getElementById('popupAlerta').classList.add('active');
-  }
-
-  renderFila();
-  atualizarProgresso();
-
-  if(modoManual){
-    document.getElementById('timerNum').textContent='✋';
-    document.getElementById('timerNum').style.fontSize='.9rem';
-  } else {
-    iniciarCountdown();
-  }
-}
-
-// ══════════════════════════════════════════════════════
-// COUNTDOWN
-// ══════════════════════════════════════════════════════
-function iniciarCountdown(){
-  clearInterval(timerRef);
-  timerSeg=parseInt(document.getElementById('cfgIntervalo').value);
-  document.getElementById('timerNum').style.fontSize='1.1rem';
-  document.getElementById('timerNum').textContent=timerSeg;
-  timerRef=setInterval(()=>{
-    if(pausado) return;
-    timerSeg--;
-    document.getElementById('timerNum').textContent=timerSeg;
-    if(timerSeg<=0){
-      clearInterval(timerRef);
-      marcarEnviado();
-      avancar();
-    }
-  },1000);
-}
-
-// ══════════════════════════════════════════════════════
-// MARCAR / AVANCAR
-// ══════════════════════════════════════════════════════
-function marcarEnviado(){
-  if(filaIdx<fila.length) fila[filaIdx].status='enviado';
-}
-
-function avancar(){
-  filaIdx++;
-  while(filaIdx<fila.length && fila[filaIdx].status==='semtel') filaIdx++;
-  renderFila();
-  atualizarProgresso();
-  if(filaIdx>=fila.length){ concluir(); return; }
-  processarAtual();
-}
-
-// ══════════════════════════════════════════════════════
-// CONTROLES
-// ══════════════════════════════════════════════════════
-function pausarEnvio(){
-  pausado=true;
-  document.getElementById('btnPausar').style.display='none';
-  document.getElementById('btnRetomar').style.display='inline-flex';
-  document.getElementById('timerNum').textContent='⏸';
-  mostrarToast('Envio pausado.','info');
-}
-
-function retornarEnvio(){
-  pausado=false;
-  document.getElementById('btnRetomar').style.display='none';
-  document.getElementById('btnPausar').style.display='inline-flex';
-  mostrarToast('Envio retomado!','success');
-  if(!modoManual) iniciarCountdown();
-}
-
-function pularAtual(){
-  clearInterval(timerRef);
-  if(filaIdx<fila.length) fila[filaIdx].status='pulado';
-  atualizarProgresso();
-  renderFila();
-  filaIdx++;
-  while(filaIdx<fila.length && fila[filaIdx].status==='semtel') filaIdx++;
-  if(filaIdx>=fila.length){ concluir(); return; }
-  processarAtual();
-}
-
-function proximoManual(){
-  // modo manual: marca como enviado e avança
-  clearInterval(timerRef);
-  marcarEnviado();
-  atualizarProgresso();
-  filaIdx++;
-  while(filaIdx<fila.length && fila[filaIdx].status==='semtel') filaIdx++;
-  renderFila();
-  if(filaIdx>=fila.length){ concluir(); return; }
-  processarAtual();
-}
-
-function pararEnvio(){
-  clearInterval(timerRef);
-  rodando=false;
-  pausado=false;
-  resetUI();
-  mostrarToast('Envio interrompido.','warning');
-}
-
-// ══════════════════════════════════════════════════════
-// CONCLUSÃO
-// ══════════════════════════════════════════════════════
-function concluir(){
-  clearInterval(timerRef);
-  rodando=false;
-  document.getElementById('atualCard').style.display='none';
-  document.getElementById('conclusaoCard').style.display='block';
-  const env=fila.filter(x=>x.status==='enviado').length;
-  const pul=fila.filter(x=>x.status==='pulado').length;
-  const st=fila.filter(x=>x.status==='semtel').length;
-  document.getElementById('finalEnviado').textContent=env;
-  document.getElementById('finalPulado').textContent=pul;
-  document.getElementById('finalSemTel').textContent=st;
-  document.getElementById('btnPausar').style.display='none';
-  document.getElementById('btnRetomar').style.display='none';
-  document.getElementById('btnPular').style.display='none';
-  document.getElementById('btnParar').style.display='none';
-  document.getElementById('btnProximo').style.display='none';
-  atualizarProgresso();
-  renderFila();
-  mostrarToast(`✅ Envio concluído! ${env} mensagens enviadas.`,'success');
-}
-
-function resetarEnvio(){
-  fila=[];
-  filaIdx=0;
-  clearInterval(timerRef);
-  rodando=false;
-  pausado=false;
-  resetUI();
-  document.getElementById('conclusaoCard').style.display='none';
-  document.getElementById('progressSection').style.display='none';
-  document.getElementById('filaContainer').style.display='none';
-  document.getElementById('atualCard').style.display='none';
-  document.getElementById('filaItens').innerHTML='';
-}
-
-function resetUI(){
-  document.getElementById('btnIniciar').style.display='inline-flex';
-  document.getElementById('btnPausar').style.display='none';
-  document.getElementById('btnRetomar').style.display='none';
-  document.getElementById('btnPular').style.display='none';
-  document.getElementById('btnParar').style.display='none';
-  document.getElementById('btnProximo').style.display='none';
-  document.getElementById('atualCard').style.display='none';
-}
-
-// ══════════════════════════════════════════════════════
-// POPUP
-// ══════════════════════════════════════════════════════
-function fecharPopup(){
-  document.getElementById('popupOverlay').classList.remove('active');
-  document.getElementById('popupAlerta').classList.remove('active');
-}
-
-// ══════════════════════════════════════════════════════
-// TOAST
-// ══════════════════════════════════════════════════════
-function mostrarToast(msg,tipo='success'){
-  const t=document.createElement('div');
-  t.className=`toast ${tipo}`;
-  t.innerHTML=`<i class="fas fa-${tipo==='success'?'check-circle':tipo==='warning'?'exclamation-triangle':tipo==='info'?'info-circle':'times-circle'}"></i> ${msg}`;
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),3500);
-}
-
-window.addEventListener('DOMContentLoaded',init);
-</script>
+        // ─── INICIAR ───────────────────────────────────────────────────────────
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
