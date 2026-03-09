@@ -669,7 +669,7 @@
                 </div>
                 <div class="stat-badge highlight" id="aniversarioBadge" style="display: none;">
                     <i class="fas fa-birthday-cake"></i>
-                    <span><span id="aniversarioCount">0</span> aniversariante(s) hoje! 🎉</span>
+                    <span id="aniversarioNomes">🎉 Aniversariante(s) hoje!</span>
                 </div>
             </div>
         </div>
@@ -768,7 +768,7 @@
                     </div>
                     <div class="footer-stat" id="footerAniversario" style="display: none;">
                         <i class="fas fa-birthday-cake" style="color: #fbbf24;"></i>
-                        <span id="footerAniversarioCount">0</span> aniversariante(s)
+                        <span id="footerAniversarioNomes">aniversariante(s)</span>
                     </div>
                 </div>
             </div>
@@ -1276,7 +1276,8 @@
             const totalAtivos = socios.filter(s => !isFalecido(s.socio)).length;
             const totalFalecidos = socios.filter(s => isFalecido(s.socio)).length;
             const totalSemTel = socios.filter(s => isSemTelefone(s.telefone)).length;
-            const aniversariantes = socios.filter(s => estaAniversariando(s.dataNascimento)).length;
+            const listAniversariantes = socios.filter(s => !isFalecido(s.socio) && estaAniversariando(s.dataNascimento));
+            const aniversariantes = listAniversariantes.length;
 
             document.getElementById('totalSocios').textContent = socios.length;
             document.getElementById('totalAtivos').textContent = totalAtivos;
@@ -1287,10 +1288,23 @@
             document.getElementById('total').textContent = socios.length;
 
             if (aniversariantes > 0) {
+                // Formata os nomes: pega apenas o primeiro nome para ficar compacto no badge
+                const nomesCompletos = listAniversariantes.map(s => {
+                    const partes = s.socio.trim().split(' ');
+                    return partes[0].charAt(0).toUpperCase() + partes[0].slice(1).toLowerCase();
+                });
+                const textoNomes = nomesCompletos.join(', ');
+                const textoBadge = aniversariantes === 1
+                    ? `🎂 Aniversariante hoje: ${textoNomes}! 🎉`
+                    : `🎂 Aniversariantes hoje: ${textoNomes}! 🎉`;
+                const textoFooter = aniversariantes === 1
+                    ? `${textoNomes} (aniversariante)`
+                    : `${textoNomes} (aniversariantes)`;
+
                 document.getElementById('aniversarioBadge').style.display = 'flex';
-                document.getElementById('aniversarioCount').textContent = aniversariantes;
+                document.getElementById('aniversarioNomes').textContent = textoBadge;
                 document.getElementById('footerAniversario').style.display = 'flex';
-                document.getElementById('footerAniversarioCount').textContent = aniversariantes;
+                document.getElementById('footerAniversarioNomes').textContent = textoFooter;
             } else {
                 document.getElementById('aniversarioBadge').style.display = 'none';
                 document.getElementById('footerAniversario').style.display = 'none';
