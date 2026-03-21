@@ -109,12 +109,6 @@
             background: rgba(255, 193, 7, 0.3);
             animation: pulse 2s infinite;
         }
-        .stat-badge.highlight a {
-            color: #ffffff;
-            text-decoration: underline;
-            text-underline-offset: 2px;
-            font-weight: 700;
-        }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -399,6 +393,14 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+        .socio-name .nome-click {
+            color: #1d4ed8;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .socio-name .nome-click:hover {
+            color: #0f3460;
         }
 
         .socio-name.falecido {
@@ -747,16 +749,8 @@
             <p>Sistema de Cadastro de Sócios</p>
             <div class="stats-container">
                 <div class="stat-badge">
-                    <i class="fas fa-users"></i>
-                    <span><span id="totalSocios">228</span> sócios cadastrados</span>
-                </div>
-                <div class="stat-badge">
                     <span class="stat-dot dot-green"></span>
                     <span><span id="totalAtivos">223</span> ativos</span>
-                </div>
-                <div class="stat-badge">
-                    <span class="stat-dot dot-gray"></span>
-                    <span><span id="totalFalecidos">5</span> falecidos</span>
                 </div>
                 <div class="stat-badge highlight" id="aniversarioBadge" style="display: none;">
                     <i class="fas fa-birthday-cake"></i>
@@ -768,54 +762,7 @@
 
     <!-- MAIN -->
     <main>
-        <!-- FORM SECTION -->
-        <section class="form-section">
-            <div class="form-header">
-                <div class="form-header-icon">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-                <h2 id="formTitle">Cadastrar Novo Sócio</h2>
-                <span class="badge" id="editBadge" style="display: none;">Editando</span>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="box">Box</label>
-                    <input type="text" id="box" placeholder="Ex: 42, 113A, YCI01">
-                </div>
-                <div class="form-group" style="grid-column: span 2;">
-                    <label for="socio">Nome do Sócio *</label>
-                    <input type="text" id="socio" placeholder="Nome completo">
-                </div>
-                <div class="form-group">
-                    <label for="telefone">Telefone</label>
-                    <input type="text" id="telefone" placeholder="Ex: 99991234567">
-                </div>
-                <div class="form-group">
-                    <label for="dataNascimento">Data de Nascimento</label>
-                    <input type="date" id="dataNascimento">
-                </div>
-            </div>
-
-            <div class="form-buttons">
-                <button class="btn-primary" onclick="salvar()">
-                    <i class="fas fa-save"></i>
-                    <span id="btnSalvarText">Salvar</span>
-                </button>
-                <button class="btn-secondary" id="btnCancelar" onclick="limpar()" style="display: none;">
-                    <i class="fas fa-times"></i>
-                    Cancelar
-                </button>
-                <button class="btn-secondary" onclick="limpar()">
-                    <i class="fas fa-redo"></i>
-                    Limpar
-                </button>
-                <button class="btn-danger" onclick="gerarPDF()">
-                    <i class="fas fa-file-pdf"></i>
-                    Gerar PDF
-                </button>
-            </div>
-        </section>
+        <!-- FORM SECTION REMOVIDA -->
 
         <!-- TABLE SECTION -->
         <section class="table-section">
@@ -1123,6 +1070,7 @@
         // ─── INICIALIZAÇÃO ─────────────────────────────────────────────────────
         function init() {
             carregarDoStorage();
+            aplicarCorrecoes();
             document.getElementById('year').textContent = new Date().getFullYear();
             listar();
             atualizarEstatisticas();
@@ -1132,6 +1080,7 @@
             const dados = localStorage.getItem('socios_yate');
             if (dados) {
                 socios = JSON.parse(dados);
+                // ─── MIGRAÇÃO: preenche dataNascimento ausente usando dadosIniciais ───
                 let migrado = false;
                 dadosIniciais.forEach(function(inicial) {
                     if (!inicial.dataNascimento) return;
@@ -1141,12 +1090,8 @@
                         migrado = true;
                     }
                 });
-                const f = socios.find(function(s) { return s.socio === 'FRANCISCO DE ASSIS MAIA'; });
-                if (f && f.dataNascimento !== '1962-09-05') {
-                    f.dataNascimento = '1962-09-05';
-                    migrado = true;
-                }
                 if (migrado) salvarNoStorage();
+                // ─────────────────────────────────────────────────────────────────────
             } else {
                 socios = JSON.parse(JSON.stringify(dadosIniciais));
                 salvarNoStorage();
@@ -1155,6 +1100,19 @@
 
         function salvarNoStorage() {
             localStorage.setItem('socios_yate', JSON.stringify(socios));
+        }
+        function aplicarCorrecoes() {
+            const alvo = socios.find(function(s) {
+                return s.socio && s.socio.toUpperCase().trim() === 'FRANCISCO DE ASSIS MAIA';
+            });
+            if (alvo) {
+                let ano = '1962';
+                if (alvo.dataNascimento && /^\d{4}-\d{2}-\d{2}$/.test(alvo.dataNascimento)) {
+                    ano = alvo.dataNascimento.split('-')[0];
+                }
+                alvo.dataNascimento = `${ano}-09-05`;
+                salvarNoStorage();
+            }
         }
 
         // ─── UTILITÁRIOS ───────────────────────────────────────────────────────
@@ -1205,14 +1163,6 @@
             let limpo = telefone.replace(/\D/g, '');
             if (!limpo.startsWith('55')) limpo = '55' + limpo;
             window.open(`https://wa.me/${limpo}`, '_blank');
-        }
-        
-        function linkWhatsApp(telefone, texto) {
-            if (isSemTelefone(telefone)) return null;
-            let limpo = telefone.replace(/\D/g, '');
-            if (!limpo.startsWith('55')) limpo = '55' + limpo;
-            const msg = encodeURIComponent(texto || 'Parabéns! 🎉🎂');
-            return `https://wa.me/${limpo}?text=${msg}`;
         }
 
         // ─── CRUD ──────────────────────────────────────────────────────────────
@@ -1342,7 +1292,7 @@
                     <td>
                         <div class="socio-name ${falecido ? 'falecido' : ''}">
                             ${aniversariando ? '<i class="fas fa-birthday-cake cake-icon"></i>' : ''}
-                            <span>${s.socio}</span>
+                            ${aniversariando && !semTel ? `<a href="#" class="nome-click" onclick="abrirWhatsApp('${s.telefone}'); return false;">${s.socio}</a>` : `<span>${s.socio}</span>`}
                             ${falecido ? '<span style="font-size: 0.75rem; color: #9ca3af;">(falecido)</span>' : ''}
                         </div>
                     </td>
@@ -1354,9 +1304,6 @@
                     </td>
                     <td>
                         <div class="actions">
-                            <button class="btn-small btn-edit" onclick="editar(${index})">
-                                <i class="fas fa-edit"></i> Editar
-                            </button>
                             <button class="btn-small btn-delete" onclick="abrirModalExcluir(${index})">
                                 <i class="fas fa-trash"></i> Excluir
                             </button>
@@ -1381,50 +1328,31 @@
             const listAniversariantes = socios.filter(s => !isFalecido(s.socio) && estaAniversariando(s.dataNascimento));
             const aniversariantes = listAniversariantes.length;
 
-            document.getElementById('totalSocios').textContent = socios.length;
-            document.getElementById('totalAtivos').textContent = totalAtivos;
-            document.getElementById('totalFalecidos').textContent = totalFalecidos;
+            const elAtivos = document.getElementById('totalAtivos');
+            if (elAtivos) elAtivos.textContent = totalAtivos;
             document.getElementById('footerAtivos').textContent = totalAtivos;
             document.getElementById('footerFalecidos').textContent = totalFalecidos;
             document.getElementById('footerSemTel').textContent = totalSemTel;
             document.getElementById('total').textContent = socios.length;
 
             if (aniversariantes > 0) {
-                // Formata os nomes: exibe o NOME COMPLETO do aniversariante
-                const nomesCompletos = listAniversariantes.map(s => {
-                    return s.socio.trim().split(' ').map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+                const nomesComLinks = listAniversariantes.map(s => {
+                    const nomeFormatado = s.socio.trim().split(' ').map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+                    if (isSemTelefone(s.telefone)) return `<span>${nomeFormatado}</span>`;
+                    const tel = s.telefone.replace(/"/g, '&quot;');
+                    return `<a href="#" class="nome-click" onclick="abrirWhatsApp('${tel}'); return false;">${nomeFormatado}</a>`;
                 });
-                const textoNomes = nomesCompletos.join(', ');
                 const textoBadge = aniversariantes === 1
-                    ? `🎂 Aniversariante hoje: ${textoNomes}! 🎉`
-                    : `🎂 Aniversariantes hoje: ${textoNomes}! 🎉`;
+                    ? `🎂 Aniversariante hoje: ${nomesComLinks.join(', ')}! 🎉`
+                    : `🎂 Aniversariantes hoje: ${nomesComLinks.join(', ')}! 🎉`;
                 const textoFooter = aniversariantes === 1
-                    ? `${textoNomes} (aniversariante)`
-                    : `${textoNomes} (aniversariantes)`;
+                    ? `${nomesComLinks.join(', ')} (aniversariante)`
+                    : `${nomesComLinks.join(', ')} (aniversariantes)`;
 
                 document.getElementById('aniversarioBadge').style.display = 'flex';
-                const nomesComLink = listAniversariantes.map(function(s) {
-                    const href = linkWhatsApp(s.telefone, 'Parabéns! 🎉🎂');
-                    const nomeFmt = s.socio.trim().split(' ').map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
-                    if (href) return `<a href="${href}" target="_blank" rel="noopener">${nomeFmt}</a>`;
-                    return `${nomeFmt}`;
-                });
-                document.getElementById('aniversarioNomes').innerHTML = aniversariantes === 1
-                    ? `🎂 Aniversariante hoje: ${nomesComLink[0]}! 🎉`
-                    : `🎂 Aniversariantes hoje: ${nomesComLink.join(', ')}! 🎉`;
-                
-                const primeiroComTel = listAniversariantes.find(function(s) { return !isSemTelefone(s.telefone); });
-                const badge = document.getElementById('aniversarioBadge');
-                if (primeiroComTel && badge) {
-                    const href = linkWhatsApp(primeiroComTel.telefone, 'Parabéns! 🎉🎂');
-                    badge.style.cursor = 'pointer';
-                    badge.onclick = function() { window.open(href, '_blank'); };
-                } else if (badge) {
-                    badge.onclick = null;
-                    badge.style.cursor = 'default';
-                }
+                document.getElementById('aniversarioNomes').innerHTML = textoBadge;
                 document.getElementById('footerAniversario').style.display = 'flex';
-                document.getElementById('footerAniversarioNomes').textContent = textoFooter;
+                document.getElementById('footerAniversarioNomes').innerHTML = textoFooter;
             } else {
                 document.getElementById('aniversarioBadge').style.display = 'none';
                 document.getElementById('footerAniversario').style.display = 'none';
