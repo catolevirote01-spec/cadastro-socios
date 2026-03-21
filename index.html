@@ -109,6 +109,12 @@
             background: rgba(255, 193, 7, 0.3);
             animation: pulse 2s infinite;
         }
+        .stat-badge.highlight a {
+            color: #ffffff;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            font-weight: 700;
+        }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -394,6 +400,14 @@
             align-items: center;
             gap: 0.5rem;
         }
+
+        .socio-name.falecido {
+            text-decoration: line-through;
+            color: #9ca3af;
+            font-style: italic;
+            opacity: 0.65;
+        }
+
         .socio-name .cake-icon {
             color: #fbbf24;
             animation: bounce 1s infinite;
@@ -740,7 +754,10 @@
                     <span class="stat-dot dot-green"></span>
                     <span><span id="totalAtivos">223</span> ativos</span>
                 </div>
-
+                <div class="stat-badge">
+                    <span class="stat-dot dot-gray"></span>
+                    <span><span id="totalFalecidos">5</span> falecidos</span>
+                </div>
                 <div class="stat-badge highlight" id="aniversarioBadge" style="display: none;">
                     <i class="fas fa-birthday-cake"></i>
                     <span id="aniversarioNomes">🎉 Aniversariante(s) hoje!</span>
@@ -751,6 +768,55 @@
 
     <!-- MAIN -->
     <main>
+        <!-- FORM SECTION -->
+        <section class="form-section">
+            <div class="form-header">
+                <div class="form-header-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h2 id="formTitle">Cadastrar Novo Sócio</h2>
+                <span class="badge" id="editBadge" style="display: none;">Editando</span>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="box">Box</label>
+                    <input type="text" id="box" placeholder="Ex: 42, 113A, YCI01">
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label for="socio">Nome do Sócio *</label>
+                    <input type="text" id="socio" placeholder="Nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" id="telefone" placeholder="Ex: 99991234567">
+                </div>
+                <div class="form-group">
+                    <label for="dataNascimento">Data de Nascimento</label>
+                    <input type="date" id="dataNascimento">
+                </div>
+            </div>
+
+            <div class="form-buttons">
+                <button class="btn-primary" onclick="salvar()">
+                    <i class="fas fa-save"></i>
+                    <span id="btnSalvarText">Salvar</span>
+                </button>
+                <button class="btn-secondary" id="btnCancelar" onclick="limpar()" style="display: none;">
+                    <i class="fas fa-times"></i>
+                    Cancelar
+                </button>
+                <button class="btn-secondary" onclick="limpar()">
+                    <i class="fas fa-redo"></i>
+                    Limpar
+                </button>
+                <button class="btn-danger" onclick="gerarPDF()">
+                    <i class="fas fa-file-pdf"></i>
+                    Gerar PDF
+                </button>
+            </div>
+        </section>
+
         <!-- TABLE SECTION -->
         <section class="table-section">
             <div class="search-bar">
@@ -765,6 +831,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>Box</th>
                             <th>Sócio</th>
                             <th>Telefone</th>
                             <th>Data Nasc.</th>
@@ -782,7 +849,10 @@
                         <span class="stat-dot dot-green"></span>
                         <span id="footerAtivos">223</span> ativos
                     </div>
-
+                    <div class="footer-stat">
+                        <span class="stat-dot dot-gray"></span>
+                        <span id="footerFalecidos">5</span> falecidos
+                    </div>
                     <div class="footer-stat">
                         <span class="stat-dot dot-yellow"></span>
                         <span id="footerSemTel">0</span> sem telefone
@@ -800,6 +870,19 @@
     <footer>
         <p>Yate Clube de Imperatriz — Sistema de Cadastro de Sócios — <span id="year">2026</span></p>
     </footer>
+
+    <!-- MODAL DE CONFIRMAÇÃO -->
+    <div class="modal" id="modalConfirm">
+        <div class="modal-content">
+            <div class="modal-header">Confirmar exclusão</div>
+            <div class="modal-description">Tem certeza que deseja excluir o sócio <strong id="modalSocioName"></strong>? Esta ação não pode ser desfeita.</div>
+            <div class="modal-buttons">
+                <button class="btn-secondary" onclick="fecharModal()">Cancelar</button>
+                <button class="btn-delete" onclick="confirmarExcluir()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ─── DADOS ─────────────────────────────────────────────────────────────
         const dadosIniciais = [
@@ -829,7 +912,7 @@
             {"box":"24","socio":"HASSAN HUSUF","telefone":"99991211017","dataNascimento":"1949-09-24"},
             {"box":"25","socio":"CESAR FELIX","telefone":"98991930075","dataNascimento":"1972-02-20"},
             {"box":"26","socio":"GABRIEL SOUSA DA SILVA","telefone":"99999553038","dataNascimento":"1990-07-07"},
-            {"box":"27","socio":"FRANCISCO DE ASSIS MAIA","telefone":"99981114626","dataNascimento":"1962-03-21"},
+            {"box":"27","socio":"FRANCISCO DE ASSIS MAIA","telefone":"99981114626","dataNascimento":"1962-09-05"},
             {"box":"28","socio":"MIRES DA SILVA MIRANDA","telefone":"99985390163","dataNascimento":"1984-03-30"},
             {"box":"29","socio":"FRANCISCO LEITE AMARAL NETO","telefone":"99984154498","dataNascimento":"2000-03-23"},
             {"box":"30","socio":"JOSE AUGUSTO ALVES DE OLIVEIRA","telefone":"9499286346"},
@@ -886,6 +969,7 @@
             {"box":"87","socio":"ALTOMIRANDO PLACEDÔNIO MACHADO","telefone":"99981281867","dataNascimento":"1956-07-24"},
             {"box":"88","socio":"HAMON DOS SANTOS BRAGA","telefone":"99984326404","dataNascimento":"1974-07-02"},
             {"box":"89","socio":"FABIANO PIRES CERQUEIRA","telefone":"99981114888","dataNascimento":"1975-02-18"},
+            {"box":"90","socio":"LUIS EDUARDO MARINHO ALMEIDA - FALECIDO","telefone":""},
             {"box":"91","socio":"LAERCIO PRATES DOS SANTOS","telefone":"99981570101","dataNascimento":"1971-08-12"},
             {"box":"92","socio":"ELISIO BRUNO DRUMOND FRAGA","telefone":"99991769656","dataNascimento":"1981-05-05"},
             {"box":"93","socio":"ANFRIZIO DE MORAIS MENESES FILHO","telefone":"99981165555","dataNascimento":"1964-03-20"},
@@ -903,6 +987,8 @@
             {"box":"105","socio":"NAGIB SABBAG","telefone":"94991121633","dataNascimento":"1992-05-07"},
             {"box":"106","socio":"JORCELIO LUSTOSA LOPES","telefone":"99981161800","dataNascimento":"1977-12-14"},
             {"box":"107","socio":"GLEN ANDERSON MAIA OLIVEIRA","telefone":"99991285561","dataNascimento":"1971-07-20"},
+            {"box":"108","socio":"ANTONIO LEITE ANDRADE - FALECIDO","telefone":""},
+            {"box":"109","socio":"ANTONIO LEITE ANDRADE - FALECIDO","telefone":""},
             {"box":"110","socio":"PAULINO BRAGA FILHO","telefone":"99981722324","dataNascimento":"1952-01-12"},
             {"box":"111","socio":"JOAQUIM PONTES MARIANO","telefone":"99981124145","dataNascimento":"1960-08-05"},
             {"box":"112","socio":"MARCOS ANDRE FAGUNDES","telefone":"99988020251","dataNascimento":"1967-06-25"},
@@ -936,6 +1022,7 @@
             {"box":"140","socio":"TIBERIO MIRANDA COSTA","telefone":"99991956900","dataNascimento":"1982-10-05"},
             {"box":"141","socio":"ALESSIO CAVALCANTE","telefone":"99991222191","dataNascimento":"1978-04-04"},
             {"box":"142","socio":"ESTER ALVES","telefone":"99992301100","dataNascimento":"1981-09-02"},
+            {"box":"143","socio":"GILBERTO FRANCISCO DE SOUSA - FALECIDO","telefone":""},
             {"box":"144","socio":"AMAURI ALBERTO PEREIRA DE SOUSA","telefone":"99991380012","dataNascimento":"1976-06-26"},
             {"box":"145","socio":"EVERSON GOMES CAVALCANTI","telefone":"99981162000","dataNascimento":"1972-11-05"},
             {"box":"146","socio":"DIEGO HELLISON BARROS DA CRUZ","telefone":"99981331248","dataNascimento":"1990-06-28"},
@@ -1031,6 +1118,7 @@
 
         let socios = [];
         let editandoIndex = -1;
+        let excluirIndex = -1;
 
         // ─── INICIALIZAÇÃO ─────────────────────────────────────────────────────
         function init() {
@@ -1043,8 +1131,7 @@
         function carregarDoStorage() {
             const dados = localStorage.getItem('socios_yate');
             if (dados) {
-                socios = JSON.parse(dados).filter(s => !s.socio.toUpperCase().includes('FALECIDO'));
-                // ─── MIGRAÇÃO: preenche dataNascimento ausente usando dadosIniciais ───
+                socios = JSON.parse(dados);
                 let migrado = false;
                 dadosIniciais.forEach(function(inicial) {
                     if (!inicial.dataNascimento) return;
@@ -1054,8 +1141,12 @@
                         migrado = true;
                     }
                 });
+                const f = socios.find(function(s) { return s.socio === 'FRANCISCO DE ASSIS MAIA'; });
+                if (f && f.dataNascimento !== '1962-09-05') {
+                    f.dataNascimento = '1962-09-05';
+                    migrado = true;
+                }
                 if (migrado) salvarNoStorage();
-                // ─────────────────────────────────────────────────────────────────────
             } else {
                 socios = JSON.parse(JSON.stringify(dadosIniciais));
                 salvarNoStorage();
@@ -1115,6 +1206,14 @@
             if (!limpo.startsWith('55')) limpo = '55' + limpo;
             window.open(`https://wa.me/${limpo}`, '_blank');
         }
+        
+        function linkWhatsApp(telefone, texto) {
+            if (isSemTelefone(telefone)) return null;
+            let limpo = telefone.replace(/\D/g, '');
+            if (!limpo.startsWith('55')) limpo = '55' + limpo;
+            const msg = encodeURIComponent(texto || 'Parabéns! 🎉🎂');
+            return `https://wa.me/${limpo}?text=${msg}`;
+        }
 
         // ─── CRUD ──────────────────────────────────────────────────────────────
         function salvar() {
@@ -1148,8 +1247,54 @@
             listar();
             atualizarEstatisticas();
         }
+
+        function editar(index) {
+            const s = socios[index];
+            document.getElementById('socio').value = s.socio;
+            document.getElementById('box').value = s.box;
+            document.getElementById('telefone').value = s.telefone;
+            document.getElementById('dataNascimento').value = s.dataNascimento || '';
+            editandoIndex = index;
+            document.getElementById('formTitle').textContent = 'Editar Sócio';
+            document.getElementById('editBadge').style.display = 'inline-block';
+            document.getElementById('btnCancelar').style.display = 'inline-flex';
+            document.getElementById('btnSalvarText').textContent = 'Atualizar';
+            document.getElementById('socio').focus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function abrirModalExcluir(index) {
+            excluirIndex = index;
+            document.getElementById('modalSocioName').textContent = socios[index].socio;
+            document.getElementById('modalConfirm').classList.add('active');
+        }
+
+        function fecharModal() {
+            document.getElementById('modalConfirm').classList.remove('active');
+            excluirIndex = -1;
+        }
+
+        function confirmarExcluir() {
+            if (excluirIndex !== -1) {
+                socios.splice(excluirIndex, 1);
+                salvarNoStorage();
+                listar();
+                atualizarEstatisticas();
+                mostrarToast('Sócio removido com sucesso!', 'success');
+                fecharModal();
+            }
+        }
+
         function limpar() {
+            document.getElementById('socio').value = '';
+            document.getElementById('box').value = '';
+            document.getElementById('telefone').value = '';
+            document.getElementById('dataNascimento').value = '';
             editandoIndex = -1;
+            document.getElementById('formTitle').textContent = 'Cadastrar Novo Sócio';
+            document.getElementById('editBadge').style.display = 'none';
+            document.getElementById('btnCancelar').style.display = 'none';
+            document.getElementById('btnSalvarText').textContent = 'Salvar';
         }
 
         // ─── LISTAGEM ──────────────────────────────────────────────────────────
@@ -1168,7 +1313,7 @@
             if (filtrados.length === 0) {
                 tabela.innerHTML = `
                     <tr>
-                        <td colspan="4" class="no-results">
+                        <td colspan="5" class="no-results">
                             <div>
                                 <i class="fas fa-search"></i>
                                 <p>Nenhum sócio encontrado</p>
@@ -1183,6 +1328,7 @@
 
             filtrados.forEach((s, rowIdx) => {
                 const index = socios.indexOf(s);
+                const falecido = isFalecido(s.socio);
                 const semTel = isSemTelefone(s.telefone);
                 const aniversariando = estaAniversariando(s.dataNascimento);
 
@@ -1192,10 +1338,12 @@
                 const boxClass = s.box.startsWith('YCI') ? 'box-yci' : /[A-Za-z]/.test(s.box) ? 'box-alpha' : 'box-numeric';
 
                 row.innerHTML = `
+                    <td><span class="box-badge ${boxClass}">${s.box}</span></td>
                     <td>
-                        <div class="socio-name">
+                        <div class="socio-name ${falecido ? 'falecido' : ''}">
                             ${aniversariando ? '<i class="fas fa-birthday-cake cake-icon"></i>' : ''}
                             <span>${s.socio}</span>
+                            ${falecido ? '<span style="font-size: 0.75rem; color: #9ca3af;">(falecido)</span>' : ''}
                         </div>
                     </td>
                     <td>
@@ -1206,6 +1354,12 @@
                     </td>
                     <td>
                         <div class="actions">
+                            <button class="btn-small btn-edit" onclick="editar(${index})">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="btn-small btn-delete" onclick="abrirModalExcluir(${index})">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
                             <button class="btn-small btn-whatsapp" onclick="abrirWhatsApp('${s.telefone}')" ${semTel ? 'disabled' : ''}>
                                 <i class="fab fa-whatsapp"></i> WhatsApp
                             </button>
@@ -1221,14 +1375,17 @@
 
         // ─── ESTATÍSTICAS ──────────────────────────────────────────────────────
         function atualizarEstatisticas() {
-            const totalAtivos = socios.length;
+            const totalAtivos = socios.filter(s => !isFalecido(s.socio)).length;
+            const totalFalecidos = socios.filter(s => isFalecido(s.socio)).length;
             const totalSemTel = socios.filter(s => isSemTelefone(s.telefone)).length;
-            const listAniversariantes = socios.filter(s => estaAniversariando(s.dataNascimento));
+            const listAniversariantes = socios.filter(s => !isFalecido(s.socio) && estaAniversariando(s.dataNascimento));
             const aniversariantes = listAniversariantes.length;
 
             document.getElementById('totalSocios').textContent = socios.length;
             document.getElementById('totalAtivos').textContent = totalAtivos;
+            document.getElementById('totalFalecidos').textContent = totalFalecidos;
             document.getElementById('footerAtivos').textContent = totalAtivos;
+            document.getElementById('footerFalecidos').textContent = totalFalecidos;
             document.getElementById('footerSemTel').textContent = totalSemTel;
             document.getElementById('total').textContent = socios.length;
 
@@ -1246,7 +1403,26 @@
                     : `${textoNomes} (aniversariantes)`;
 
                 document.getElementById('aniversarioBadge').style.display = 'flex';
-                document.getElementById('aniversarioNomes').textContent = textoBadge;
+                const nomesComLink = listAniversariantes.map(function(s) {
+                    const href = linkWhatsApp(s.telefone, 'Parabéns! 🎉🎂');
+                    const nomeFmt = s.socio.trim().split(' ').map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+                    if (href) return `<a href="${href}" target="_blank" rel="noopener">${nomeFmt}</a>`;
+                    return `${nomeFmt}`;
+                });
+                document.getElementById('aniversarioNomes').innerHTML = aniversariantes === 1
+                    ? `🎂 Aniversariante hoje: ${nomesComLink[0]}! 🎉`
+                    : `🎂 Aniversariantes hoje: ${nomesComLink.join(', ')}! 🎉`;
+                
+                const primeiroComTel = listAniversariantes.find(function(s) { return !isSemTelefone(s.telefone); });
+                const badge = document.getElementById('aniversarioBadge');
+                if (primeiroComTel && badge) {
+                    const href = linkWhatsApp(primeiroComTel.telefone, 'Parabéns! 🎉🎂');
+                    badge.style.cursor = 'pointer';
+                    badge.onclick = function() { window.open(href, '_blank'); };
+                } else if (badge) {
+                    badge.onclick = null;
+                    badge.style.cursor = 'default';
+                }
                 document.getElementById('footerAniversario').style.display = 'flex';
                 document.getElementById('footerAniversarioNomes').textContent = textoFooter;
             } else {
